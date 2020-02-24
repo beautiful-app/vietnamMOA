@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>我的</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="avatar-box" mat-ripple routerLink="/user/details">
+        <ion-avatar class="avatar">
+            <img src="{{avatar}}">
+        </ion-avatar>
+        <div class="user-info">
+            <p class="name">{{username}}</p>
+            <p class="department">{{department}}</p>
+        </div>
+        <span class="flex-right"></span>
+        <mat-icon>chevron_right</mat-icon>
+    </div>
+    
+    <mat-list class="setting-list">
+        <div mat-ripple routerLink="/application/about">
+            <mat-list-item>
+                <mat-icon mat-list-icon>folder</mat-icon>
+                <h4 mat-line>关于同维OA</h4>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+        </div>
+        <div mat-ripple>
+            <mat-list-item>
+                <mat-icon mat-list-icon>folder</mat-icon>
+                <h4 mat-line>修改密码</h4>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+        </div>
+    </mat-list>
+    
+    <div class="example-button-row exit-box">
+        <button translate mat-raised-button routerLink="/user/login"> LOG.OUT</button>
+        <button translate  routerLink="/user/login"> LOG.OUT</button>
+
+    </div>
+
+</ion-content>

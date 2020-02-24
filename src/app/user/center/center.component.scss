@@ -1,0 +1,28 @@
+.avatar-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 15%;
+  width: 100%;
+  height: 40%;
+  background-color: #4199dd;
+
+  .avatar {
+    $diameter: 100px;
+    width: $diameter;
+    height: $diameter;
+  }
+
+  .name {
+    color: #fdfbff;
+  }
+}
+
+
+.setting-list {
+  h4, mat-icon {
+    color: #999999;
+  }
+
+}

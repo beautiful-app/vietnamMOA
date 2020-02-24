@@ -1,0 +1,52 @@
+<ion-content>
+    <ion-row class="ion-padding-bottom ion-margin ion-text-center logo-box">
+        <ion-col>
+            <mat-icon class="logo slide-top" svgIcon="tw_logo">content_copy</mat-icon>
+        </ion-col>
+    </ion-row>
+    
+    <form [formGroup]="form">
+        <div class="input-box">
+            <mat-form-field appearance="legacy">
+                <mat-label>账号</mat-label>
+                <input matInput placeholder="工号/用户名" formControlName="username">
+                <mat-error
+                        *ngIf="form.controls['username'].errors">填写用户名!
+                </mat-error>
+                <button mat-icon-button matPrefix>
+                    <mat-icon>person</mat-icon>
+                </button>
+                <button mat-icon-button matSuffix>
+                    <mat-icon>clear</mat-icon>
+                </button>
+            
+            </mat-form-field>
+            <mat-form-field appearance="legacy">
+                <mat-label>密码</mat-label>
+                <input matInput placeholder="你的密码" formControlName="password"
+                       [type]="passwordHide ? 'password' : 'text'">
+                <button mat-icon-button matPrefix>
+                    <mat-icon>vpn_key</mat-icon>
+                </button>
+                <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide"
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
+                    <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+            <mat-checkbox checked="false" formControlName="remember">记住密码</mat-checkbox>
+        </div>
+    </form>
+    
+    <ion-row class="slide3">
+        <ion-col class="ion-text-center" size="11">
+            <ion-button type="submit" color="secondary" expand="block" [disabled]="!form.valid"
+                        (click)="doLogin()" translate>LOG.OUT
+            </ion-button>
+        </ion-col>
+        
+        <ion-col class="ion-text-end" size="11">
+            <button mat-button>忘记登录密码?</button>
+        </ion-col>
+    </ion-row>
+
+</ion-content>

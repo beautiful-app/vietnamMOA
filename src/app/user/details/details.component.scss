@@ -1,0 +1,17 @@
+
+mat-list {
+  .mat-list-item {
+    justify-content: space-between;
+  }
+}
+
+
+.info-item {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.flex-right {
+  flex: 1 1 auto;
+}

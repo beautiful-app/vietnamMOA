@@ -1,20 +1,55 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            薪资查询
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+    
+    <mat-list>
+        
+        <span>程序获取到的浏览器语言标识：{{title}}</span>
+        <br>
+        <span>程序获取到的浏览器语言标识：{{title}}</span>
+        <br>
+        <span>语言转换结果：</span><span translate>TABS.SALARY </span>
+        <br>
+        <span>语言转换结果：</span><span translate>TABS.SALARY </span>
+        <br>
+        <span>语言转换结果：</span><span translate>TABS.SALARY </span>
+        <br>
+        <span>语言转换结果：</span><span translate>TABS.SALARY </span>
+        <br>
+        <span>语言转换结果：</span><span translate>TABS.SALARY </span>
+        <br>
+        <span>语言转换结果：</span><span translate>TABS.SALARY </span>
+        <br>
+        <span>语言转换结果：</span><span translate>TABS.SALARY </span>
+        <br>
+        <span>语言转换结果：</span><span translate>TABS.SALARY </span>
+        <br>
+    </mat-list>
+    
+    
+    <div class="example-button-row">
+        <button mat-raised-button (click)="selectLanguage('zh')">中文</button>
+        <button mat-raised-button color="primary" (click)="selectLanguage('vi')">越南文</button>
+        <button mat-raised-button color="accent" (click)="selectLanguage('en')">English</button>
+    </div>
+    
+    
+    
+    <button id="increment" (click)="increment()">Increment</button>
+    
+    <div>Current Count: {{ count$ | async }}</div>
+    
+    <button id="decrement" (click)="decrement()">Decrement</button>
+    
+    <button id="reset" (click)="reset()">Reset Counter</button>
+    
+    
+    
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
 </ion-content>

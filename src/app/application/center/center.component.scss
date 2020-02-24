@@ -1,0 +1,64 @@
+ion-header .toolbar-background {
+  --background-color: red;
+}
+
+ion-header {
+  --background-color: red;
+}
+
+.toolbar-background {
+  --background: red;
+}
+
+.avatar-box {
+  display: flex;
+  //justify-content: center;
+  padding: 5px;
+  align-items: center;
+  width: 100%;
+  height: 10%;
+  border-bottom: 1px solid #dbdbdb;
+
+  .avatar {
+    $diameter: 50px;
+    width: $diameter;
+    height: $diameter;
+    margin-left: 10px;
+  }
+
+  .user-info {
+    font-size: 14px;
+    margin-left: 10px;
+
+    p {
+      margin: 0;
+    }
+
+    .name {
+      //color: #fdfbff;
+      font-size: 17px;
+    }
+  }
+
+  mat-icon {
+
+  }
+}
+
+.exit-box {
+  margin-top: 40px;
+  width: 100%;
+
+  button {
+    height: 40px;
+    width: 100%;
+    margin-top: 30px;
+  }
+}
+
+.setting-list {
+  h4, mat-icon {
+    color: #999999;
+  }
+
+}
