@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {USER} from 'src/app/shared/entity/user.bo';
 import {UserService} from '../../shared/service/user.service';
+import {Store, select} from '@ngrx/store';
+
 
 @Component({
     selector: 'app-center',
@@ -13,17 +15,16 @@ export class CenterComponent implements OnInit {
     avatar: string;
     
     constructor(
-        private userSV: UserService
+        private userSV: UserService,
+        private storeSV: Store<{ user: 'user' }>
     ) {
     }
     
     ngOnInit() {
-        // this.userSV.getUserFromStorage().subscribe(r => {
-        this.username = USER.get().username;
-        this.avatar = USER.get().avatar;
-        this.department = USER.get().department;
-        console.log(USER.get());
-        // });
+        this.storeSV.pipe(select('user')).subscribe(r => {
+            this.username = USER.get().username;
+            this.avatar = USER.get().avatar;
+            this.department = USER.get().department;
+        });
     }
-    
 }

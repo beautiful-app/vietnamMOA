@@ -1,9 +1,4 @@
-// import {createAction, props} from '@ngrx/store';
-//
-// export const homeScore = createAction('[Scoreboard Page] Home Score');
-// export const awayScore = createAction('[Scoreboard Page] Away Score');
-// export const resetScore = createAction('[Scoreboard Page] Score Reset');
-//
-// class Game {
-// }
-//
+import {createAction} from '@ngrx/store';
+
+export const userInfoUpddate = createAction('[user curd] user info has update');
+

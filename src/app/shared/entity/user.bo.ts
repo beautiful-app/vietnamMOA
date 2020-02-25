@@ -1,4 +1,7 @@
 import {Observable} from 'rxjs';
+import {userInfoUpddate} from '../../core/ngrx/actions/user.actions';
+import {Store} from '@ngrx/store';
+import {UserService} from '../service/user.service';
 
 export class USER {
     private _id: string = '';
@@ -27,7 +30,7 @@ export class USER {
         return this._instance;
     }
     
-    public static assign(info: USER, fromStorage?: boolean) {
+    public static assign(info: USER, store, fromStorage?: boolean): USER {
         for (let propertyName in USER.get()) {
             let infoName;
             if(!fromStorage) infoName = propertyName.substr(1, propertyName.length);
@@ -35,15 +38,11 @@ export class USER {
             if(info[infoName]) USER.get()[propertyName] = info[infoName];
             if(propertyName == '_token' && info['access_token']) USER.get().token = info['access_token'];
         }
+        store.dispatch(userInfoUpddate());
+        return this._instance;
     }
     
-    // public dataHasPrepare():Observable<boolean> {
-    //     return new Observable<boolean>(o => {
-    //         set
-    //     });
-    // }
-    
-    constructor() {
+    private constructor() {
     }
     
     get id(): string {
@@ -125,5 +124,4 @@ export class USER {
     get workAddress(): string {
         return this._workAddress;
     }
-    
 }

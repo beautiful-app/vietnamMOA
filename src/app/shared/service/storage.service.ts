@@ -26,7 +26,6 @@ export class StorageService {
                 if(r) o.next(r);
                 else o.next(false);
             });
-            
         });
     }
     

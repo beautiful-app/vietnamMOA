@@ -13,6 +13,7 @@ import {Storage} from '@ionic/storage';
 import {HttpInterceptor} from './interceptor/http.interceptor';
 import {_counterReducer} from './ngrx/reducers/counter.reducer';
 import {StoreModule} from '@ngrx/store';
+import {_userReducer} from './ngrx/reducers/user.reducer';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import {StoreModule} from '@ngrx/store';
         CommonModule,
         HttpClientModule,
         TranslateModule.forRoot(translateModuleConfig()),
-        StoreModule.forRoot({count: _counterReducer})
+        StoreModule.forRoot({count: _counterReducer, user: _userReducer})
     ],
     exports: [],
     providers: [
@@ -54,6 +55,8 @@ export class CoreModule {
         let language = this.translate.getBrowserLang();
         this.translate.use(language.substr(0, 2));
         
+        // 获取用户信息
+        this.userSV.getUserFromStorage().subscribe();
     }
 }
 

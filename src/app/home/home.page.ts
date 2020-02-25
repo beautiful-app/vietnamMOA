@@ -3,8 +3,11 @@ import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {ToastController} from '@ionic/angular';
 import {Store, select} from '@ngrx/store';
-import {increment, decrement, reset} from '../core/ngrx/actions/counter.actions';
+import {increment,} from '../core/ngrx/actions/counter.actions';
 import {USER} from '../shared/entity/user.bo';
+import {userInfoUpddate} from '../core/ngrx/actions/user.actions';
+import {USER_TEST} from '../shared/entity/user-test.bo';
+import {UserService} from '../shared/service/user.service';
 
 @Component({
     selector: 'app-home',
@@ -19,10 +22,11 @@ export class HomePage implements OnInit {
     constructor(private router: Router,
                 private translate: TranslateService,
                 public toastController: ToastController,
-                private store: Store<{ count: 'count' }>
+                private store: Store<{ user: 'user' }>,
+                private userSV: UserService
     ) {
-        store.pipe(select('count')).subscribe(r => {
-            console.log(r);
+        this.store.pipe<any>(select('user')).subscribe(() => {
+            console.log('用户信息更新啦:', USER.get());
         });
     }
     
@@ -36,16 +40,14 @@ export class HomePage implements OnInit {
     }
     
     increment() {
-        this.store.dispatch(increment({user: USER.get()}));
+        // this.store.dispatch(userInfoUpddate());
+        this.userSV.getUserFromStorage().subscribe();
     }
     
     decrement() {
-        this.store.dispatch(decrement());
     }
     
     reset() {
-        this.store.dispatch(reset());
     }
-    
     
 }
