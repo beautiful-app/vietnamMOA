@@ -22,11 +22,26 @@
             <mat-divider></mat-divider>
         </div>
         <div mat-ripple>
-            <mat-list-item>
+            <mat-list-item (click)="checkUpdate()">
                 <h4 mat-line>版本更新</h4>
             </mat-list-item>
             <mat-divider></mat-divider>
         </div>
+        
+        <div mat-ripple>
+            <mat-list-item (click)="checkUpdate1()">
+                <h4 mat-line>测试已是最新版本</h4>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+        </div>
+        
+        <div mat-ripple>
+            <mat-list-item (click)="checkUpdate2()">
+                <h4 mat-line>测试新版本</h4>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+        </div>
+    
     </mat-list>
 
 

@@ -11,6 +11,7 @@ import {CoreModule} from './core/core.module';
 import {NativeStorage} from '@ionic-native/native-storage/ngx';
 import {IonicStorageModule} from '@ionic/storage';
 import {UserResolve} from './shared/service/user-resolve.service';
+import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
 
 @NgModule({
     declarations: [AppComponent],

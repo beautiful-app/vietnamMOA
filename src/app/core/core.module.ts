@@ -14,6 +14,8 @@ import {HttpInterceptor} from './interceptor/http.interceptor';
 import {_counterReducer} from './ngrx/reducers/counter.reducer';
 import {StoreModule} from '@ngrx/store';
 import {_userReducer} from './ngrx/reducers/user.reducer';
+import {UpgradeModule} from '../application/upgrade/upgrade.module';
+import {UpgradeService} from '../application/upgrade/upgrade.service';
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import {_userReducer} from './ngrx/reducers/user.reducer';
         CommonModule,
         HttpClientModule,
         TranslateModule.forRoot(translateModuleConfig()),
-        StoreModule.forRoot({count: _counterReducer, user: _userReducer})
+        StoreModule.forRoot({count: _counterReducer, user: _userReducer}),
+        UpgradeModule
     ],
     exports: [],
     providers: [
@@ -44,6 +47,7 @@ export class CoreModule {
                 private router: Router,
                 private userSV: UserService,
                 private storage: Storage,
+                private upgradeSV: UpgradeService
     ) {
         console.log('core模块执行');
         if(parent) throw new Error('模块已经存在，不能再次加载');
@@ -55,8 +59,13 @@ export class CoreModule {
         let language = this.translate.getBrowserLang();
         this.translate.use(language.substr(0, 2));
         
+        this.router.navigate(['/application/about']);
+        
         // 获取用户信息
         this.userSV.getUserFromStorage().subscribe();
+        
+        // this.upgradeSV.checkVersion();
+        
     }
 }
 

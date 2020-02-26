@@ -23,6 +23,11 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 
+.custom-dialog-container .mat-dialog-container {
+  padding: 10px;
+
+}
+
 .flex-right {
   flex: 1 1 auto;
 }

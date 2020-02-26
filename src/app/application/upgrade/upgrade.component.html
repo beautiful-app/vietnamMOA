@@ -1,0 +1,26 @@
+<div *ngIf="canUpgrade">
+    <div *ngIf="!downloading">
+        <p class="title">检测到新版本</p>
+        <p>当前版本号: 同维OA 8.5.5</p>
+        <p>同维oa8.5.5
+            本次更新文件大小为 14.8，
+            为保证正常使用，请点击升级进行下载，建议使用wifi网络</p>
+    </div>
+    <div *ngIf="downloading">
+        <span class="download">正在下载:50%</span>
+        <mat-progress-bar [mode]="mode"></mat-progress-bar>
+    </div>
+    <br>
+    <button mat-button color="primary" *ngIf="!downloading" (click)="update()">升级</button>
+    <button mat-button color="primary" *ngIf="downloading" (click)="close()">后台下载</button>
+</div>
+
+<div *ngIf="!canUpgrade">
+    <p class="title">已是最新版本</p>
+    <p>当前版本号: 同维OA 8.5.5</p>
+    <button mat-button color="primary" (click)="close()">Ok</button>
+</div>
+
+
+
+
