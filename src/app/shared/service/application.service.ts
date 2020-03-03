@@ -1,29 +1,30 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {StorageService} from './storage.service';
 import {Observable} from 'rxjs';
-import {result} from '../entity/resultbo';
 import {APP} from 'src/environments/app.config';
+import {Httpbase} from './httpbase';
+import {RETURN} from '../utils/return-verify.util';
+import {data} from '../entity/result.bo';
 import {URL} from '../const/url.const';
-import {USER} from '../entity/user.bo';
 
 @Injectable({providedIn: 'root'})
-export class ApplicationService {
+export class ApplicationService extends Httpbase {
     
-    constructor(private httpClient: HttpClient,
+    constructor(httpClient: HttpClient,
                 private storageSV: StorageService
     ) {
+        super(httpClient);
     }
     
-    getVersionFeaturesList() {
+    getVersionFeaturesList(): Observable<data> {
         let queryObj = {
             current: '1',
-            size: '15'
+            size: APP.versonFeaturesPZ
         };
-        return new Observable<any>(o => {
-            this.httpClient.post<result>(APP.fullURL(URL.version_features_list), new HttpParams({fromObject: queryObj})).subscribe(r => {
-                console.log(USER.get());
-                console.log(r);
+        return new Observable<data>(o => {
+            this.postJson(URL.version_features_list, queryObj).subscribe(r => {
+                if(RETURN.isSucceed(r)) o.next(r.data);
             });
         });
     }

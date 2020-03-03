@@ -7,8 +7,8 @@
             为保证正常使用，请点击升级进行下载，建议使用wifi网络</p>
     </div>
     <div *ngIf="downloading">
-        <span class="download">正在下载:50%</span>
-        <mat-progress-bar [mode]="mode"></mat-progress-bar>
+        <span class="download">正在下载:{{rate}}%</span>
+        <mat-progress-bar [mode]="mode" value="{{rate}}" [bufferValue]="bufferValue">></mat-progress-bar>
     </div>
     <br>
     <button mat-button color="primary" *ngIf="!downloading" (click)="update()">升级</button>

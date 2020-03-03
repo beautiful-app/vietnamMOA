@@ -12,6 +12,7 @@ import {ApplicationService} from '../../../shared/service/application.service';
     styleUrls: ['./version-features.component.scss'],
 })
 export class VersionFeaturesComponent extends TWBase implements OnInit {
+    featuresList: any[];
     
     constructor(
         private loadingSV: LoadingService,
@@ -24,19 +25,9 @@ export class VersionFeaturesComponent extends TWBase implements OnInit {
     }
     
     ngOnInit() {
-        
-        
         this.appSV.getVersionFeaturesList().subscribe(r => {
-        
+            this.featuresList = r.records;
         });
-        
-        // setTimeout(() => {
-        //     this.location.back();
-        // }, 5000);
-        // setTimeout(() => {
-        //     super.loadingDismiss();
-        // }, 9000);
-        
     }
     
     

@@ -13,6 +13,14 @@ export class UpgradeService {
     }
     
     checkVersion() {
+        // 通过http查询版本升级信息，并且显示加载loading
+        
+        
+        // 显示弹窗信息
+        this.openDialog();
+    }
+    
+    openDialog() {
         const dialogRef = this.dialog.open(UpgradeComponent, {
             disableClose: true,
             // height: '300px',
@@ -23,10 +31,9 @@ export class UpgradeService {
             }
         });
         
-        dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
-            console.log(result);
-        });
+        // dialogRef.afterClosed().subscribe(result => {
+        //
+        // });
     }
     
     checkVersion1() {
@@ -41,8 +48,7 @@ export class UpgradeService {
         });
         
         dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
-            console.log(result);
+        
         });
     }
     

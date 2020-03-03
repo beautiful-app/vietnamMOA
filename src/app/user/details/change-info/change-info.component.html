@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-toolbar color="tertiary">
+        <ion-buttons slot="start">
+            <ion-button>
+                <ion-back-button></ion-back-button>
+            </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <button mat-button>确定</button>
+        </ion-buttons>
+        <ion-title>修改手机号</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <mat-form-field class="width-100 padding-20">
+        <mat-label>Telephone</mat-label>
+        <span matPrefix>+1 &nbsp;</span>
+        <input type="tel" matInput placeholder="555-555-1234">
+        <button mat-icon-button matSuffix>
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-form-field>
+</ion-content>

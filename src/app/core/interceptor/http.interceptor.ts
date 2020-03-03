@@ -21,10 +21,10 @@ export class HttpInterceptor implements HttpInterceptor {
         // console.log('id是:' + USER.get().id);
         
         // if(!req.headers.has('Content-Type')) {
-        req = req.clone({headers: req.headers.set('Content-Type', 'application/x-www-form-urlencoded')});
+        // req = req.clone({headers: req.headers.set('Content-Type', 'application/x-www-form-urlencoded')});
         console.log(req.urlWithParams);
-        if(req.url.indexOf('user/version/mlist') != -1)
-            req = req.clone({headers: req.headers.set('Content-Type', 'application/json')});
+        // if(req.url.indexOf('user/version/mlist') != -1)
+        //     req = req.clone({headers: req.headers.set('Content-Type', 'application/json')});
         
         // }
         //

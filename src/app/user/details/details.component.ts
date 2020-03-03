@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../shared/service/user.service';
 import {USER} from '../../shared/entity/user.bo';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-details',
@@ -17,7 +18,9 @@ export class DetailsComponent implements OnInit {
     department: string;
     
     
-    constructor(private userSV: UserService) {
+    constructor(private userSV: UserService,
+                private router: Router
+    ) {
     }
     
     ngOnInit() {
@@ -33,4 +36,8 @@ export class DetailsComponent implements OnInit {
         // });
     }
     
+    changeInfo() {
+        this.router.navigate(['./']);
+        
+    }
 }

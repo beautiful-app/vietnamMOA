@@ -11,7 +11,12 @@ import {CoreModule} from './core/core.module';
 import {NativeStorage} from '@ionic-native/native-storage/ngx';
 import {IonicStorageModule} from '@ionic/storage';
 import {UserResolve} from './shared/service/user-resolve.service';
-import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
+import {File} from '@ionic-native/file/ngx';
+import {FileTransfer} from '@ionic-native/file-transfer/ngx';
+import {FileOpener} from '@ionic-native/file-opener/ngx';
+import {SafeHTMLPipe} from './shared/pipes/save-html';
+import {AccordionModule} from './shared/components/accordion';
+
 
 @NgModule({
     declarations: [AppComponent],
@@ -22,13 +27,17 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
         AppRoutingModule,
         CoreModule,
         IonicModule.forRoot(),
-        IonicStorageModule.forRoot()
+        IonicStorageModule.forRoot(),
+        AccordionModule
     ],
     providers: [
         StatusBar,
         SplashScreen,
         NativeStorage,
         UserResolve,
+        File,
+        FileTransfer,
+        FileOpener,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     ],
     bootstrap: [AppComponent],

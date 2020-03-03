@@ -1,31 +1,33 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {URL} from '../const/url.const';
 import {RETURN} from '../utils/return-verify.util';
 import {USER} from '../entity/user.bo';
-import {APP} from '../../../environments/app.config';
-import {result} from '../entity/resultbo';
 import {StorageService} from './storage.service';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
+import {Httpbase} from './httpbase';
+import {CheckBo} from '../entity/check.bo';
+import {MapperUtil} from '../utils/mapper.util';
+import {MatchFieldBo} from '../entity/match-field.bo';
+import {result, resultObj} from '../entity/result.bo';
 
 @Injectable({
     providedIn: 'root'
 })
-export class UserService {
+export class UserService extends Httpbase {
     
-    constructor(private httpClient: HttpClient,
+    constructor(public httpClient: HttpClient,
                 private storageSV: StorageService,
                 private storeSV: Store<{ user: 'user' }>
     ) {
+        super(httpClient);
     }
     
-    doLogin(loginInfo: any): Observable<boolean | Object> {
+    doLogin(loginInfo: any = {}): Observable<CheckBo> {
         return new Observable<any>(o => {
             loginInfo.source = 'mobile';
-            
-            console.log(loginInfo);
-            this.httpClient.post<result>(APP.fullURL(URL.login_check), new HttpParams({fromObject: loginInfo})).subscribe(r => {
+            this.post(URL.login_check, loginInfo).subscribe(r => {
                 if(RETURN.isSucceed(r)) {
                     // 进行用户token信息保存
                     r.data.id = loginInfo.username;
@@ -37,26 +39,23 @@ export class UserService {
                     });
                 } else o.next(r);
             });
+            
         });
     }
     
-    getUserInfoByToken(): Observable<any> {
+    getUserInfoByToken(): Observable<CheckBo> {
         return new Observable<any>(o => {
-            this.httpClient.get<result>(APP.fullURL(URL.get_user_info) + USER.get().id).subscribe(r => {
+            this.get(URL.get_user_info + USER.get().id).subscribe(r => {
+                console.log(r);
                 if(RETURN.isSucceed(r)) {
                     USER.assign(r.data, this.storeSV);
-                    // 保存用户信息到缓存
-                    this.storageSV.storageUserInfo().subscribe(r => {
-                        o.next(true);
-                    });
-                } else {
-                    o.next(r);
+                    o.next(true);
                 }
             });
         });
     }
     
-    getUserFromStorage(): Observable<any> {
+    getUserFromStorage(): Observable<CheckBo> {
         return new Observable<any>(o => {
             this.storageSV.getUser().subscribe(r => {
                 // return true;
@@ -67,6 +66,17 @@ export class UserService {
                 } else o.next(false);
             });
             o.next('dkfjk');
+        });
+    }
+    
+    changePassword(queryObj: any = {}): Observable<boolean | result> {
+        let changesObj = MapperUtil.mapPart(queryObj,
+            MatchFieldBo.toMatchFieldArray([['oldPassword', 'oldPwd'], ['confirmPassword', 'newPwd']]));
+        return new Observable<boolean | result>(o => {
+            this.postJson(URL.change_password, changesObj).subscribe(r => {
+                if(RETURN.isSucceed(r)) o.next(true);
+                else o.next(r);
+            });
         });
     }
 }

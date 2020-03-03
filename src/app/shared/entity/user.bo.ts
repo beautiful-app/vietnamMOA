@@ -26,7 +26,6 @@ export class USER {
     private static _instance: USER = new USER();
     
     static get(): USER {
-        // return USER.instance;
         return this._instance;
     }
     

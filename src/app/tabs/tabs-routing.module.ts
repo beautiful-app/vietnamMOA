@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {Tabs} from './tabs';
 import {UserResolve} from '../shared/service/user-resolve.service';
+import {DemoAccordionAccordionComponent} from '../shared/components/accordion/demo/accordion';
 
 const routes: Routes = [
     {
@@ -9,8 +10,13 @@ const routes: Routes = [
         component: Tabs,
         children: [
             {
+                path: 'salary',
+                loadChildren: () => import('../salary/salary.module').then(m => m.SalaryModule),
+            },
+            {
                 path: 'home',
                 loadChildren: () => import('../home/home.module').then(m => m.HomePageModule),
+                component: DemoAccordionAccordionComponent
             },
             {
                 path: 'application',
@@ -29,5 +35,6 @@ const routes: Routes = [
     exports: [RouterModule]
 })
 export class TabsRoutingModule {
+
 }
 

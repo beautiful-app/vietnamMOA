@@ -1,0 +1,40 @@
+<Accordion [accordion]="true" [defaultActiveKey]="'0'" [activeKey]="activeKey" (onChange)="onChange($event)">
+    <AccordionPanel
+            *ngFor="let item of accordions; let i = index"
+            [key]="i"
+            [header]="item.title"
+            [disabled]="item.inactive"
+    >
+        <mat-list>
+            <h3 mat-subheader>item.title</h3>
+            <mat-list-item *ngFor="let content of item.child">
+                <mat-icon mat-list-icon>folder</mat-icon>
+                <h4 mat-line>{{content}}</h4>
+            </mat-list-item>
+        </mat-list>
+        
+        <!--        <p className="my-list">-->
+        <!--                    <span *ngFor="let content of item.child">-->
+        <!--                        {{ content }}-->
+        <!--                    </span>-->
+        <!--        </p>-->
+    
+    </AccordionPanel>
+</Accordion>
+
+
+<mat-list>
+    <h3 mat-subheader>Folders</h3>
+    <mat-list-item *ngFor="let folder of folders">
+        <mat-icon mat-list-icon>folder</mat-icon>
+        <h4 mat-line>{{folder.name}}</h4>
+        <p mat-line> {{folder.updated | date}} </p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <h3 mat-subheader>Notes</h3>
+    <mat-list-item *ngFor="let note of notes">
+        <mat-icon mat-list-icon>note</mat-icon>
+        <h4 mat-line>{{note.name}}</h4>
+        <p mat-line> {{note.updated | date}} </p>
+    </mat-list-item>
+</mat-list>

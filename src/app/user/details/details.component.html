@@ -11,7 +11,6 @@
     <ion-list>
         <ion-item>
             <ion-avatar slot="end">
-                <!--                <img src="https://public-assets.envato-static.com/assets/badges/elite-d41954e54b009732125beec497f8e4e837aabac1fb59883dc88f167d61fe06ae.svg">-->
                 <img src="{{avatar}}">
             </ion-avatar>
             <ion-label>用户头像</ion-label>
@@ -26,10 +25,11 @@
             <span class="flex-right"></span>
             <span>{{gender}}</span>
         </ion-item>
-        <ion-item class="info-item">
+        <ion-item class="info-item" routerLink="./change-info">
             <span>手机号</span>
             <span class="flex-right"></span>
             <span>{{cellphone}}</span>
+            <mat-icon>chevron_right</mat-icon>
         </ion-item>
         <ion-item class="info-item">
             <span>邮箱</span>

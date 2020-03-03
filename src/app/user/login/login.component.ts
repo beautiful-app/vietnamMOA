@@ -42,13 +42,11 @@ export class LoginComponent implements OnInit {
     
     
     doLogin() {
+        // 勾选了记住密码，那么保存信息,否则忘记...
         if(this.form.getRawValue().remember) this.storage.set(STORAGE_KEY.login_info, this.form.getRawValue());
         else this.storage.remove(STORAGE_KEY.login_info);
-        let _this = this;
         this.userSV.doLogin(this.form.getRawValue()).subscribe(r => {
             if(RETURN.isTrue(r)) {
-                // 跳转到应用中心页
-                // _this.router;
                 this.router.navigate(['/tabs/application']);
             } else console.log('失败');
         });

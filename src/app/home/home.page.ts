@@ -2,11 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {ToastController} from '@ionic/angular';
-import {Store, select} from '@ngrx/store';
-import {increment,} from '../core/ngrx/actions/counter.actions';
+import {select, Store} from '@ngrx/store';
 import {USER} from '../shared/entity/user.bo';
-import {userInfoUpddate} from '../core/ngrx/actions/user.actions';
-import {USER_TEST} from '../shared/entity/user-test.bo';
 import {UserService} from '../shared/service/user.service';
 
 @Component({
