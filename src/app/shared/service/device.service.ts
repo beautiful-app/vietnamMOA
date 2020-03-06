@@ -13,7 +13,6 @@ export class DeviceService {
     
     }
     
-    
     /**
      * @Description: 返回本软件在设备中的存储路径
      */

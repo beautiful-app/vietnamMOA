@@ -9,15 +9,16 @@ import {translateModuleConfig} from './HttpLoaderFactory';
 import {Platform} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {UserService} from '../shared/service/user.service';
-import {Storage} from '@ionic/storage';
 import {HttpInterceptor} from './interceptor/http.interceptor';
 import {select, Store, StoreModule} from '@ngrx/store';
 import {_userReducer} from './ngrx/reducers/user.reducer';
 import {UpgradeModule} from '../application/upgrade/upgrade.module';
 import {UpgradeService} from '../application/upgrade/upgrade.service';
 import {_downloadApkReducer} from './ngrx/reducers/application.reducer';
-import {USER} from '../shared/entity/user.bo';
 import {StorageService} from '../shared/service/storage.service';
+import {LanguageService} from '../shared/service/language.service';
+import {RouterService} from '../shared/service/router.service';
+import {WHERE} from '../shared/entity/where.enum';
 
 
 @NgModule({
@@ -51,28 +52,30 @@ export class CoreModule {
                 private storageSV: StorageService,
                 private storeSV: Store<{ user: 'user' }>,
                 private upgradeSV: UpgradeService,
+                private languageSV: LanguageService,
+                private routerSV: RouterService
     ) {
         console.log('core模块执行');
         if(parent) throw new Error('模块已经存在，不能再次加载');
         
+        // 注入svg图片
         loadSvgResources(ir, ds);
-        // 语言初始化(若未设置语言, 则取浏览器语言)
-        // // 当在assets/i18n中找不到对应的语言翻译时，使用'zh-CN'作为默认语言
-        this.translate.setDefaultLang('zh');
-        let language = this.translate.getBrowserLang();
-        this.translate.use(language.substr(0, 2));
         
-        // this.router.navigate(['/application/about']);
+        // 语言设置
+        this.languageSV.languageSettings();
         
         // 获取用户信息
-        this.userSV.getUserFromStorage().subscribe();
-        
-        
-        this.storeSV.pipe(select('user')).subscribe(r => {
-            this.storageSV.storageUserInfo().subscribe();
+        this.userSV.getUserFromStorage().subscribe(r => {
+            if(r) {
+                // 通过token查询用户信息,此步骤也作为token验证是否过期的目的
+                this.userSV.getUserInfoByToken().subscribe();
+            } else this.routerSV.to(WHERE.login);
         });
         
-        // this.upgradeSV.checkVersion();
+        // 设置user信息变化的监听
+        this.storeSV.pipe(select('user')).subscribe(_ => {
+            this.storageSV.storageUserInfo().subscribe();
+        });
         
     }
 }

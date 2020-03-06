@@ -25,11 +25,12 @@
             <span class="flex-right"></span>
             <span>{{gender}}</span>
         </ion-item>
-        <ion-item class="info-item" routerLink="./change-info">
+        
+        <ion-item class="info-item" [routerLink]="['change-info',cellphone]">
             <span>手机号</span>
             <span class="flex-right"></span>
             <span>{{cellphone}}</span>
-            <mat-icon>chevron_right</mat-icon>
+            <!--            <mat-icon>chevron_right</mat-icon>-->
         </ion-item>
         <ion-item class="info-item">
             <span>邮箱</span>

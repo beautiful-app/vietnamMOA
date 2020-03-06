@@ -1,7 +1,4 @@
-import {Observable} from 'rxjs';
 import {userInfoUpddate} from '../../core/ngrx/actions/user.actions';
-import {Store} from '@ngrx/store';
-import {UserService} from '../service/user.service';
 
 export class USER {
     private _id: string = '';
@@ -38,7 +35,13 @@ export class USER {
             if(propertyName == '_token' && info['access_token']) USER.get().token = info['access_token'];
         }
         store.dispatch(userInfoUpddate());
+        console.log('修改了用户信息:', USER.get());
         return this._instance;
+    }
+    
+    public static reset() {
+        this._instance = new USER();
+        console.log('重置了用户信息:', USER.get());
     }
     
     private constructor() {

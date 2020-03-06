@@ -1,50 +1,55 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
-import {ToastController} from '@ionic/angular';
-import {select, Store} from '@ngrx/store';
-import {USER} from '../shared/entity/user.bo';
-import {UserService} from '../shared/service/user.service';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 
 @Component({
     selector: 'app-home',
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, AfterViewInit {
     
-    title = 'aa';
-    count$: any;
-    
-    constructor(private router: Router,
-                private translate: TranslateService,
-                public toastController: ToastController,
-                private store: Store<{ user: 'user' }>,
-                private userSV: UserService
-    ) {
-        this.store.pipe<any>(select('user')).subscribe(() => {
-            console.log('用户信息更新啦:', USER.get());
-        });
-    }
+    @ViewChild('datePicker', {static: false}) datePicker: any;
     
     ngOnInit() {
-        this.title = this.translate.getBrowserCultureLang();
+    
     }
     
-    selectLanguage(lang: string) {
-        this.title = this.translate.getBrowserLang().substr(0, 2);
-        this.translate.use(lang);
+    ngAfterViewInit() {
+        console.log('datepicker', this.datePicker);
+        // this.datePicker.open();
+        
     }
     
-    increment() {
-        // this.store.dispatch(userInfoUpddate());
-        this.userSV.getUserFromStorage().subscribe();
+    customYearValues = [2020, 2016, 2008, 2004, 2000, 1996];
+    customDayShortNames = [2020, 2016, 2008];
+    customPickerOptions: any;
+    date: any;
+    daete1 = new Date();
+    
+    constructor() {
+        let _this = this;
+        this.customPickerOptions = {
+            buttons: [
+                {
+                    text: '取消',
+                    handler: ($event) => {
+                        console.log($event);
+                        return false;
+                    }
+                },
+                {
+                    text: '确定',
+                    handler: ($event) => {
+                        _this.daete1 = $event;
+                        console.log(_this.daete1);
+                    }
+                },
+            ]
+        };
     }
     
-    decrement() {
-    }
     
-    reset() {
-    }
+    dateChange($event) {
     
+    }
 }
+

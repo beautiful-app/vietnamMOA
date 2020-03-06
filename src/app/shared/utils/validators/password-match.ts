@@ -1,4 +1,4 @@
-import {FormGroup} from '@angular/forms';
+import {FormGroup, Validators} from '@angular/forms';
 
 // export function passwordMatch(controlName: string, matchingControlName: string): any {
 //     if(group) {
@@ -30,3 +30,5 @@ export function twoValueMatch(controlName: string, matchingControlName: string, 
         }
     };
 }
+
+

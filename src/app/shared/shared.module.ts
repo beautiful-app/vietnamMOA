@@ -1,24 +1,17 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ScrollMenuComponent} from './components/scroll-menu';
 import {TranslateModule} from '@ngx-translate/core';
 import {IonicModule} from '@ionic/angular';
 import {ReactiveFormsModule} from '@angular/forms';
 import {
-    MatButtonModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule, MatListModule, MatRippleModule
+    MatButtonModule, MatCardModule, MatCheckboxModule, MatDatepickerModule,
+    MatExpansionModule, MatFormFieldModule, MatGridListModule, MatIconModule,
+    MatInputModule, MatListModule, MatNativeDateModule, MatRippleModule, MatTreeModule
 } from '@angular/material';
 
 
 @NgModule({
-    declarations: [
-        ScrollMenuComponent
-    ],
+    declarations: [],
     imports: [
         CommonModule,
         
@@ -34,6 +27,10 @@ import {
         MatGridListModule,
         MatListModule,
         MatRippleModule,
+        MatTreeModule,
+        MatExpansionModule,
+        MatNativeDateModule,
+        MatDatepickerModule,
     ],
     exports: [
         IonicModule,
@@ -48,6 +45,10 @@ import {
         MatGridListModule,
         MatListModule,
         MatRippleModule,
+        MatTreeModule,
+        MatExpansionModule,
+        MatNativeDateModule,
+        MatDatepickerModule,
     ]
 })
 export class SharedModule {

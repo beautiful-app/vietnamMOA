@@ -8,9 +8,8 @@ import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {Httpbase} from './httpbase';
 import {CheckBo} from '../entity/check.bo';
-import {MapperUtil} from '../utils/mapper.util';
-import {MatchFieldBo} from '../entity/match-field.bo';
-import {result, resultObj} from '../entity/result.bo';
+import {result} from '../entity/result.bo';
+import {EntityUtil} from '../utils/entity.util';
 
 @Injectable({
     providedIn: 'root'
@@ -58,25 +57,70 @@ export class UserService extends Httpbase {
     getUserFromStorage(): Observable<CheckBo> {
         return new Observable<any>(o => {
             this.storageSV.getUser().subscribe(r => {
-                // return true;
-                USER.assign(r, this.storeSV, true);
-                if(r) {
+                console.log('缓存中获取到的用户信息为:', r);
+                if(r && r._token) {
+                    USER.assign(r, this.storeSV, true);
                     o.next(true);
-                    return true;
                 } else o.next(false);
             });
-            o.next('dkfjk');
         });
     }
     
     changePassword(queryObj: any = {}): Observable<boolean | result> {
-        let changesObj = MapperUtil.mapPart(queryObj,
-            MatchFieldBo.toMatchFieldArray([['oldPassword', 'oldPwd'], ['confirmPassword', 'newPwd']]));
+        let changesObj = EntityUtil.fieldReplacement(queryObj, [['oldPassword', 'oldPwd'], ['confirmPassword', 'newPwd']]);
         return new Observable<boolean | result>(o => {
             this.postJson(URL.change_password, changesObj).subscribe(r => {
                 if(RETURN.isSucceed(r)) o.next(true);
                 else o.next(r);
             });
         });
+    }
+    
+    setPhoneNumber(phoneNum: string): Observable<boolean | result> {
+        return new Observable<boolean | result>(o => {
+            let param = {
+                type: '2',
+                value: phoneNum
+            };
+            this.postJson(URL.change_phone_number, param).subscribe(r => {
+                console.log(r);
+            });
+        });
+    }
+    
+    confirmPhoneForResetPassword(account: string): Observable<result | boolean | any> {
+        return new Observable<result | boolean>(o => {
+            this.get(URL.get_confirm_phone_for_reset_password + account).subscribe(r => {
+                if(r.data && r.data.cellphone) {
+                    o.next(r.data);
+                } else o.next(false);
+            });
+            
+        });
+        
+    }
+    
+    getCodeForRestPassword(account: string): Observable<boolean | result | any> {
+        return new Observable<boolean | result>(o => {
+            this.get(URL.get_code_for_reset_password + account).subscribe(r => {
+                if(RETURN.isSucceed(r)) o.next(r.data);
+                else o.next(false);
+            });
+        });
+    }
+    
+    resetPassword(data: any): Observable<result> {
+        let queryObj = EntityUtil.fieldReplacement(data, [['account', 'userId'], ['authCode', 'code']]);
+        return new Observable(o => {
+            this.postJson(URL.reset_password, queryObj).subscribe(r => {
+                o.next(r);
+                console.log('password reset result:', r);
+            });
+        });
+    }
+    
+    clearData() {
+        USER.reset();
+        this.storageSV.clearUserInfo();
     }
 }

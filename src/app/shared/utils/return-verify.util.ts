@@ -5,7 +5,7 @@ export class RETURN {
     private static a = APP.succeedCode;
     
     static isSucceed(res): boolean {
-        return res.code === this.a;
+        return res && res.code === this.a;
     }
     
     static isTrue(res): boolean {

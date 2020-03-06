@@ -1,7 +1,8 @@
 export class result {
-    public id: string;
+    public id?: string;
     public code: string;
-    public data: data | any;
+    public msg?: string;
+    public data?: data | any;
 }
 
 export class resultObj {
@@ -12,7 +13,7 @@ export class resultObj {
 }
 
 export class data {
-    public id: number;
+    public id: string;
     public current: number;
     public orders: any[];
     public pages: number;

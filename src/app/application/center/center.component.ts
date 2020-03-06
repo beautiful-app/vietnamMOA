@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {USER} from 'src/app/shared/entity/user.bo';
 import {UserService} from '../../shared/service/user.service';
 import {Store, select} from '@ngrx/store';
+import {RouterService} from '../../shared/service/router.service';
+import {WHERE} from '../../shared/entity/where.enum';
 
 
 @Component({
@@ -16,8 +18,10 @@ export class CenterComponent implements OnInit {
     
     constructor(
         private userSV: UserService,
-        private storeSV: Store<{ user: 'user' }>
+        private storeSV: Store<{ user: 'user' }>,
+        private routerSV: RouterService
     ) {
+    
     }
     
     ngOnInit() {
@@ -26,5 +30,10 @@ export class CenterComponent implements OnInit {
             this.avatar = USER.get().avatar;
             this.department = USER.get().department;
         });
+    }
+    
+    loginOut() {
+        this.userSV.clearData();
+        this.routerSV.to(WHERE.login);
     }
 }

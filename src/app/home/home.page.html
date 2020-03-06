@@ -1,55 +1,48 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-title>
-            薪资查询
-        </ion-title>
-    </ion-toolbar>
-</ion-header>
-
 <ion-content>
-    
-    <mat-list>
-        
-        <span>程序获取到的浏览器语言标识：{{title}}</span>
-        <br>
-        <span>程序获取到的浏览器语言标识：{{title}}</span>
-        <br>
-        <span>语言转换结果：</span><span translate>TABS.SALARY </span>
-        <br>
-        <span>语言转换结果：</span><span translate>TABS.SALARY </span>
-        <br>
-        <span>语言转换结果：</span><span translate>TABS.SALARY </span>
-        <br>
-        <span>语言转换结果：</span><span translate>TABS.SALARY </span>
-        <br>
-        <span>语言转换结果：</span><span translate>TABS.SALARY </span>
-        <br>
-        <span>语言转换结果：</span><span translate>TABS.SALARY </span>
-        <br>
-        <span>语言转换结果：</span><span translate>TABS.SALARY </span>
-        <br>
-        <span>语言转换结果：</span><span translate>TABS.SALARY </span>
-        <br>
-    </mat-list>
-    
-    
-    <div class="example-button-row">
-        <button mat-raised-button (click)="selectLanguage('zh')">中文</button>
-        <button mat-raised-button color="primary" (click)="selectLanguage('vi')">越南文</button>
-        <button mat-raised-button color="accent" (click)="selectLanguage('en')">English</button>
+    <div>
+        {{daete1 |json }}
+        <ion-datetime #datePicker displayFormat="YYYY/MM" pickerFormat="YYYY MM" min="2002-12-19"
+                      [pickerOptions]="customPickerOptions" mode="md"
+                      (ionChange)="dateChange($event)"
+        ></ion-datetime>
     </div>
     
-    
-    
-    <button id="increment" (click)="increment()">Increment</button>
-    
-    <div>Current Count: {{ count$ | async }}</div>
-    
-    <button id="decrement" (click)="decrement()">Decrement</button>
-    
-    <button id="reset" (click)="reset()">Reset Counter</button>
-    
-    
-    
-
 </ion-content>
+
+
+
+
+<!--<mat-expansion-panel matRipple>-->
+<!--    <mat-expansion-panel-header>-->
+<!--        <mat-panel-title>岗位补贴</mat-panel-title>-->
+<!--        <mat-panel-description>₫ 2,500,000</mat-panel-description>-->
+<!--    </mat-expansion-panel-header>-->
+<!--    <div slot="details" class="item-details">-->
+<!--        <span>个人所得税</span>-->
+<!--        <span class="fill-remaining-space"></span>-->
+<!--        <span>₫ 1,500,000</span>-->
+<!--    </div>-->
+<!--    <div slot="details" class="item-details">-->
+<!--        <span>旅游补贴</span>-->
+<!--        <span class="fill-remaining-space"></span>-->
+<!--        <span>₫ 1,500,000</span>-->
+<!--    </div>-->
+<!--    <div slot="details" class="item-details">-->
+<!--        <span>熬夜补贴</span>-->
+<!--        <span class="fill-remaining-space"></span>-->
+<!--        <span>₫ 1,500,000</span>-->
+<!--    </div>-->
+<!--</mat-expansion-panel>-->
+
+<!--<mat-expansion-panel (opened)="panelOpenState = true"-->
+<!--                     (closed)="panelOpenState = false">-->
+<!--    <mat-expansion-panel-header>-->
+<!--        <mat-panel-title>加班补助</mat-panel-title>-->
+<!--        <mat-panel-description>₫ 2,500,000</mat-panel-description>-->
+<!--    </mat-expansion-panel-header>-->
+<!--    <div slot="details" class="item-details">-->
+<!--        <span>个人所得税</span>-->
+<!--        <span class="fill-remaining-space"></span>-->
+<!--        <span>₫ 1,500,000</span>-->
+<!--    </div>-->
+<!--</mat-expansion-panel>-->

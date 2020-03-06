@@ -3,6 +3,8 @@
   "TABS.SALARY": "薪资",
   "tabs.order": "订单",
   "TABS.MY": "我的",
-  "LOG.OUT": "登录"
+  "LOG.OUT": "登录",
+  "PROBATION_PAY": "试用期工资",
+  "BASE_PAY": "正常工作时间工资"
 }
 

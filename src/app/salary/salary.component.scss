@@ -1,0 +1,43 @@
+.content {
+  --padding-top: 20px;
+
+  .date-picker {
+    display: flex;
+    align-items: center;
+    padding: 3px 5px;
+
+    .date-picker-button {
+      display: flex;
+      align-items: center;
+
+      .date-number {
+        line-height: 100%;
+      }
+    }
+
+    .all-income {
+      flex: 1;
+      text-align: right;
+    }
+  }
+}
+
+.mat-expansion-panel {
+  margin: 5px;
+}
+
+.mat-expansion-panel-header-description {
+  flex-grow: 0;
+  margin-right: 9px;
+}
+
+.fill-remaining-space {
+  // 使用 flexbox 填充剩余空间
+  // @angular/material 中的很多控件使用了 flex 布局
+  flex: 1 1 auto;
+}
+
+.item-details {
+  display: flex;
+}
+

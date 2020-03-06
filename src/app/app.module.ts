@@ -14,8 +14,6 @@ import {UserResolve} from './shared/service/user-resolve.service';
 import {File} from '@ionic-native/file/ngx';
 import {FileTransfer} from '@ionic-native/file-transfer/ngx';
 import {FileOpener} from '@ionic-native/file-opener/ngx';
-import {SafeHTMLPipe} from './shared/pipes/save-html';
-import {AccordionModule} from './shared/components/accordion';
 
 
 @NgModule({
@@ -28,7 +26,6 @@ import {AccordionModule} from './shared/components/accordion';
         CoreModule,
         IonicModule.forRoot(),
         IonicStorageModule.forRoot(),
-        AccordionModule
     ],
     providers: [
         StatusBar,

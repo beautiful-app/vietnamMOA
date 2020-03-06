@@ -1,9 +1,11 @@
 import {LoadingController, ToastController} from '@ionic/angular';
+import {MatDialog} from '@angular/material';
 import {Observable} from 'rxjs';
 
 export abstract class TWBase {
     protected _loading: LoadingController;
     protected _toast: ToastController;
+    protected _dialog: MatDialog;
     
     constructor() {
         this._loading = new LoadingController();
@@ -14,22 +16,29 @@ export abstract class TWBase {
         const toast = await this._toast.create({
             header: header,
             message: String(message),
-            duration: duration ? duration : 2200,
+            duration: duration ? duration : 1500,
             position: position ? position : 'top',
             cssClass: 'toast',
             mode: 'ios'
-            // buttons: closeButtons ? closeButtons : [
-            //     {
-            //         text: '关闭',
-            //         role: 'cancel',
-            //         handler: () => {
-            //             console.log('Cancel clicked');
-            //         }
-            //     }
-            // ]
         });
         toast.present();
     }
+    
+    
+    protected openDialog(dialog: MatDialog, component: any, date: any): Observable<boolean | any> {
+        const dialogRef = dialog.open(component, {
+            disableClose: true,
+            panelClass: 'custom-dialog-container',
+            data: date
+        });
+        
+        return new Observable<boolean>(o => {
+            dialogRef.afterClosed().subscribe(r => {
+                o.next(r);
+            });
+        });
+    }
+    
     
     protected async loadingShow(message?: string) {
         // this._loading = await this._loadingCtrl.create({

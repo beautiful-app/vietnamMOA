@@ -1,57 +1,60 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {datePicker, DatePickerOptions} from '../shared/entity/date-picker-options.vo';
+import {PlanA, Salary} from '../shared/entity/salary.vo';
+import {DateUtil} from '../shared/utils/date.util';
+import {SalaryService} from '../shared/service/salary.service';
 
-export interface Section {
-    name: string;
-    updated: Date;
-}
 
 @Component({
     selector: 'app-salary',
     templateUrl: './salary.component.html',
     styleUrls: ['./salary.component.scss'],
 })
-export class SalaryComponent implements OnInit {
-    activeKey = [1];
-    accordions: Array<any> = [
-        {title: 'Title 1', child: ['content 1', 'content 1', 'content 1']},
-        {title: 'Title 2', child: ['content 2', 'content 2', 'content 2']},
-        {title: 'Title 3', child: ['content 3', 'content 3', 'content 3']}
-    ];
+export class SalaryComponent implements OnInit, AfterViewInit {
+    @ViewChild('datePicker', {static: false}) datePicker: any;
     
+    panelOpenState = false;
+    private customPickerOptions: DatePickerOptions = datePicker.options(this);
+    private salary: Salary;
+    private date: string = DateUtil.getYearMonth();
     
-    folders: Section[] = [
-        {
-            name: 'Photos',
-            updated: new Date('1/1/16'),
-        },
-        {
-            name: 'Recipes',
-            updated: new Date('1/17/16'),
-        },
-        {
-            name: 'Work',
-            updated: new Date('1/28/16'),
+    constructor(private salsrySV: SalaryService) {
+        // 从缓存中获取已保存的数据
+        this.salsrySV.getDataFromStorage().subscribe(r => {
+            this.salary = r;
+            // 根据语言环境进行数据处理
+            this.salsrySV.languageProcessing(r).subscribe(r => {
+            
+            });
+            // 通过http请求判断当月有没有新的工资数据
+            this.salsrySV.getData(DateUtil.getFullYear(), DateUtil.getYearMonth());
+        });
+        
+    }
+    
+    dateHandle(pick) {
+        // 判断前后日期是否有变化
+        let year = pick.year.text;
+        let month = pick.month.text;
+        let pickerDate = year + '/' + month;
+        // 重新获取数据
+        if(this.date != pickerDate) {
+            this.date = pickerDate;
+            this.salsrySV.getData(year, month);
         }
-    ];
-    notes: Section[] = [
-        {
-            name: 'Vacation Itinerary',
-            updated: new Date('2/20/16'),
-        },
-        {
-            name: 'Kitchen Remodel',
-            updated: new Date('1/18/16'),
-        }
-    ];
-    
-    
-    constructor() {
+        this.date = pickerDate;
     }
     
-    ngOnInit() {
+    
+    ngOnInit(): void {
     }
     
-    onChange(event) {
-        console.log(event);
+    openDatePicker(): void {
+        this.datePicker.open();
     }
+    
+    ngAfterViewInit(): void {
+        // this.datePicker.open();
+    }
+    
 }

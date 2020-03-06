@@ -29,4 +29,9 @@ export class StorageService {
         });
     }
     
+    clearUserInfo() {
+        this.storage.remove(STORAGE_KEY.user_obj);
+    }
+    
+    
 }

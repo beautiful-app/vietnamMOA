@@ -3,6 +3,10 @@ export const URL = {
     get_user_info: 'api/user/getInfo?userId=',
     version_features_list: 'api/user/version/mlist',
     get_version_features: 'api/user/version/note',
+    get_confirm_phone_for_reset_password: 'api/user/unauthorizedInfo?userId=',
+    get_code_for_reset_password: 'api/user/sendCode?userId=',
+    reset_password: 'api/user/resetPassword',
     
-    change_password: 'api/user/modifyPassword'
+    change_password: 'api/user/modifyPassword',
+    change_phone_number: 'api/bpm/changeAddressBookInfo',
 };
