@@ -22,7 +22,7 @@ export class SalaryService {
         return new Observable<Salary>(o => {
             // 根据语言进行字段
             // o.next(PlanA);
-            o.next(PlanB);
+            o.next(PlanA);
         });
     }
     

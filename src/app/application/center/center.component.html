@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar color="secondary">
-        <ion-title>我的</ion-title>
+        <ion-title translate>Lang_12</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -21,21 +21,21 @@
         <div mat-ripple routerLink="/application/about">
             <mat-list-item>
                 <mat-icon mat-list-icon>folder</mat-icon>
-                <h4 mat-line>关于同维OA</h4>
+                <h4 mat-line translate>Lang_31</h4>
             </mat-list-item>
             <mat-divider></mat-divider>
         </div>
         <div mat-ripple routerLink="/user/update-password">
             <mat-list-item>
                 <mat-icon mat-list-icon>folder</mat-icon>
-                <h4 mat-line>修改密码</h4>
+                <h4 mat-line translate>Lang_32</h4>
             </mat-list-item>
             <mat-divider></mat-divider>
         </div>
     </mat-list>
     
     <div class="example-button-row exit-box">
-        <button translate mat-raised-button (click)="loginOut()">退出登录</button>
+        <button mat-raised-button (click)="loginOut()" translate>{{'Lang_33' | translate}}</button>
     </div>
 
 </ion-content>

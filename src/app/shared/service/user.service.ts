@@ -10,6 +10,8 @@ import {Httpbase} from './httpbase';
 import {CheckBo} from '../entity/check.bo';
 import {result} from '../entity/result.bo';
 import {EntityUtil} from '../utils/entity.util';
+import {RouterService} from './router.service';
+import {WHERE} from '../entity/where.enum';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +20,8 @@ export class UserService extends Httpbase {
     
     constructor(public httpClient: HttpClient,
                 private storageSV: StorageService,
-                private storeSV: Store<{ user: 'user' }>
+                private storeSV: Store<{ user: 'user' }>,
+                private routerSV: RouterService
     ) {
         super(httpClient);
     }
@@ -45,11 +48,10 @@ export class UserService extends Httpbase {
     getUserInfoByToken(): Observable<CheckBo> {
         return new Observable<any>(o => {
             this.get(URL.get_user_info + USER.get().id).subscribe(r => {
-                console.log(r);
                 if(RETURN.isSucceed(r)) {
                     USER.assign(r.data, this.storeSV);
                     o.next(true);
-                }
+                } else o.next(false);
             });
         });
     }
@@ -83,7 +85,7 @@ export class UserService extends Httpbase {
                 value: phoneNum
             };
             this.postJson(URL.change_phone_number, param).subscribe(r => {
-                console.log(r);
+                RETURN.next(r, o);
             });
         });
     }
@@ -117,6 +119,11 @@ export class UserService extends Httpbase {
                 console.log('password reset result:', r);
             });
         });
+    }
+    
+    loginOut() {
+        this.clearData();
+        this.routerSV.to(WHERE.login);
     }
     
     clearData() {

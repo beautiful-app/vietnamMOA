@@ -15,6 +15,7 @@ class app {
     private _maxPhoneNum = 11;
     private _minPhoneNum = 11;
     
+    private _appVersion = '9.5.3';               // 当无法使用cordova插件的时候，自定义一个版本号显示和测试
     
     // code :1 错误信息
     // code :7 登录信息失效
@@ -61,6 +62,11 @@ class app {
     
     get authCodeLength(): number {
         return this._authCodeLength;
+    }
+    
+    
+    get appVersion(): string {
+        return this._appVersion;
     }
 }
 

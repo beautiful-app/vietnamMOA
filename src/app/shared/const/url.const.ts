@@ -6,6 +6,7 @@ export const URL = {
     get_confirm_phone_for_reset_password: 'api/user/unauthorizedInfo?userId=',
     get_code_for_reset_password: 'api/user/sendCode?userId=',
     reset_password: 'api/user/resetPassword',
+    get_version_detail: 'api/user/version/note?id=',
     
     change_password: 'api/user/modifyPassword',
     change_phone_number: 'api/bpm/changeAddressBookInfo',

@@ -7,6 +7,8 @@ import {stringify} from 'querystring';
 import {STORAGE_KEY} from '../../shared/const/storageKey.const';
 import {RETURN} from '../../shared/utils/return-verify.util';
 import {Router} from '@angular/router';
+import {RouterService} from '../../shared/service/router.service';
+import {WHERE} from '../../shared/entity/where.enum';
 
 @Component({
     selector: 'app-login',
@@ -20,12 +22,14 @@ export class LoginComponent implements OnInit {
     isShow = false;
     passwordHide = true;
     
+    
     constructor(
         private formBuilder: FormBuilder,
         private httpClient: HttpClient,
         private userSV: UserService,
         private storage: Storage,
-        private router: Router
+        private router: Router,
+        private routerSV: RouterService
     ) {
         this.form = this.formBuilder.group({
             username: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
@@ -47,7 +51,7 @@ export class LoginComponent implements OnInit {
         else this.storage.remove(STORAGE_KEY.login_info);
         this.userSV.doLogin(this.form.getRawValue()).subscribe(r => {
             if(RETURN.isTrue(r)) {
-                this.router.navigate(['/tabs/application']);
+                this.routerSV.to(WHERE.home);
             } else console.log('失败');
         });
     }

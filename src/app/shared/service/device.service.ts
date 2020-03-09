@@ -1,16 +1,28 @@
 import {Injectable} from '@angular/core';
 import {Platform} from '@ionic/angular';
 import {File} from '@ionic-native/file/ngx';
+import {TWBase} from '../TWBase.ui';
 
 @Injectable({
     providedIn: 'root'
 })
-export class DeviceService {
+export class DeviceService extends TWBase {
     
     constructor(private platform: Platform,
                 private file: File
     ) {
+        super();
+        
+    }
     
+    
+    // 物理返回键监听
+    backButtonRegister() {
+        this.platform.ready().then(_ => {
+            this.platform.backButton.subscribeWithPriority(99999, () => {
+                this.presentToast('priority 1', null, 'bottom');
+            });
+        });
     }
     
     /**

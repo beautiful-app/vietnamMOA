@@ -66,13 +66,14 @@ export class CoreModule {
         
         // 获取用户信息
         this.userSV.getUserFromStorage().subscribe(r => {
-            if(r) {
-                // 通过token查询用户信息,此步骤也作为token验证是否过期的目的
+            console.log('huoqudaode:', r);
+            if(r)
+            // 通过token查询用户信息,此步骤也作为token验证是否过期的目的
                 this.userSV.getUserInfoByToken().subscribe();
-            } else this.routerSV.to(WHERE.login);
+            else this.routerSV.to(WHERE.login);
         });
         
-        // 设置user信息变化的监听
+        // 设置user信息变化的监听,如果有变化就更新缓存里的值
         this.storeSV.pipe(select('user')).subscribe(_ => {
             this.storageSV.storageUserInfo().subscribe();
         });

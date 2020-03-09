@@ -10,7 +10,8 @@ export class DateUtil {
         return this._date.getMonth() + 1;
     }
     
-    public static getYearMonth(): string {
-        return this.getFullYear() + '/' + this.getCuttentMonth();
+    
+    public static getYearMonth(separator: string = '/'): string {
+        return this.getFullYear() + separator + this.getCuttentMonth();
     }
 }

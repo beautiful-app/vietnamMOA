@@ -1,4 +1,5 @@
 import {APP} from '../../../environments/app.config';
+import {result} from '../entity/result.bo';
 
 export class RETURN {
     code: string;
@@ -6,6 +7,16 @@ export class RETURN {
     
     static isSucceed(res): boolean {
         return res && res.code === this.a;
+    }
+    
+    static next(res: result, observable: any) {
+        if(this.isSucceed(res)) observable.next(res);
+        else observable.next();
+    }
+    
+    static nextData(res: result, observable: any) {
+        if(this.isSucceed(res)) observable.next(res.data);
+        else observable.next();
     }
     
     static isTrue(res): boolean {

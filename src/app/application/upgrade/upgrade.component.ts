@@ -20,7 +20,7 @@ export class UpgradeComponent extends TWBase {
     // mode = 'indeterminate';
     mode = 'buffer';
     bufferValue = 0;
-    rate: number;
+    rate: number = 0;
     rate$: any;
     
     constructor(

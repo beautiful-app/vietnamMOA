@@ -14,6 +14,7 @@ import {UserResolve} from './shared/service/user-resolve.service';
 import {File} from '@ionic-native/file/ngx';
 import {FileTransfer} from '@ionic-native/file-transfer/ngx';
 import {FileOpener} from '@ionic-native/file-opener/ngx';
+import {AppVersion} from '@ionic-native/app-version/ngx';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {FileOpener} from '@ionic-native/file-opener/ngx';
         File,
         FileTransfer,
         FileOpener,
-        {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+        AppVersion,
+        // {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     ],
     bootstrap: [AppComponent],
     

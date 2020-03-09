@@ -33,7 +33,6 @@ export class CenterComponent implements OnInit {
     }
     
     loginOut() {
-        this.userSV.clearData();
-        this.routerSV.to(WHERE.login);
+        this.userSV.loginOut();
     }
 }

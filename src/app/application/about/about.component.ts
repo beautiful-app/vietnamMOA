@@ -5,6 +5,7 @@ import {TWBase} from '../../shared/TWBase.ui';
 import {LoadingController, Platform, ToastController} from '@ionic/angular';
 import {DeviceService} from '../../shared/service/device.service';
 import {FileService} from '../../shared/service/file.service';
+import {ApplicationService} from '../../shared/service/application.service';
 
 @Component({
     selector: 'app-about',
@@ -12,23 +13,26 @@ import {FileService} from '../../shared/service/file.service';
     styleUrls: ['./about.component.scss'],
 })
 export class AboutComponent extends TWBase {
+    version: string;
     
     constructor(
         private upgrapdeSV: UpgradeService,
         private file: File,
         private deviceSV: DeviceService,
         private fileSV: FileService,
-        private platform: Platform
+        private platform: Platform,
+        private appSV: ApplicationService
     ) {
         super();
+        this.appSV.getVersion().subscribe(r => {
+            this.version = r;
+        });
     }
     
     ngOnInit() {
     }
     
     checkUpdate() {
-        // this.upgrapdeSV.checkVersion();
-        
         this.fileSV.openFile(null, null);
     }
     

@@ -1,13 +1,11 @@
 <div *ngIf="canUpgrade">
     <div *ngIf="!downloading">
-        <p class="title">检测到新版本</p>
-        <p>当前版本号: 同维OA 8.5.5</p>
-        <p>同维oa8.5.5
-            本次更新文件大小为 14.8，
-            为保证正常使用，请点击升级进行下载，建议使用wifi网络</p>
+        <p class="title" translate>
+            Lang_75
+        </p>
     </div>
     <div *ngIf="downloading">
-        <span class="download">正在下载:{{rate}}%</span>
+        <span class="download">{{rate}}%</span>
         <mat-progress-bar [mode]="mode" value="{{rate}}" [bufferValue]="bufferValue">></mat-progress-bar>
     </div>
     <br>

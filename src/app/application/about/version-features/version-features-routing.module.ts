@@ -4,7 +4,8 @@ import {VersionFeaturesComponent} from './version-features.component';
 
 
 const routes: Routes = [
-    {path: '', component: VersionFeaturesComponent}
+    {path: '', component: VersionFeaturesComponent},
+    {path: 'details/:id', loadChildren: () => import('./version-detail/version-detail.module').then(m => m.VersionDetailModule)}
 ];
 
 @NgModule({
@@ -12,4 +13,5 @@ const routes: Routes = [
     exports: [RouterModule]
 })
 export class VersionFeaturesRoutingModule {
+
 }

@@ -15,7 +15,7 @@ export class LanguageService {
         this.translate.setDefaultLang('vi');
         let language = this.translate.getBrowserLang();
         // this.translate.use(language.substr(0, 2));
-        this.translate.use('vi');
+        this.translate.use('en');
         console.log('#################成功设置语言');
     }
     

@@ -41,6 +41,7 @@ export class UpgradeService {
             disableClose: true,
             // height: '300px',
             // width: '300px',
+            closeOnNavigation: true,
             panelClass: 'custom-dialog-container',
             data: {
                 latestVersion: true
@@ -57,16 +58,22 @@ export class UpgradeService {
             disableClose: true,
             // height: '300px',
             // width: '300px',
+            closeOnNavigation: true,
             panelClass: 'custom-dialog-container',
             data: {
                 latestVersion: false
             }
         });
         
+        dialogRef.backdropClick().subscribe(r => {
+            this.dialog.closeAll();
+        });
+        
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
             console.log(result);
         });
+        
     }
     
 }

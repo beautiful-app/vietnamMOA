@@ -9,40 +9,30 @@
 
 <ion-content>
     
-    <div class="avatar-box" mat-ripple routerLink="/user/details">
+    <div class="avatar-box" mat-ripple [routerLink]="['details',item.id]"
+         *ngFor="let item of featuresList">
         <div class="user-info">
-            <p class="name">同维OA2.5.7主要更新</p>
-            <p class="department">2019年12月18日</p>
+            <p class="name">vietnamMOA{{item.version}}主要更新</p>
+            <p class="department">{{item.releaseTime}}</p>
         </div>
         <span class="flex-right"></span>
         <mat-icon>chevron_right</mat-icon>
     </div>
     
-    <div class="avatar-box" mat-ripple routerLink="/user/details">
-        <div class="user-info">
-            <p class="name">同维OA2.5.7主要更新</p>
-            <p class="department">2019年12月18日</p>
-        </div>
-        <span class="flex-right"></span>
-        <mat-icon>chevron_right</mat-icon>
-    </div>
     
-    <div class="avatar-box" mat-ripple routerLink="/user/details">
-        <div class="user-info">
-            <p class="name">同维OA2.5.7主要更新</p>
-            <p class="department">2019年12月18日</p>
-        </div>
-        <span class="flex-right"></span>
-        <mat-icon>chevron_right</mat-icon>
-    </div>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
     
-    <div class="avatar-box" mat-ripple routerLink="/user/details">
-        <div class="user-info">
-            <p class="name">同维OA2.5.7主要更新</p>
-            <p class="department">2019年12月18日</p>
-        </div>
-        <span class="flex-right"></span>
-        <mat-icon>chevron_right</mat-icon>
+    <br>
+    
+    <div style=" width:100%; text-align:left; margin-left:15px; margin-right:15px;" *ngIf="noData">
+        <hr class="hrLine" style="width:60px;"/>
+        加载完毕
+        <hr class="hrLine" style="width:60px;"/>
     </div>
 
 </ion-content>

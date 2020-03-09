@@ -9,6 +9,7 @@ import {result, resultObj} from '../entity/result.bo';
 export class Httpbase {
     
     constructor(public httpClient: HttpClient) {
+    
     }
     
     post(url: string, queryObj?: any): Observable<result> {

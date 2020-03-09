@@ -8,21 +8,19 @@
     <form [formGroup]="form">
         <div class="input-box">
             <mat-form-field appearance="legacy">
-                <mat-label>账号</mat-label>
-                <input matInput placeholder="工号/用户名" formControlName="username">
+                <input matInput placeholder="{{ 'Lang_82' | translate }}" formControlName="username">
                 <mat-error
-                        *ngIf="form.controls['username'].errors">填写用户名!
+                        *ngIf="form.controls['username'].errors" translate> Lang_95
                 </mat-error>
                 <button mat-icon-button matPrefix>
                     <mat-icon>person</mat-icon>
                 </button>
-                <button mat-icon-button matSuffix>
+                <button mat-icon-button matSuffix (click)="form.reset('username')">
                     <mat-icon>clear</mat-icon>
                 </button>
             </mat-form-field>
             <mat-form-field appearance="legacy">
-                <mat-label>密码</mat-label>
-                <input matInput placeholder="你的密码" formControlName="password"
+                <input matInput placeholder="{{ 'Lang_81' | translate }}" formControlName="password"
                        [type]="passwordHide ? 'password' : 'text'">
                 <button mat-icon-button matPrefix>
                     <mat-icon>vpn_key</mat-icon>
@@ -39,12 +37,12 @@
     <ion-row class="slide3">
         <ion-col class="ion-text-center" size="11">
             <ion-button type="submit" color="secondary" expand="block" [disabled]="!form.valid"
-                        (click)="doLogin()" translate>LOG.OUT
+                        (click)="doLogin()" translate> Lang_94
             </ion-button>
         </ion-col>
         
-        <ion-col class="ion-text-end" size="11">
-            <button mat-button>忘记登录密码?</button>
+        <ion-col class="ion-text-end" size="11" routerLink="/user/rest-password">
+            <button mat-button>{{ 'Lang_93' | translate }}?</button>
         </ion-col>
     </ion-row>
 

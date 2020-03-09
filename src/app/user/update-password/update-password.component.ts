@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../shared/service/user.service';
 import {twoValueMatch} from '../../shared/utils/validators/password-match';
 import {RETURN} from '../../shared/utils/return-verify.util';
+import {TwoPasswordMatchValidator, TwoPasswordValidator, VALIDATORS} from '../../shared/utils/validators/validators.collection';
 
 @Component({
     selector: 'app-update-password',
@@ -19,16 +20,13 @@ export class UpdatePasswordComponent implements OnInit {
         private formBuilder: FormBuilder,
         private userSV: UserService
     ) {
+    
     }
     
     ngOnInit() {
-        this.form = this.formBuilder.group({
-            oldPassword: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-            password: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-            confirmPassword: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-        }, {
-            validator: twoValueMatch('password', 'confirmPassword', '两次输入的新密码不相等!')
-        });
+        let validator = {...TwoPasswordValidator};
+        validator['oldPassword'] = VALIDATORS.case2;
+        this.form = this.formBuilder.group(validator, TwoPasswordMatchValidator);
     }
     
     commitChanges() {

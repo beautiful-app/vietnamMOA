@@ -7,7 +7,7 @@ import {TWBase} from '../../shared/TWBase.ui';
 import {RETURN} from '../../shared/utils/return-verify.util';
 import {RouterService} from '../../shared/service/router.service';
 import {WHERE} from '../../shared/entity/where.enum';
-import {PasswordValidator, TwoPasswordMatchValidator, VALIDATORS} from '../../shared/utils/validators/validators.collection';
+import {TwoPasswordValidator, TwoPasswordMatchValidator, VALIDATORS} from '../../shared/utils/validators/validators.collection';
 
 @Component({
     selector: 'app-reset-password',
@@ -30,7 +30,7 @@ export class ResetPasswordComponent extends TWBase implements OnInit {
         private routerSV: RouterService
     ) {
         super();
-        let validatorGroup = {...PasswordValidator};
+        let validatorGroup = {...TwoPasswordValidator};
         validatorGroup['authCode'] = VALIDATORS.case1;
         validatorGroup['account'] = VALIDATORS.case1;
         this.form = this.formBuilder.group(validatorGroup, TwoPasswordMatchValidator);
