@@ -1,5 +1,5 @@
-import {APP} from '../../../environments/app.config';
 import {result} from '../entity/result.bo';
+import {APP} from '../../core/singleton.export';
 
 export class RETURN {
     code: string;

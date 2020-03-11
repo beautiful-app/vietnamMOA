@@ -6,6 +6,8 @@ import {ActivatedRoute} from '@angular/router';
 import {RouterService} from '../../../shared/service/router.service';
 import {WHERE} from '../../../shared/entity/where.enum';
 import {TWBase} from '../../../shared/TWBase.ui';
+import {Location} from '@angular/common';
+import {NavController} from '@ionic/angular';
 
 @Component({
     selector: 'app-change-info',
@@ -19,7 +21,9 @@ export class ChangeInfoComponent extends TWBase implements OnInit {
         private userSV: UserService,
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
-        private routerSV: RouterService
+        private routerSV: RouterService,
+        private location: Location,
+        private navCtrl: NavController
     ) {
         super();
         // let a = this.route.paramMap.pipe(
@@ -35,11 +39,18 @@ export class ChangeInfoComponent extends TWBase implements OnInit {
     }
     
     changePhoneNumber() {
+        // this.location.back();
+        console.log('path', this.location.path());
+        console.log('state', this.location.getState());
+        this.navCtrl.back();
+        
+        return;
+        
         if(this.form.valid) {
             this.userSV.setPhoneNumber(this.form.getRawValue().phoneNumber).subscribe(r => {
                 // 修改成功后重新获取用户数据，并导航到个人信息页
-                if(r) this.userSV.getUserInfoByToken().subscribe(r => {
-                    if(r) this.routerSV.to(WHERE.back);
+                if(r) this.userSV.getUserInfoByToken().subscribe(rr => {
+                    if(rr) this.routerSV.to(WHERE.back);
                     else this.presentToast('修改失败,请重新提交');
                 });
             });

@@ -2,27 +2,56 @@ import {Injectable} from '@angular/core';
 import {Platform} from '@ionic/angular';
 import {File} from '@ionic-native/file/ngx';
 import {TWBase} from '../TWBase.ui';
+import {RouterService} from './router.service';
+import {APP} from '../../core/singleton.export';
+
+enum exitMark {
+    init,
+    step1,
+    finish
+}
 
 @Injectable({
     providedIn: 'root'
 })
 export class DeviceService extends TWBase {
+    number: number = 5;
+    _dialogMode: any = false;
+    _exitApp = 0;
+    exitTimeOut: any;
+    
     
     constructor(private platform: Platform,
-                private file: File
+                private file: File,
+                private routerSV: RouterService
     ) {
         super();
-        
     }
     
-    
     // 物理返回键监听
-    backButtonRegister() {
-        this.platform.ready().then(_ => {
-            this.platform.backButton.subscribeWithPriority(99999, () => {
-                this.presentToast('priority 1', null, 'bottom');
-            });
+    androidBackButtonRegister() {
+        this.platform.backButton.subscribeWithPriority(29, () => {
+            if(!this._dialogMode) {
+                if(!this.routerSV.back()) {
+                    if(this._exitApp < exitMark.finish) {
+                        if(this.exitTimeOut) clearTimeout(this.exitTimeOut);
+                        
+                        this.presentToast('在执行一次退出程序');
+                        this._exitApp += exitMark.step1;
+                    } else navigator['app'].exitApp();
+                    this.exitTimeOut = setTimeout(_ => {
+                        this._exitApp = exitMark.init;
+                    }, APP.backButtonTime);
+                }
+            } else {
+                this._dialogMode.close();
+                this._dialogMode = false;
+            }
         });
+    }
+    
+    dialogMode(dialogRef: any) {
+        this._dialogMode = dialogRef;
     }
     
     /**
@@ -46,10 +75,9 @@ export class DeviceService extends TWBase {
     }
     
     /**
-     * @name 是否真机环境
+     * @name 是否支持cordova
      */
     isCordova(): boolean {
-        // return this.platform.is('cordova') && !this.platform.is('mobileweb');
         return this.platform.is('cordova');
     }
     

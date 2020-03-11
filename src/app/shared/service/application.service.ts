@@ -2,13 +2,13 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {StorageService} from './storage.service';
 import {Observable} from 'rxjs';
-import {APP} from 'src/environments/app.config';
 import {Httpbase} from './httpbase';
 import {RETURN} from '../utils/return-verify.util';
 import {data, result} from '../entity/result.bo';
 import {URL} from '../const/url.const';
 import {DeviceService} from './device.service';
 import {AppVersion} from '@ionic-native/app-version/ngx';
+import {APP} from '../../core/singleton.export';
 
 @Injectable({providedIn: 'root'})
 export class ApplicationService extends Httpbase {

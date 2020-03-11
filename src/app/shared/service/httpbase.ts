@@ -1,10 +1,7 @@
-import {APP} from '../../../environments/app.config';
-import {URL} from '../const/url.const';
-import {HttpClient, HttpHandler, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {RETURN} from '../utils/return-verify.util';
-import {USER} from '../entity/user.bo';
 import {result, resultObj} from '../entity/result.bo';
+import {APP} from '../../core/singleton.export';
 
 export class Httpbase {
     

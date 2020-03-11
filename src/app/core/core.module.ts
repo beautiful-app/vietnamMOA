@@ -19,6 +19,7 @@ import {StorageService} from '../shared/service/storage.service';
 import {LanguageService} from '../shared/service/language.service';
 import {RouterService} from '../shared/service/router.service';
 import {WHERE} from '../shared/entity/where.enum';
+import {DeviceService} from '../shared/service/device.service';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ export class CoreModule {
                 private storeSV: Store<{ user: 'user' }>,
                 private upgradeSV: UpgradeService,
                 private languageSV: LanguageService,
-                private routerSV: RouterService
+                private routerSV: RouterService,
+                private deviceSV: DeviceService
     ) {
         console.log('core模块执行');
         if(parent) throw new Error('模块已经存在，不能再次加载');
@@ -66,7 +68,6 @@ export class CoreModule {
         
         // 获取用户信息
         this.userSV.getUserFromStorage().subscribe(r => {
-            console.log('huoqudaode:', r);
             if(r)
             // 通过token查询用户信息,此步骤也作为token验证是否过期的目的
                 this.userSV.getUserInfoByToken().subscribe();
@@ -78,6 +79,9 @@ export class CoreModule {
             this.storageSV.storageUserInfo().subscribe();
         });
         
+        // 注册物理返回键
+        // this.deviceSV.backButtonRegister();
+        this.deviceSV.androidBackButtonRegister();
     }
 }
 

@@ -1,6 +1,6 @@
 import {Validators} from '@angular/forms';
 import {twoValueMatch} from './password-match';
-import {APP} from '../../../../environments/app.config';
+import {APP} from '../../../core/singleton.export';
 
 export const VALIDATORS = {
     

@@ -1,6 +1,6 @@
 import {environment} from './environment';
 
-class app {
+export class app {
     
     private _baseURL = environment.baseURL;
     private _succeedCode = 0;                                           // 后端成功标志代码
@@ -17,8 +17,14 @@ class app {
     
     private _appVersion = '9.5.3';               // 当无法使用cordova插件的时候，自定义一个版本号显示和测试
     
+    
+    // 定义两次点击在多少秒之内判定用户退出  单位：毫秒
+    private _backButtonTime = 1500;
     // code :1 错误信息
     // code :7 登录信息失效
+    
+    // 路由信息
+    
     
     constructor() {
     }
@@ -29,6 +35,15 @@ class app {
     
     get baseURL(): string {
         return this._baseURL;
+    }
+    
+    
+    get invalidationCode(): number {
+        return this._invalidationCode;
+    }
+    
+    get backButtonTime(): number {
+        return this._backButtonTime;
     }
     
     get succeedCode(): number {
@@ -64,11 +79,9 @@ class app {
         return this._authCodeLength;
     }
     
-    
     get appVersion(): string {
         return this._appVersion;
     }
 }
 
-export const APP = new app();
 

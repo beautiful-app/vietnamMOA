@@ -5,7 +5,7 @@ import {TWBase} from '../../../shared/TWBase.ui';
 import {Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {ApplicationService} from '../../../shared/service/application.service';
-import {APP} from '../../../../environments/app.config';
+import {APP} from '../../../core/singleton.export';
 
 @Component({
     selector: 'app-version-features',

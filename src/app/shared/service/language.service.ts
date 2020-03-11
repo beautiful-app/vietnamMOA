@@ -19,4 +19,13 @@ export class LanguageService {
         console.log('#################成功设置语言');
     }
     
+    // 获取代码中需要的语言
+    initStaticLanguage() {
+        // this.translate.get()
+    }
+    
+    get(key: string) {
+        this.translate.get('kjk').subscribe()
+    }
+    
 }

@@ -46,6 +46,12 @@ export class LoginComponent implements OnInit {
     
     
     doLogin() {
+        
+        this.routerSV.to(WHERE.home);
+        
+        return;
+        
+        
         // 勾选了记住密码，那么保存信息,否则忘记...
         if(this.form.getRawValue().remember) this.storage.set(STORAGE_KEY.login_info, this.form.getRawValue());
         else this.storage.remove(STORAGE_KEY.login_info);
