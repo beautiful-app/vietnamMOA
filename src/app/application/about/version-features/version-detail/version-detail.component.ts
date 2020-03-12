@@ -17,10 +17,12 @@ export class VersionDetailComponent implements OnInit {
     }
     
     ngOnInit() {
-        let a = this.route.snapshot.paramMap.get('id');
-        this.appSV.getVersionFeaturesDetail(Number(a)).subscribe(r => {
-            if(r) this.contnet = r.data;
-        });
+        setTimeout(_ => {
+            let a = this.route.snapshot.paramMap.get('id');
+            this.appSV.getVersionFeaturesDetail(Number(a)).subscribe(r => {
+                if(r) this.contnet = r.data;
+                else this.contnet = '';
+            });
+        }, 5000);
     }
-    
 }

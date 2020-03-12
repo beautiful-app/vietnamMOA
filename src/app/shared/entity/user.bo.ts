@@ -35,13 +35,12 @@ export class USER {
             if(propertyName == '_token' && info['access_token']) USER.get().token = info['access_token'];
         }
         store.dispatch(userInfoUpddate());
-        console.log('修改了用户信息:', USER.get());
         return this._instance;
     }
     
-    public static reset() {
+    public static reset(store) {
         this._instance = new USER();
-        console.log('重置了用户信息:', USER.get());
+        store.dispatch(userInfoUpddate());
     }
     
     private constructor() {

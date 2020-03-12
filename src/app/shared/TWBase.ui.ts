@@ -12,7 +12,7 @@ export abstract class TWBase {
         this._toast = new ToastController();
     }
     
-    protected async presentToast(message: string | number, duration?: number, position?: 'bottom' | 'middle', header?: string, closeButtons?: string[]) {
+    protected async presentToast(message: string | number, position?: 'bottom' | 'middle', duration?: number, header?: string, closeButtons?: string[]) {
         const toast = await this._toast.create({
             header: header,
             message: String(message),
@@ -25,7 +25,7 @@ export abstract class TWBase {
     }
     
     
-    protected openDialog(dialog: MatDialog, component: any, date: any): Observable<boolean | any> {
+    protected openDialog(dialog: MatDialog, component: any, date?: any): Observable<boolean | any> {
         const dialogRef = dialog.open(component, {
             disableClose: true,
             panelClass: 'custom-dialog-container',

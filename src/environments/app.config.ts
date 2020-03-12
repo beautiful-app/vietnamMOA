@@ -15,7 +15,7 @@ export class app {
     private _maxPhoneNum = 11;
     private _minPhoneNum = 11;
     
-    private _appVersion = '9.5.3';               // 当无法使用cordova插件的时候，自定义一个版本号显示和测试
+    private _appVersion = '1.5.3';               // 当无法使用cordova插件的时候，自定义一个版本号显示和测试
     
     
     // 定义两次点击在多少秒之内判定用户退出  单位：毫秒
@@ -23,10 +23,23 @@ export class app {
     // code :1 错误信息
     // code :7 登录信息失效
     
+    // 下载时候后端用于判断是安卓还是苹果的数据标识
+    private _downloadIos = 2;
+    private _downloadAndroid = 1;
+    
     // 路由信息
     
     
     constructor() {
+    }
+    
+    
+    get downloadIos(): number {
+        return this._downloadIos;
+    }
+    
+    get downloadAndroid(): number {
+        return this._downloadAndroid;
     }
     
     public fullURL(suffix: string): string {

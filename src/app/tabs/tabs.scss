@@ -5,3 +5,20 @@
 .tab-button {
   max-width: 200px;
 }
+
+.hint-badge {
+  position: absolute;
+  background-color: red;
+  display: inline-block;
+  $diameter: 5px;
+  width: $diameter;
+  height: $diameter;
+  border-radius: 50%;
+  //width: 3px;
+  //padding: 1px 6px;
+  right: calc(50% - 20px);
+  top: 4px;
+  //height: auto;
+  //font-size: 12px;
+  //line-height: 16px;
+}

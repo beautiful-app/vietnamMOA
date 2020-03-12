@@ -9,6 +9,7 @@ import {URL} from '../const/url.const';
 import {DeviceService} from './device.service';
 import {AppVersion} from '@ionic-native/app-version/ngx';
 import {APP} from '../../core/singleton.export';
+import {Device} from '@ionic-native/device/ngx';
 
 @Injectable({providedIn: 'root'})
 export class ApplicationService extends Httpbase {
@@ -17,10 +18,10 @@ export class ApplicationService extends Httpbase {
                 private storageSV: StorageService,
                 private deviceSV: DeviceService,
                 public appVersion: AppVersion,
+                private device: Device
     ) {
         super(httpClient);
     }
-    
     
     
     getVersionFeaturesList(page: number): Observable<data> {
@@ -51,9 +52,26 @@ export class ApplicationService extends Httpbase {
                     o.next(version);
                 });
             else o.next(APP.appVersion);
-            
         });
     }
     
+    
+    checkNewVersion(): Observable<data> {
+        return new Observable<data>(o => {
+            this.getVersion().subscribe(r => {
+                console.log('version:', r);
+                let params = {
+                    deviceId: this.device.uuid,
+                    deviceType: this.deviceSV.isIos() ? APP.downloadIos : APP.downloadAndroid,
+                    version: r
+                };
+                this.postJson(URL.version_check, params).subscribe(r => {
+                    if(RETURN.isSucceed(r) && r.data) {
+                        o.next(r.data);
+                    } else o.next();
+                });
+            });
+        });
+    }
     
 }

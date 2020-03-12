@@ -10,4 +10,6 @@ export const URL = {
     
     change_password: 'api/user/modifyPassword',
     change_phone_number: 'api/bpm/changeAddressBookInfo',
+    
+    version_check: 'api/user/version/check'
 };

@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
+import {Lang} from '../const/language.const';
 
 @Injectable({providedIn: 'root'})
 export class LanguageService {
@@ -21,11 +22,20 @@ export class LanguageService {
     
     // 获取代码中需要的语言
     initStaticLanguage() {
-        // this.translate.get()
+        // 根据语言属性生成查询数组
+        let langKeyArr = [];
+        for (let langKey in Lang) {
+            langKeyArr.push(langKey);
+        }
+        this.translate.get(langKeyArr).subscribe(r => {
+            for (let rKey in r) {
+                if(rKey != r[rKey]) Lang[rKey] = r[rKey];
+            }
+        });
     }
     
     get(key: string) {
-        this.translate.get('kjk').subscribe()
+        this.translate.get('kjk').subscribe();
     }
     
 }

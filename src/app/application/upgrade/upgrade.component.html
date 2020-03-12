@@ -1,17 +1,19 @@
 <div *ngIf="canUpgrade">
     <div *ngIf="!downloading">
-        <p class="title" translate>
-            Lang_75
-        </p>
+        <p class="title" translate>Lang_75_1</p>
+        <p class="" translate>Lang_75_2 <span>{{data.fileSize}}m</span></p>
+        <p class="" translate>Lang_75_3 </p>
     </div>
     <div *ngIf="downloading">
         <span class="download">{{rate}}%</span>
         <mat-progress-bar [mode]="mode" value="{{rate}}" [bufferValue]="bufferValue">></mat-progress-bar>
     </div>
     <br>
-    <button mat-button color="primary" *ngIf="!downloading" (click)="update()">升级</button>
+    <button mat-button color="primary" *ngIf="!downloading" (click)="update()">{{'Lang_75_5' | translate}}</button>
+    <button mat-button color="primary" *ngIf="!downloading" (click)="close()">{{'Lang_75_4'| translate}}</button>
     <button mat-button color="primary" *ngIf="downloading" (click)="close()">后台下载</button>
 </div>
+
 
 <div *ngIf="!canUpgrade">
     <p class="title">已是最新版本</p>

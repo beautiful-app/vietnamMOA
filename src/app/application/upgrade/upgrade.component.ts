@@ -14,16 +14,12 @@ import {interval} from 'rxjs';
     styleUrls: ['./upgrade.component.scss'],
 })
 export class UpgradeComponent extends TWBase {
-    
     canUpgrade = true;
     downloading = false;
     color: ThemePalette = 'primary';
-    // mode = 'indeterminate';
     mode = 'buffer';
     bufferValue = 0;
     rate: number = 0;
-    rate$: any;
-    sub;
     
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
@@ -35,7 +31,6 @@ export class UpgradeComponent extends TWBase {
     ) {
         super();
         this.canUpgrade = data.latestVersion;
-        
     }
     
     ngOnInit() {
@@ -62,11 +57,10 @@ export class UpgradeComponent extends TWBase {
     
     update() {
         this.downloading = true;
-        let url = 'https://dz-pic-test.oss-cn-shanghai.aliyuncs.com/abc1231231.apk';
-        let url1 = 'https://appdl-drcn.dbankcdn.com/dl/appdl/application/apk/53/53df72eda3f44774b7e26ab5b4d56be1/com.asyey.sport.2002281121.apk';
+        // let url = 'https://dz-pic-test.oss-cn-shanghai.aliyuncs.com/abc1231231.apk';
+        // let url1 = 'https://appdl-drcn.dbankcdn.com/dl/appdl/application/apk/53/53df72eda3f44774b7e26ab5b4d56be1/com.asyey.sport.2002281121.apk';
+        let url = this.data.downloadUrl;
         let appPath = 'android.apk';
-        
-        this.fileSV.downloadFile(url1, appPath);
-        
+        this.fileSV.downloadFile(url, appPath);
     }
 }

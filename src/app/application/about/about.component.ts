@@ -6,6 +6,9 @@ import {LoadingController, Platform, ToastController} from '@ionic/angular';
 import {DeviceService} from '../../shared/service/device.service';
 import {FileService} from '../../shared/service/file.service';
 import {ApplicationService} from '../../shared/service/application.service';
+import {MatDialog} from '@angular/material';
+import {UpgradeComponent} from '../upgrade/upgrade.component';
+import {Lang} from '../../shared/const/language.const';
 
 @Component({
     selector: 'app-about',
@@ -14,6 +17,7 @@ import {ApplicationService} from '../../shared/service/application.service';
 })
 export class AboutComponent extends TWBase {
     version: string;
+    onChekVerion: boolean = false;
     
     constructor(
         private upgrapdeSV: UpgradeService,
@@ -21,7 +25,8 @@ export class AboutComponent extends TWBase {
         private deviceSV: DeviceService,
         private fileSV: FileService,
         private platform: Platform,
-        private appSV: ApplicationService
+        private appSV: ApplicationService,
+        private dialog: MatDialog
     ) {
         super();
         this.appSV.getVersion().subscribe(r => {
@@ -33,26 +38,17 @@ export class AboutComponent extends TWBase {
     }
     
     checkUpdate() {
-        this.fileSV.openFile(null, null);
+        if(!this.onChekVerion) {
+            this.onChekVerion = true;
+            this.appSV.checkNewVersion().subscribe(r => {
+                // 有新版本 打开升级对话框
+                if(r) {
+                    console.log('有新版本:', r);
+                    this.openDialog(this.dialog, UpgradeComponent, r);
+                } else this.presentToast(Lang.Lang_76);
+                this.onChekVerion = false;
+            });
+        }
     }
     
-    checkUpdate1() {
-        this.upgrapdeSV.checkVersion1();
-    }
-    
-    checkUpdate2() {
-        this.upgrapdeSV.checkVersion2();
-        this.presentToast(this.file.externalDataDirectory);
-    }
-    
-    
-    test1() {
-        this.file.checkFile(this.deviceSV.deviceFilePath(), 'android.apk')
-        .then(r => this.presentToast(JSON.stringify(r)))
-        .catch(err => this.presentToast('Meiyou quanxian ' + err));
-    }
-    
-    test2() {
-        // this.fileSV.downloadFile();
-    }
 }

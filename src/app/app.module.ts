@@ -15,6 +15,8 @@ import {File} from '@ionic-native/file/ngx';
 import {FileTransfer} from '@ionic-native/file-transfer/ngx';
 import {FileOpener} from '@ionic-native/file-opener/ngx';
 import {AppVersion} from '@ionic-native/app-version/ngx';
+import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
+import {Device} from '@ionic-native/device/ngx';
 
 
 @NgModule({
@@ -33,10 +35,12 @@ import {AppVersion} from '@ionic-native/app-version/ngx';
         SplashScreen,
         NativeStorage,
         UserResolve,
+        InAppBrowser,
         File,
         FileTransfer,
         FileOpener,
         AppVersion,
+        Device,
         // {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     ],
     bootstrap: [AppComponent],

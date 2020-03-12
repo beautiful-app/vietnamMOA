@@ -45,11 +45,15 @@ export class FileService extends TWBase {
      * @param relativePath
      */
     downloadFile(url: string, relativePath: string) {
+        if(this.deviceSV.isIos()) {
+            this.deviceSV.openUrlInNaviteBrowser(url);
+            return;
+        }
+        
         const fileTransfer = this.ft.create();
         fileTransfer.download(encodeURI(url), this.deviceSV.deviceFilePath() + relativePath).then((entry) => {
                 // this.presentToast('download has completed:' + JSON.stringify(entry), 1000000);
             }, (error) => {
-                this.presentToast('download has error:' + JSON.stringify(error), 1000000, 'middle');
                 this.store.dispatch(downloadApk({rate: -1}));
             }
         );

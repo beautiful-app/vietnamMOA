@@ -8,5 +8,19 @@
 </ion-header>
 
 <ion-content>
-    <div [innerHTML]="contnet"></div>
+    
+    <div [innerHTML]="contnet" *ngIf="contnet"></div>
+    
+    <ion-label class="skeleton" *ngIf="!contnet">
+        <h3 class="first-line">
+            <ion-skeleton-text animated style="width: 100%;"></ion-skeleton-text>
+        </h3>
+        <p class="line-normal">
+            <ion-skeleton-text animated></ion-skeleton-text>
+        </p>
+        <p class="line-normal">
+            <ion-skeleton-text animated></ion-skeleton-text>
+        </p>
+    </ion-label>
+
 </ion-content>

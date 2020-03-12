@@ -22,39 +22,15 @@
             <mat-divider></mat-divider>
         </div>
         <div mat-ripple>
-            <mat-list-item (click)="checkUpdate1()">
-                <h4 mat-line translate>Lang_52</h4>
+            <mat-list-item (click)="checkUpdate()">
+                <h4 mat-line translate>Lang_52
+                    <span class="new-tip">NEW</span>
+                </h4>
+                <ion-spinner name="crescent" *ngIf="onChekVerion"></ion-spinner>
             </mat-list-item>
             <mat-divider></mat-divider>
         </div>
-        
-        <!--        <div mat-ripple>-->
-        <!--            <mat-list-item (click)="checkUpdate1()">-->
-        <!--                <h4 mat-line>测试已是最新版本</h4>-->
-        <!--            </mat-list-item>-->
-        <!--            <mat-divider></mat-divider>-->
-        <!--        </div>-->
-        <!--        -->
-        <!--        <div mat-ripple>-->
-        <!--            <mat-list-item (click)="checkUpdate2()">-->
-        <!--                <h4 mat-line>测试新版本</h4>-->
-        <!--            </mat-list-item>-->
-        <!--            <mat-divider></mat-divider>-->
-        <!--        </div>-->
-        <!--        -->
-        <!--        <div mat-ripple>-->
-        <!--            <mat-list-item (click)="test1()">-->
-        <!--                <h4 mat-line>test button 1</h4>-->
-        <!--            </mat-list-item>-->
-        <!--            <mat-divider></mat-divider>-->
-        <!--        </div>-->
-        <!--        -->
-        <!--        <div mat-ripple>-->
-        <!--            <mat-list-item (click)="test2()">-->
-        <!--                <h4 mat-line>test button 2</h4>-->
-        <!--            </mat-list-item>-->
-        <!--            <mat-divider></mat-divider>-->
-        <!--        </div>-->
+    
     </mat-list>
 
 </ion-content>

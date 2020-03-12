@@ -4,7 +4,7 @@ import {USER} from '../../shared/entity/user.bo';
 import {Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {NavController} from '@ionic/angular';
-import {Lang} from '../../core/singleton.export';
+import {DeviceService} from '../../shared/service/device.service';
 
 @Component({
     selector: 'app-details',
@@ -24,7 +24,8 @@ export class DetailsComponent implements OnInit {
     constructor(private userSV: UserService,
                 private router: Router,
                 private location: Location,
-                private navCtrl: NavController
+                private navCtrl: NavController,
+                private deviceSV: DeviceService
     ) {
     }
     
@@ -48,12 +49,9 @@ export class DetailsComponent implements OnInit {
     
     go() {
         
-        // console.log('lang', Lang);
-        Lang.lang_32 = 'dkfjkdjfldaskf经会计师的咖啡店';
-        for (let langKey in Lang) {
-            console.log('langey', langKey);
-            console.log(Lang[langKey]);
-        }
+        this.deviceSV.openUrlInNaviteBrowser('http://baidu.com');
+        
+        
         // this.navCtrl.back();
         
     }

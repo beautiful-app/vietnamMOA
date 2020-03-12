@@ -3,7 +3,7 @@ import {twoValueMatch} from './password-match';
 import {APP} from '../../../core/singleton.export';
 
 export const VALIDATORS = {
-    
+    case0: ['', Validators.compose([Validators.required])],
     case1: ['', Validators.compose([Validators.required, Validators.minLength(APP.authCodeLength)])],
     
     // 密码验证器
@@ -16,10 +16,10 @@ export const VALIDATORS = {
 };
 
 export const TwoPasswordValidator = {
-    password: VALIDATORS.case3,
+    password: VALIDATORS.case0,
     confirmPassword: VALIDATORS.case3
 };
 
 export const TwoPasswordMatchValidator = {
-    validator: twoValueMatch('password', 'confirmPassword', '两次输入的新密码不相等!')
+    validator: twoValueMatch('password', 'confirmPassword')
 };

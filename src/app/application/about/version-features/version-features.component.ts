@@ -29,18 +29,19 @@ export class VersionFeaturesComponent extends TWBase implements OnInit {
     }
     
     ngOnInit() {
+        // setTimeout(_ => {
         this.getData(this.page);
+        // }, 10000);
     }
     
     getData(page: number) {
         this.appSV.getVersionFeaturesList(page).subscribe(r => {
             if(r) {
-                console.log(r);
                 let dataList = r.records;
                 this.featuresList = this.featuresList.concat(dataList);
-                this.infiniteScroll.complete();
+                if(this.infiniteScroll) this.infiniteScroll.complete();
                 if(dataList.length < APP.versonFeaturesPZ) {
-                    this.infiniteScroll.disabled = true;
+                    if(this.infiniteScroll) this.infiniteScroll.disabled = true;
                     this.noData = true;
                 }
             }

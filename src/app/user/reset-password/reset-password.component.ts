@@ -8,6 +8,7 @@ import {RETURN} from '../../shared/utils/return-verify.util';
 import {RouterService} from '../../shared/service/router.service';
 import {WHERE} from '../../shared/entity/where.enum';
 import {TwoPasswordValidator, TwoPasswordMatchValidator, VALIDATORS} from '../../shared/utils/validators/validators.collection';
+import {APP} from '../../core/singleton.export';
 
 @Component({
     selector: 'app-reset-password',
@@ -37,7 +38,7 @@ export class ResetPasswordComponent extends TWBase implements OnInit {
     }
     
     ngOnInit() {
-        // console.log(this.form.get('account'));
+
     }
     
     getCode() {

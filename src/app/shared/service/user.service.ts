@@ -20,7 +20,7 @@ export class UserService extends Httpbase {
     
     constructor(public httpClient: HttpClient,
                 private storageSV: StorageService,
-                private storeSV: Store<{ user: 'user' }>,
+                private store: Store<{ user: 'user' }>,
                 private routerSV: RouterService
     ) {
         super(httpClient);
@@ -33,7 +33,7 @@ export class UserService extends Httpbase {
                 if(RETURN.isSucceed(r)) {
                     // 进行用户token信息保存
                     r.data.id = loginInfo.username;
-                    USER.assign(r.data, this.storeSV);
+                    USER.assign(r.data, this.store);
                     // 根据token获取用户信息
                     this.getUserInfoByToken().subscribe(r => {
                         if(r) o.next(true);
@@ -41,7 +41,6 @@ export class UserService extends Httpbase {
                     });
                 } else o.next(r);
             });
-            
         });
     }
     
@@ -49,7 +48,7 @@ export class UserService extends Httpbase {
         return new Observable<any>(o => {
             this.get(URL.get_user_info + USER.get().id).subscribe(r => {
                 if(RETURN.isSucceed(r)) {
-                    USER.assign(r.data, this.storeSV);
+                    USER.assign(r.data, this.store);
                     o.next(true);
                 } else o.next(false);
             });
@@ -61,18 +60,18 @@ export class UserService extends Httpbase {
             this.storageSV.getUser().subscribe(r => {
                 console.log('缓存中获取到的用户信息为:', r);
                 if(r && r._token) {
-                    USER.assign(r, this.storeSV, true);
+                    USER.assign(r, this.store, true);
                     o.next(true);
                 } else o.next(false);
             });
         });
     }
     
-    changePassword(queryObj: any = {}): Observable<boolean | result> {
+    changePassword(queryObj: any = {}): Observable<result> {
         let changesObj = EntityUtil.fieldReplacement(queryObj, [['oldPassword', 'oldPwd'], ['confirmPassword', 'newPwd']]);
-        return new Observable<boolean | result>(o => {
+        return new Observable<result>(o => {
             this.postJson(URL.change_password, changesObj).subscribe(r => {
-                if(RETURN.isSucceed(r)) o.next(true);
+                if(RETURN.isSucceed(r)) o.next();
                 else o.next(r);
             });
         });
@@ -127,7 +126,7 @@ export class UserService extends Httpbase {
     }
     
     clearData() {
-        USER.reset();
+        USER.reset(this.store);
         this.storageSV.clearUserInfo();
     }
 }

@@ -4,6 +4,8 @@ import {File} from '@ionic-native/file/ngx';
 import {TWBase} from '../TWBase.ui';
 import {RouterService} from './router.service';
 import {APP} from '../../core/singleton.export';
+import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
+import {Lang} from '../const/language.const';
 
 enum exitMark {
     init,
@@ -23,7 +25,8 @@ export class DeviceService extends TWBase {
     
     constructor(private platform: Platform,
                 private file: File,
-                private routerSV: RouterService
+                private routerSV: RouterService,
+                private naviteBr: InAppBrowser
     ) {
         super();
     }
@@ -35,8 +38,7 @@ export class DeviceService extends TWBase {
                 if(!this.routerSV.back()) {
                     if(this._exitApp < exitMark.finish) {
                         if(this.exitTimeOut) clearTimeout(this.exitTimeOut);
-                        
-                        this.presentToast('在执行一次退出程序');
+                        this.presentToast(Lang.Lang_01);
                         this._exitApp += exitMark.step1;
                     } else navigator['app'].exitApp();
                     this.exitTimeOut = setTimeout(_ => {
@@ -67,6 +69,10 @@ export class DeviceService extends TWBase {
         return path;
     }
     
+    openUrlInNaviteBrowser(url: string) {
+        const browser = this.naviteBr.create('http://baidu.com', '_system');
+    }
+    
     /**
      * 是否android真机环境
      */
@@ -91,5 +97,4 @@ export class DeviceService extends TWBase {
                 || this.platform.is('ipad')
                 || this.platform.is('iphone'));
     }
-    
 }

@@ -1,8 +1,17 @@
 import {createReducer, on} from '@ngrx/store';
-import {downloadApk} from '../actions/application.actions';
+import {downloadApk, newVersion} from '../actions/application.actions';
 
-export const initialState = -1;
+const initialState = -1;
+
+const initialNewVersion = false;
 
 export const _downloadApkReducer = createReducer(initialState,
     on(downloadApk, (state, rate) => rate.rate),
+);
+
+export const _newVersion = createReducer(initialNewVersion,
+    on(newVersion, (state, change) => {
+            return change.newVersion;
+        }
+    ),
 );
