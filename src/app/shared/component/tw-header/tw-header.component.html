@@ -1,0 +1,14 @@
+<ion-header mode="md">
+    <!--<ion-header mode="ios">-->
+    <ion-toolbar color="secondary">
+        <ion-buttons slot="start" *ngIf="backButton">
+            <ion-button>
+                <ion-back-button defaultHref="/"></ion-back-button>
+            </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end" (click)="actionEmit()" *ngIf="showButtonRight">
+            <button mat-button>{{buttonTitle}}</button>
+        </ion-buttons>
+        <ion-title>{{title}}</ion-title>
+    </ion-toolbar>
+</ion-header>

@@ -49,6 +49,7 @@ export class UserService extends Httpbase {
             this.get(URL.get_user_info + USER.get().id).subscribe(r => {
                 if(RETURN.isSucceed(r)) {
                     USER.assign(r.data, this.store);
+                    // 广播数据变化
                     o.next(true);
                 } else o.next(false);
             });

@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {RouteReuseStrategy} from '@angular/router';
-import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {AppComponent} from './app.component';
@@ -27,7 +26,10 @@ import {Device} from '@ionic-native/device/ngx';
         BrowserAnimationsModule,
         AppRoutingModule,
         CoreModule,
-        IonicModule.forRoot(),
+        IonicModule.forRoot({
+            mode: 'ios',
+            animated: true
+        }),
         IonicStorageModule.forRoot(),
     ],
     providers: [

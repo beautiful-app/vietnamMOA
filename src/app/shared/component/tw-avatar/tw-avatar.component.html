@@ -1,0 +1,7 @@
+<ion-avatar class="avatar" *ngIf="avatar" slot="{{slot}}">
+    <img src="{{avatar}}">
+</ion-avatar>
+
+<ion-avatar class="avatar" *ngIf="!avatar" slot="{{slot}}">
+    <img src="../../../../assets/img/default-avatar.jpg">
+</ion-avatar>

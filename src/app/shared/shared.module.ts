@@ -8,6 +8,7 @@ import {
     MatExpansionModule, MatFormFieldModule, MatGridListModule, MatIconModule,
     MatInputModule, MatListModule, MatNativeDateModule, MatRippleModule, MatTreeModule
 } from '@angular/material';
+import {TwComponentModule} from './component/tw-component.module';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import {
         MatExpansionModule,
         MatNativeDateModule,
         MatDatepickerModule,
+        TwComponentModule,
     ],
     exports: [
         IonicModule,
@@ -49,6 +51,7 @@ import {
         MatExpansionModule,
         MatNativeDateModule,
         MatDatepickerModule,
+        TwComponentModule,
     ]
 })
 export class SharedModule {

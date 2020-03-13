@@ -1,6 +1,6 @@
 import {NgModule, Optional, SkipSelf} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MatIconRegistry} from '@angular/material';
+import {MatDialog, MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {loadSvgResources} from './svg.util';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -22,6 +22,8 @@ import {WHERE} from '../shared/entity/where.enum';
 import {DeviceService} from '../shared/service/device.service';
 import {newVersion} from './ngrx/actions/application.actions';
 import {ApplicationService} from '../shared/service/application.service';
+import {TWBase} from '../shared/TWBase.ui';
+import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 
 @NgModule({
@@ -47,7 +49,7 @@ import {ApplicationService} from '../shared/service/application.service';
     ]
     
 })
-export class CoreModule {
+export class CoreModule extends TWBase {
     // 两个注解是防止循环调用和第一次的时候可以调用
     constructor(@Optional() @SkipSelf() parent: CoreModule,
                 ir: MatIconRegistry,
@@ -62,9 +64,11 @@ export class CoreModule {
                 private languageSV: LanguageService,
                 private routerSV: RouterService,
                 private deviceSV: DeviceService,
-                private appSV: ApplicationService
+                private appSV: ApplicationService,
+                private dialog: MatDialog,
+                private statusBar: StatusBar,
     ) {
-        console.log('core模块执行');
+        super();
         if(parent) throw new Error('模块已经存在，不能再次加载');
         
         // 注入svg图片
@@ -78,25 +82,30 @@ export class CoreModule {
         
         // 获取用户信息
         this.userSV.getUserFromStorage().subscribe(r => {
-            console.log('缓存中获取用户:', r);
-            if(r)
-            // 通过token查询用户信息,此步骤也作为token验证是否过期的目的
+            if(r)// 通过token查询用户信息,此步骤也作为token验证是否过期的目的
                 this.userSV.getUserInfoByToken().subscribe();
             else this.routerSV.to(WHERE.login);
         });
         
         // 设置user信息变化的监听,如果有变化就更新缓存里的值
         this.store.pipe(select('user')).subscribe(_ => {
-            console.log('侦听到了用户信息变化');
+            console.log('jianigndjdkfjkj');
             this.storageSV.storageUserInfo().subscribe();
         });
+        
+        // 开启路由检测
+        this.routerSV.routeDetection();
         
         // 注册物理返回键
         this.deviceSV.androidBackButtonRegister();
         
-        // 检查版本有没有更新
-        this.appSV.checkNewVersion().subscribe(r => {
-            if(r) this.store.dispatch(newVersion({newVersion: true}));
+        // 检查版本有没有更新,并做强制升级处理
+        this.appSV.checkNewVersionOnLoad();
+        
+        this.platform.ready().then(() => {
+            // this.statusBar.overlaysWebView(true);
+            // this.statusBar.backgroundColorByHexString('#3dc2ff');
+            // this.splashScreen.hide();
         });
         
     }

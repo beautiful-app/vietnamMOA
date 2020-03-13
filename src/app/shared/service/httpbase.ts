@@ -2,11 +2,12 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {result, resultObj} from '../entity/result.bo';
 import {APP} from '../../core/singleton.export';
+import {TWBase} from '../TWBase.ui';
 
-export class Httpbase {
+export class Httpbase extends TWBase {
     
     constructor(public httpClient: HttpClient) {
-    
+        super();
     }
     
     post(url: string, queryObj?: any): Observable<result> {

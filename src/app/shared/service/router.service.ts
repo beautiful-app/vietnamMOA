@@ -7,6 +7,7 @@ import {StringUtil} from '../utils/string.util';
 import {TWBase} from '../TWBase.ui';
 import {NavController} from '@ionic/angular';
 import {route} from '../const/route.enum';
+import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 @Injectable({providedIn: 'root'})
 export class RouterService extends TWBase {
@@ -18,18 +19,12 @@ export class RouterService extends TWBase {
     constructor(
         private router: Router,
         private location: Location,
-        private navCtrl: NavController
+        private navCtrl: NavController,
+        private statusBar: StatusBar,
     ) {
         super();
-        this._routeHistory = [];
-        router.events.pipe(filter(event => event instanceof NavigationEnd))
-        .subscribe((event: NavigationEnd) => {
-            this._setURLs(event);
-            console.log('路由变换:', this.previousUrl, this.currentUrl, this.routeHistory);
-            // this.canBack();
-            console.log('kkk', StringUtil.isIncludeArr([[event.urlAfterRedirects, route.tabs_root], [event.urlAfterRedirects, route.login]]));
-        });
     }
+    
     
     to(where: any, data?: any) {
         switch (where) {
@@ -37,7 +32,7 @@ export class RouterService extends TWBase {
                 this.router.navigate([route.login]);
                 break;
             case WHERE.back:
-                if(this.previousUrl) {
+                if(this._previousUrl) {
                     this.navCtrl.back();
                 } else this.to(WHERE.home);
                 break;
@@ -47,38 +42,45 @@ export class RouterService extends TWBase {
         }
     }
     
+    routeDetection() {
+        this._routeHistory = [];
+        this.router.events.pipe(filter(event => event instanceof NavigationEnd))
+        .subscribe((event: NavigationEnd) => {
+            this._setURLs(event);
+            // 当前登录页的
+            if(StringUtil.isInclude(this._currentUrl, route.login)) {
+                this.statusBar.overlaysWebView(true);
+            } else {
+                this.statusBar.overlaysWebView(false);
+                setTimeout(_ => {
+                    this.statusBar.backgroundColorByHexString('#3dc2ff');
+                }, 100);
+            }
+            console.log('路由变换:', this._previousUrl, this._currentUrl, this._routeHistory);
+        });
+    }
     
     private _setURLs(event: NavigationEnd): void {
         // 如果堆栈的历史大于零在做处理
-        this._previousUrl = this._currentUrl;
-        this._currentUrl = event.urlAfterRedirects;
-        this._routeHistory.push(event.urlAfterRedirects);
+        let url = event.urlAfterRedirects;
+        if(!StringUtil.isIncludeArr([[url, route.tabs_root], [url, route.login]])) {
+            if(url == this._previousUrl) {
+                this._routeHistory.pop();
+            } else {
+                this._routeHistory.push(url);
+            }
+        } else this._routeHistory = [url];
+        this._currentUrl = this._routeHistory[this._routeHistory.length - 1];
+        this._previousUrl = this._routeHistory[this._routeHistory.length - 2];
     }
     
-    get previousUrl(): string {
-        return this._previousUrl;
-    }
-    
-    get currentUrl(): string {
-        return this._currentUrl;
-    }
-    
-    get routeHistory(): string[] {
-        return this._routeHistory;
-    }
-    
-    
-    set routeHistory(value: string[]) {
-        this._routeHistory = value;
-    }
-
-// 是否可返回
+    // 是否可返回
     back(): boolean {
-        // let currentUrl = this.routeHistory[this.routeHistory.length - 1];
-        if(!StringUtil.isIncludeArr([[this.currentUrl, route.tabs_root], [this.currentUrl, route.login]])) {
-            this.navCtrl.back();
+        if(!StringUtil.isIncludeArr([[this._currentUrl, route.tabs_root], [this._currentUrl, route.login]])) {
+            this.navCtrl.navigateBack(this._previousUrl);
             return true;
         } else return false;
     }
+    
     
 }

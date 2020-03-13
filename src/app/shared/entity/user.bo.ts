@@ -34,6 +34,7 @@ export class USER {
             if(info[infoName]) USER.get()[propertyName] = info[infoName];
             if(propertyName == '_token' && info['access_token']) USER.get().token = info['access_token'];
         }
+        console.log('用户重新赋值了');
         store.dispatch(userInfoUpddate());
         return this._instance;
     }

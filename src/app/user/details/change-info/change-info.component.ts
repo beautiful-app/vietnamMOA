@@ -26,10 +26,6 @@ export class ChangeInfoComponent extends TWBase implements OnInit {
         private navCtrl: NavController
     ) {
         super();
-        // let a = this.route.paramMap.pipe(
-        //     switchMap((params: ParamMap) => params.get('cellphone'))
-        // );
-        // this.form.setValue({phoneNumber: a});
     }
     
     ngOnInit() {
@@ -39,13 +35,6 @@ export class ChangeInfoComponent extends TWBase implements OnInit {
     }
     
     changePhoneNumber() {
-        // this.location.back();
-        console.log('path', this.location.path());
-        console.log('state', this.location.getState());
-        this.navCtrl.back();
-        
-        return;
-        
         if(this.form.valid) {
             this.userSV.setPhoneNumber(this.form.getRawValue().phoneNumber).subscribe(r => {
                 // 修改成功后重新获取用户数据，并导航到个人信息页

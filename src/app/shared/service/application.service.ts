@@ -10,6 +10,10 @@ import {DeviceService} from './device.service';
 import {AppVersion} from '@ionic-native/app-version/ngx';
 import {APP} from '../../core/singleton.export';
 import {Device} from '@ionic-native/device/ngx';
+import {UpgradeComponent} from '../../application/upgrade/upgrade.component';
+import {newVersion} from '../../core/ngrx/actions/application.actions';
+import {MatDialog} from '@angular/material';
+import {Store} from '@ngrx/store';
 
 @Injectable({providedIn: 'root'})
 export class ApplicationService extends Httpbase {
@@ -18,7 +22,9 @@ export class ApplicationService extends Httpbase {
                 private storageSV: StorageService,
                 private deviceSV: DeviceService,
                 public appVersion: AppVersion,
-                private device: Device
+                private device: Device,
+                private dialog: MatDialog,
+                private store: Store<{ user: 'user', newVersion: 'newVersion' }>,
     ) {
         super(httpClient);
     }
@@ -59,7 +65,6 @@ export class ApplicationService extends Httpbase {
     checkNewVersion(): Observable<data> {
         return new Observable<data>(o => {
             this.getVersion().subscribe(r => {
-                console.log('version:', r);
                 let params = {
                     deviceId: this.device.uuid,
                     deviceType: this.deviceSV.isIos() ? APP.downloadIos : APP.downloadAndroid,
@@ -74,4 +79,15 @@ export class ApplicationService extends Httpbase {
         });
     }
     
+    checkNewVersionOnLoad() {
+        let _this = this;
+        window.addEventListener('load', function() {
+            _this.checkNewVersion().subscribe(r => {
+                if(r) {
+                    _this.openDialog(_this.dialog, UpgradeComponent, r);
+                    _this.store.dispatch(newVersion({newVersion: true}));
+                }
+            });
+        }, false);
+    }
 }

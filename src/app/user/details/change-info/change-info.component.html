@@ -1,16 +1,4 @@
-<ion-header>
-    <ion-toolbar color="secondary">
-        <ion-buttons slot="start">
-            <ion-button>
-                <ion-back-button></ion-back-button>
-            </ion-button>
-        </ion-buttons>
-        <ion-buttons slot="end">
-            <button mat-button (click)="changePhoneNumber()">确定</button>
-        </ion-buttons>
-        <ion-title>修改手机号</ion-title>
-    </ion-toolbar>
-</ion-header>
+<tw-header title="{{'Lang_32'|translate}}" [showButtonRight]="true" buttonTitle="确定" (buttonAction)="changePhoneNumber()"></tw-header>
 
 <ion-content>
     <form [formGroup]="form">

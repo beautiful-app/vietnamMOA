@@ -9,6 +9,7 @@ import {ApplicationService} from '../../shared/service/application.service';
 import {MatDialog} from '@angular/material';
 import {UpgradeComponent} from '../upgrade/upgrade.component';
 import {Lang} from '../../shared/const/language.const';
+import {select, Store} from '@ngrx/store';
 
 @Component({
     selector: 'app-about',
@@ -18,6 +19,7 @@ import {Lang} from '../../shared/const/language.const';
 export class AboutComponent extends TWBase {
     version: string;
     onChekVerion: boolean = false;
+    newMark: boolean = false;
     
     constructor(
         private upgrapdeSV: UpgradeService,
@@ -26,11 +28,16 @@ export class AboutComponent extends TWBase {
         private fileSV: FileService,
         private platform: Platform,
         private appSV: ApplicationService,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private store: Store<{ user: 'user', newVersion: 'newVersion' }>,
     ) {
         super();
         this.appSV.getVersion().subscribe(r => {
             this.version = r;
+        });
+        
+        this.store.pipe(select('newVersion')).subscribe(r => {
+            this.newMark = Boolean(r);
         });
     }
     
@@ -43,7 +50,6 @@ export class AboutComponent extends TWBase {
             this.appSV.checkNewVersion().subscribe(r => {
                 // 有新版本 打开升级对话框
                 if(r) {
-                    console.log('有新版本:', r);
                     this.openDialog(this.dialog, UpgradeComponent, r);
                 } else this.presentToast(Lang.Lang_76);
                 this.onChekVerion = false;

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../shared/service/user.service';
 import {MatDialog} from '@angular/material';
@@ -8,7 +8,6 @@ import {RETURN} from '../../shared/utils/return-verify.util';
 import {RouterService} from '../../shared/service/router.service';
 import {WHERE} from '../../shared/entity/where.enum';
 import {TwoPasswordValidator, TwoPasswordMatchValidator, VALIDATORS} from '../../shared/utils/validators/validators.collection';
-import {APP} from '../../core/singleton.export';
 
 @Component({
     selector: 'app-reset-password',
@@ -22,13 +21,18 @@ export class ResetPasswordComponent extends TWBase implements OnInit {
     inLoad: boolean = false;
     countDown: number = 0;
     resultMsg: string = '';
+    headShow: boolean = true;
+    
+    @ViewChild('header', {static: false}) div3: ElementRef;
     
     
     constructor(
         private formBuilder: FormBuilder,
         private userSV: UserService,
         private dialog: MatDialog,
-        private routerSV: RouterService
+        private routerSV: RouterService,
+        private render2: Renderer2,
+        private cdr: ChangeDetectorRef,
     ) {
         super();
         let validatorGroup = {...TwoPasswordValidator};
@@ -38,7 +42,7 @@ export class ResetPasswordComponent extends TWBase implements OnInit {
     }
     
     ngOnInit() {
-
+    
     }
     
     getCode() {
@@ -72,6 +76,13 @@ export class ResetPasswordComponent extends TWBase implements OnInit {
                 if(r.msg) this.resultMsg = r.msg;
             }
         });
+    }
+    
+    ionViewWillLeave() {
+        setTimeout(_ => {
+            this.headShow = false;
+            this.cdr.detectChanges();
+        }, 100);
     }
     
 }

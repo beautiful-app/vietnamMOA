@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {NavController} from '@ionic/angular';
 import {DeviceService} from '../../shared/service/device.service';
+import {select, Store} from '@ngrx/store';
 
 @Component({
     selector: 'app-details',
@@ -25,21 +26,23 @@ export class DetailsComponent implements OnInit {
                 private router: Router,
                 private location: Location,
                 private navCtrl: NavController,
-                private deviceSV: DeviceService
+                private deviceSV: DeviceService,
+                private store: Store<{ user: 'user', newVersion: 'newVersion' }>,
     ) {
     }
     
     ngOnInit() {
-        // this.userSV.getUserFromStorage().subscribe(r => {
-        this.avatar = USER.get().avatar;
-        this.username = USER.get().username;
-        this.gender = USER.get().gender;
-        this.email = USER.get().email;
-        this.cellphone = USER.get().cellphone;
-        this.jobTitle = USER.get().jobTitle;
-        this.department = USER.get().department;
-        console.log('用户详情初始化时:', USER.get());
-        // });
+        this.store.pipe(select('user')).subscribe(_ => {
+            this.avatar = USER.get().avatar;
+            this.username = USER.get().username;
+            this.gender = USER.get().gender;
+            this.email = USER.get().email;
+            this.cellphone = USER.get().cellphone;
+            this.jobTitle = USER.get().jobTitle;
+            this.department = USER.get().department;
+            console.log('用户详情初始化时:', USER.get());
+        });
+        
     }
     
     changeInfo() {

@@ -71,11 +71,6 @@ ion-header {
   width: $diameter;
   height: $diameter;
   border-radius: 50%;
-  //width: 3px;
-  //padding: 1px 6px;
-  right: calc(50% + 19px);
-  top: 16px;
-  //height: auto;
-  //font-size: 12px;
-  //line-height: 16px;
+  right: -6px;
+  top: 0;
 }

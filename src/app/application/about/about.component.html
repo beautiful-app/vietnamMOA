@@ -1,11 +1,4 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
-        </ion-buttons>
-        <ion-title>关于同维OA</ion-title>
-    </ion-toolbar>
-</ion-header>
+<tw-header title="{{'Lang_31' | translate}}"></tw-header>
 
 <ion-content>
     <div class="img-div">
@@ -24,7 +17,7 @@
         <div mat-ripple>
             <mat-list-item (click)="checkUpdate()">
                 <h4 mat-line translate>Lang_52
-                    <span class="new-tip">NEW</span>
+                    <span class="new-tip" *ngIf="newMark">NEW</span>
                 </h4>
                 <ion-spinner name="crescent" *ngIf="onChekVerion"></ion-spinner>
             </mat-list-item>

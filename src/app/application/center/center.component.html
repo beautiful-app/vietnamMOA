@@ -1,14 +1,9 @@
-<ion-header>
-    <ion-toolbar color="secondary">
-        <ion-title translate>Lang_12</ion-title>
-    </ion-toolbar>
-</ion-header>
+<tw-header title="{{'Lang_12' | translate}}" [backButton]="false"></tw-header>
+
 
 <ion-content>
     <div class="avatar-box" mat-ripple routerLink="/user/details">
-        <ion-avatar class="avatar">
-            <img src="{{avatar}}">
-        </ion-avatar>
+        <tw-avatar [avatar]="avatar"></tw-avatar>
         <div class="user-info">
             <p class="name">{{username}}</p>
             <p class="department">{{department}}</p>
@@ -21,8 +16,9 @@
         <div mat-ripple routerLink="/application/about">
             <mat-list-item>
                 <mat-icon mat-list-icon>folder</mat-icon>
-                <h4 mat-line translate>Lang_31</h4>
-                <span class="hint-badge"></span>
+                <h4 style="position: relative" translate>Lang_31
+                    <span class="hint-badge" slot="start" *ngIf="newMark"></span>
+                </h4>
             </mat-list-item>
             <mat-divider></mat-divider>
         </div>

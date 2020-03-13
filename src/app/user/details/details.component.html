@@ -1,18 +1,10 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
-        </ion-buttons>
-        <ion-title>个人信息</ion-title>
-    </ion-toolbar>
-</ion-header>
+
+<tw-header title="{{'Lang_12' | translate}}"></tw-header>
 
 <ion-content>
     <ion-list>
         <ion-item>
-            <ion-avatar slot="end">
-                <img src="{{avatar}}">
-            </ion-avatar>
+            <tw-avatar [avatar]="avatar" slot="end"></tw-avatar>
             <ion-label translate>Lang_41</ion-label>
         </ion-item>
         <ion-item class="info-item" (click)="go()">
