@@ -22,8 +22,6 @@ export class ChangeInfoComponent extends TWBase implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private routerSV: RouterService,
-        private location: Location,
-        private navCtrl: NavController
     ) {
         super();
     }
@@ -44,5 +42,10 @@ export class ChangeInfoComponent extends TWBase implements OnInit {
                 });
             });
         }
+    }
+    
+    deleteFile() {
+        console.log('dianjile');
+        
     }
 }

@@ -13,7 +13,6 @@ export class Salary {
     incomes: Incomes[];
 }
 
-
 export const PlanA: Salary = {
     totalIncoming: '57888,6895,00',
     currencySymbol: '₫',

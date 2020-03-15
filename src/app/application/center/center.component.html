@@ -1,38 +1,61 @@
 <tw-header title="{{'Lang_12' | translate}}" [backButton]="false"></tw-header>
 
-
-<ion-content>
+<ion-content class="tw-background-color" style="color: red">
+    
     <div class="avatar-box" mat-ripple routerLink="/user/details">
-        <tw-avatar [avatar]="avatar"></tw-avatar>
+        <tw-avatar class="avatar" [avatar]="avatar"></tw-avatar>
         <div class="user-info">
-            <p class="name">{{username}}</p>
-            <p class="department">{{department}}</p>
+            <p class="name text-primary-color">{{username}}</p>
+            <p class="department text-secondary-color">{{department}}</p>
         </div>
         <span class="flex-right"></span>
-        <mat-icon>chevron_right</mat-icon>
+        <mat-icon class="text-secondary-color2">chevron_right</mat-icon>
     </div>
     
-    <mat-list class="setting-list">
-        <div mat-ripple routerLink="/application/about">
-            <mat-list-item>
-                <mat-icon mat-list-icon>folder</mat-icon>
-                <h4 style="position: relative" translate>Lang_31
+    <!--    <mat-list class="setting-list">-->
+    <!--        <div mat-ripple routerLink="/application/about">-->
+    <!--            <mat-list-item>-->
+    <!--                <mat-icon mat-list-icon>folder</mat-icon>-->
+    <!--                <h4 style="position: relative" translate>Lang_31-->
+    <!--                </h4>-->
+    <!--            </mat-list-item>-->
+    <!--            <mat-divider></mat-divider>-->
+    <!--        </div>-->
+    <!--        <div mat-ripple routerLink="/user/update-password">-->
+    <!--            <mat-list-item>-->
+    <!--                <mat-icon mat-list-icon>folder</mat-icon>-->
+    <!--                <h4 mat-line translate>Lang_32</h4>-->
+    <!--            </mat-list-item>-->
+    <!--            <mat-divider></mat-divider>-->
+    <!--        </div>-->
+    <!--    </mat-list>-->
+    
+    
+    <ion-list>
+        <ion-item mat-ripple style="--color-activated:none" routerLink="/application/about">
+            <ion-avatar slot="start">
+                <mat-icon mat-list-icon svgIcon="alien">alien</mat-icon>
+            </ion-avatar>
+            <ion-label>
+                <h2 class="feature-name" translate>Lang_31
                     <span class="hint-badge" slot="start" *ngIf="newMark"></span>
-                </h4>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </div>
-        <div mat-ripple routerLink="/user/update-password">
-            <mat-list-item>
-                <mat-icon mat-list-icon>folder</mat-icon>
-                <h4 mat-line translate>Lang_32</h4>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </div>
-    </mat-list>
+                </h2>
+            </ion-label>
+        </ion-item>
+        
+        <ion-item mat-ripple routerLink="/user/update-password">
+            <ion-avatar slot="start">
+                <mat-icon mat-list-icon svgIcon="alien">alien</mat-icon>
+            </ion-avatar>
+            <ion-label>
+                <h2 translate>Lang_32</h2>
+            </ion-label>
+        </ion-item>
+    
+    </ion-list>
+    
     
     <div class="example-button-row exit-box">
         <button mat-raised-button (click)="loginOut()" translate>{{'Lang_33' | translate}}</button>
     </div>
-
 </ion-content>

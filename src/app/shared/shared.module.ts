@@ -33,6 +33,7 @@ import {TwComponentModule} from './component/tw-component.module';
         MatNativeDateModule,
         MatDatepickerModule,
         TwComponentModule,
+        
     ],
     exports: [
         IonicModule,

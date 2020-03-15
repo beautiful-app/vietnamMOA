@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {WHERE} from '../entity/where.enum';
 import {Location} from '@angular/common';
-import {filter, last} from 'rxjs/operators';
+import {filter} from 'rxjs/operators';
 import {StringUtil} from '../utils/string.util';
 import {TWBase} from '../TWBase.ui';
 import {NavController} from '@ionic/angular';
@@ -20,7 +20,7 @@ export class RouterService extends TWBase {
         private router: Router,
         private location: Location,
         private navCtrl: NavController,
-        private statusBar: StatusBar,
+        private statusBar: StatusBar
     ) {
         super();
     }
@@ -50,7 +50,7 @@ export class RouterService extends TWBase {
             // 当前登录页的
             if(StringUtil.isInclude(this._currentUrl, route.login)) {
                 this.statusBar.overlaysWebView(true);
-            } else {
+            } else if(StringUtil.isIncludeArr([[this._currentUrl, route.tabs_home], [this._currentUrl, route.reset_password]])) {
                 this.statusBar.overlaysWebView(false);
                 setTimeout(_ => {
                     this.statusBar.backgroundColorByHexString('#3dc2ff');

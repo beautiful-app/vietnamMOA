@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {forwardRef, Inject, Injectable, Injector, Optional, SkipSelf} from '@angular/core';
 import {Platform} from '@ionic/angular';
 import {File} from '@ionic-native/file/ngx';
 import {TWBase} from '../TWBase.ui';
@@ -6,6 +6,10 @@ import {RouterService} from './router.service';
 import {APP} from '../../core/singleton.export';
 import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 import {Lang} from '../const/language.const';
+import {statusStyle} from '../const/status-style.enum';
+import {StatusBar} from '@ionic-native/status-bar/ngx';
+import {StringUtil} from '../utils/string.util';
+import {route} from '../const/route.enum';
 
 enum exitMark {
     init,
@@ -22,11 +26,12 @@ export class DeviceService extends TWBase {
     _exitApp = 0;
     exitTimeOut: any;
     
-    
     constructor(private platform: Platform,
                 private file: File,
-                private routerSV: RouterService,
-                private naviteBr: InAppBrowser
+                 private routerSV: RouterService,
+                private inj:Injector,
+                private naviteBr: InAppBrowser,
+                private statusBar: StatusBar
     ) {
         super();
     }
@@ -51,6 +56,7 @@ export class DeviceService extends TWBase {
             }
         });
     }
+    
     
     dialogMode(dialogRef: any) {
         this._dialogMode = dialogRef;
@@ -97,4 +103,21 @@ export class DeviceService extends TWBase {
                 || this.platform.is('ipad')
                 || this.platform.is('iphone'));
     }
+    
+    
+    setStatusBar(style: number) {
+        switch (style) {
+            case statusStyle.appDefault:
+                this.statusBar.overlaysWebView(false);
+                setTimeout(_ => {
+                    this.statusBar.backgroundColorByHexString('#3dc2ff');
+                }, 100);
+                break;
+            case statusStyle.overlaysWebView:
+                this.statusBar.overlaysWebView(true);
+                break;
+        }
+    }
 }
+
+

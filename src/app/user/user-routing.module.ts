@@ -6,7 +6,7 @@ const routes: Routes = [
     // {path: 'center', loadChildren: () => import('./center/center.module').then(m => m.CenterModule)},
     {path: 'details', loadChildren: () => import('./details/details.module').then(m => m.DetailsModule)},
     {path: 'update-password', loadChildren: () => import('./update-password/update-password.module').then(m => m.UpdatePasswordModule)},
-    {path: 'rest-password', loadChildren: () => import('./reset-password/reset-password.module').then(m => m.ResetPasswordModule)}
+    {path: 'reset-password', loadChildren: () => import('./reset-password/reset-password.module').then(m => m.ResetPasswordModule)}
     // {path: 'login', component: LoginComponent},
     // {path: 'register', component: RegisterComponent},
     // {path: '**', component: RegisterComponent},

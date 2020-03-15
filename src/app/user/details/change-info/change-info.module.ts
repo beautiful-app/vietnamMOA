@@ -11,7 +11,8 @@ import {SharedModule} from '../../../shared/shared.module';
     imports: [
         CommonModule,
         ChangeInfoRoutingModule,
-        SharedModule
+        SharedModule,
+    
     ]
 })
 export class ChangeInfoModule {

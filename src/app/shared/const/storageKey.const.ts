@@ -3,11 +3,6 @@ export const STORAGE_KEY = {
     login_info: 'login_info'
 };
 
-enum dkfj {
-    dkjf = 995987,
-    kjfjddfj,
-}
-
 export enum STORAGE_KEY1 {
     user_obj = 20201109,
     login_info

@@ -8,6 +8,7 @@ import {RETURN} from '../../shared/utils/return-verify.util';
 import {Router} from '@angular/router';
 import {RouterService} from '../../shared/service/router.service';
 import {WHERE} from '../../shared/entity/where.enum';
+import {route} from '../../shared/const/route.enum';
 
 @Component({
     selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
     passwordHide = true;
     loginError: boolean = false;
     inLogging: boolean = false;
+    resetPasswordRoute: string = route.reset_password;
     
     
     constructor(

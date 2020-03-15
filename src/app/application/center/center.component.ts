@@ -3,6 +3,10 @@ import {USER} from 'src/app/shared/entity/user.bo';
 import {UserService} from '../../shared/service/user.service';
 import {Store, select} from '@ngrx/store';
 import {RouterService} from '../../shared/service/router.service';
+import {TWBase} from '../../shared/TWBase.ui';
+import {PhoneConfirmDialog} from '../../user/reset-password/phone-confirm-dialog';
+import {MatDialog} from '@angular/material';
+import {TwSuccessComponent} from '../../shared/component/tw-success/tw-success.component';
 
 
 @Component({
@@ -10,7 +14,7 @@ import {RouterService} from '../../shared/service/router.service';
     templateUrl: './center.component.html',
     styleUrls: ['./center.component.scss'],
 })
-export class CenterComponent implements OnInit {
+export class CenterComponent extends TWBase implements OnInit {
     username: string;
     department: string;
     avatar: string;
@@ -20,8 +24,9 @@ export class CenterComponent implements OnInit {
         private userSV: UserService,
         private store: Store<{ user: 'user', newVersion: 'newVersion' }>,
         private routerSV: RouterService,
+        private dialog: MatDialog
     ) {
-    
+        super();
     }
     
     ngOnInit() {

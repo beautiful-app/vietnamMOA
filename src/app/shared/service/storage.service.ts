@@ -4,9 +4,7 @@ import {USER} from '../entity/user.bo';
 import {Storage} from '@ionic/storage';
 import {Observable} from 'rxjs';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable({providedIn: 'root',})
 export class StorageService {
     
     constructor(private storage: Storage) {

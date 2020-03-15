@@ -9,7 +9,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CoreModule} from './core/core.module';
 import {NativeStorage} from '@ionic-native/native-storage/ngx';
 import {IonicStorageModule} from '@ionic/storage';
-import {UserResolve} from './shared/service/user-resolve.service';
 import {File} from '@ionic-native/file/ngx';
 import {FileTransfer} from '@ionic-native/file-transfer/ngx';
 import {FileOpener} from '@ionic-native/file-opener/ngx';
@@ -36,7 +35,6 @@ import {Device} from '@ionic-native/device/ngx';
         StatusBar,
         SplashScreen,
         NativeStorage,
-        UserResolve,
         InAppBrowser,
         File,
         FileTransfer,

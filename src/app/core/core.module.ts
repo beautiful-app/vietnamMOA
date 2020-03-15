@@ -37,7 +37,7 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
             user: _userReducer,
             newVersion: _newVersion
         }),
-        UpgradeModule
+        UpgradeModule,
     ],
     exports: [],
     providers: [
@@ -89,7 +89,6 @@ export class CoreModule extends TWBase {
         
         // 设置user信息变化的监听,如果有变化就更新缓存里的值
         this.store.pipe(select('user')).subscribe(_ => {
-            console.log('jianigndjdkfjkj');
             this.storageSV.storageUserInfo().subscribe();
         });
         
@@ -103,9 +102,7 @@ export class CoreModule extends TWBase {
         this.appSV.checkNewVersionOnLoad();
         
         this.platform.ready().then(() => {
-            // this.statusBar.overlaysWebView(true);
-            // this.statusBar.backgroundColorByHexString('#3dc2ff');
-            // this.splashScreen.hide();
+        
         });
         
     }

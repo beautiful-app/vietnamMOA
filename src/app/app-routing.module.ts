@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
-import {UserResolve} from './shared/service/user-resolve.service';
 
 /**
  * 在功能模块中定义子路由后，只要导入该模块，等同于在根路由中直接定义

@@ -3,7 +3,8 @@ export enum route {
     tabs_home = '/tabs/salary',
     tabs_center = '/tabs/center',
     
-    login = '/user/login'
+    login = '/user/login',
+    reset_password = '/user/reset-password'
     
     
 }

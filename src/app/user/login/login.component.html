@@ -30,23 +30,24 @@
                     <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
             </mat-form-field>
-            
             <div class="login-error" *ngIf="loginError">用户名或密码错误</div>
+            
             <mat-checkbox checked="false" formControlName="remember">记住密码</mat-checkbox>
-        </div>
-    </form>
-    <ion-row class="slide3">
-        <ion-col class="ion-text-center" size="11">
-            <ion-button type="submit" color="secondary" expand="block" [disabled]="!form.valid || inLogging"
+            
+            <ion-button class="login-button" type="submit" color="secondary" expand="block"
+                        [disabled]="!form.valid || inLogging"
                         (click)="doLogin()" translate>
                 <ion-spinner name="dots" *ngIf="inLogging"></ion-spinner>
                 <span *ngIf="!inLogging" translate>Lang_94</span>
             </ion-button>
-        </ion-col>
+            
+            <div class="reset-password text-secondary-color" routerLink="{{resetPasswordRoute}}">
+                <button mat-button>{{ 'Lang_93' | translate }}?</button>
+            </div>
         
-        <ion-col class="ion-text-end" size="11" routerLink="/user/rest-password">
-            <button mat-button>{{ 'Lang_93' | translate }}?</button>
-        </ion-col>
-    </ion-row>
+        
+        </div>
+    </form>
+
 
 </ion-content>

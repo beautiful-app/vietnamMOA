@@ -53,6 +53,7 @@ ion-item {
   -webkit-animation: slide-in-bottom 1.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   animation: slide-in-bottom 1.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   text-align: center;
+  margin: 10px 0 0;
 }
 
 .text-danger {
@@ -85,4 +86,14 @@ ion-label {
 
 .login-error {
   color: red;
+}
+
+.login-button {
+  padding: 0;
+  margin-top: 15px;
+}
+
+.reset-password {
+  margin-top: 10px;
+  text-align: right;
 }
