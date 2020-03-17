@@ -1,7 +1,10 @@
-<tw-header title="{{'Lang_32'|translate}}" [showButtonRight]="true" buttonTitle="确定"
+<tw-header title="{{'Lang_32'|translate}}"
+           [showButtonRight]="true"
+           buttonTitle="确定"
+           [showLoadingButtonRight]="inModify"
            (buttonAction)="changePhoneNumber()"></tw-header>
 
-<ion-content>
+<ion-content class="tw-background-color">
     <form [formGroup]="form">
         <mat-form-field class="width-100 padding-20">
             <mat-label>Telephone</mat-label>

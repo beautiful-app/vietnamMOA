@@ -1,6 +1,6 @@
 <tw-header title="{{'Lang_11' | translate}}" [backButton]="false"></tw-header>
 
-<ion-content class="content">
+<ion-content class="content tw-background-color">
     <div class="date-picker">
         <div class="date-picker-button" (click)="openDatePicker()" matRipple>
             <mat-icon>date_range</mat-icon>
@@ -10,7 +10,9 @@
             {{salary.currencySymbol + salary.totalIncoming}}
         </div>
     </div>
-    <mat-accordion [displayMode]="'flat'">
+    
+    
+    <mat-accordion class="salary-panel" [displayMode]="'flat'">
         <mat-expansion-panel matRipple
                              *ngFor="let income of salary.incomes"
         >
@@ -24,12 +26,12 @@
             >
                 <span>{{item.name}}</span>
                 <span class="fill-remaining-space"></span>
-                <span>{{salary.currencySymbol + item.income}}</span>
+                <span class="text-secondary-color">{{salary.currencySymbol + item.income}}</span>
             </div>
         </mat-expansion-panel>
     </mat-accordion>
 </ion-content>
-<ion-datetime #datePicker displayFormat="YYYY/MM" pickerFormat="YYYY MM" min="2000"
+<ion-datetime style="display: none" #datePicker displayFormat="YYYY/MM" pickerFormat="YYYY MM" min="2000"
               [pickerOptions]="customPickerOptions" mode="md"
 ></ion-datetime>
 

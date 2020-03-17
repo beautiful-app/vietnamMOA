@@ -40,6 +40,10 @@
   padding: 20px;
 }
 
+.align-right {
+  text-align: right;
+}
+
 .toast {
   //--border-color: red;
   --color: white;
@@ -54,4 +58,8 @@
 
 .flex-right {
   flex: 1 1 auto;
+}
+
+.mat-dialog-container {
+  padding: 10px !important;
 }

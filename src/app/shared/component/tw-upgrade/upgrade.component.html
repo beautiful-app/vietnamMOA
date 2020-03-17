@@ -9,11 +9,12 @@
         <mat-progress-bar [mode]="mode" value="{{rate}}" [bufferValue]="bufferValue">></mat-progress-bar>
     </div>
     <br>
-    <button mat-button color="primary" *ngIf="!downloading" (click)="update()">{{'Lang_75_5' | translate}}</button>
-    <button mat-button color="primary" *ngIf="!downloading" (click)="close()">{{'Lang_75_4'| translate}}</button>
-    <button mat-button color="primary" *ngIf="downloading" (click)="close()">后台下载</button>
+    <div class="button">
+        <button mat-button *ngIf="!downloading" (click)="close()">{{'Lang_75_4'| translate}}</button>
+        <button mat-button class="upgrade" *ngIf="!downloading" (click)="update()">{{'Lang_75_5' | translate}}</button>
+        <button mat-button color="primary" *ngIf="downloading" (click)="close()">后台下载</button>
+    </div>
 </div>
-
 
 <div *ngIf="!canUpgrade">
     <p class="title">已是最新版本</p>

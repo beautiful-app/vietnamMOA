@@ -1,3 +1,7 @@
+* {
+  color: #161616;
+}
+
 
 mat-list {
   .mat-list-item {
@@ -20,4 +24,22 @@ mat-list {
 tw-avatar {
   width: 30px;
   height: 30px;
+}
+
+ion-list {
+  ion-item:first-child {
+    --min-height: 55px;
+  }
+
+  ion-item {
+    --border-color: #efefef;
+
+    --min-height: 50px;
+
+    span:last-child {
+      color: #9c9c9c;
+    }
+  }
+
+
 }

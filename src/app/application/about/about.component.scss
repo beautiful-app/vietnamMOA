@@ -1,3 +1,4 @@
+
 .about-us-public {
   font-size: 12px;
   color: gray;
@@ -57,11 +58,31 @@ ion-list {
 
 .custom-dialog-container .mat-dialog-container {
   padding: 10px;
-
 }
 
+.cut-off {
+  border-top-color: #e5e5e5;
+}
 
 .new-tip {
   color: red;
 
+}
+
+mat-list {
+  div {
+    background-color: #fcfcfc;
+
+    mat-icon {
+
+    }
+  }
+}
+
+.arrow-color {
+  color: #d8d8d8;
+}
+
+.setting-list {
+  margin-top: 40px;
 }

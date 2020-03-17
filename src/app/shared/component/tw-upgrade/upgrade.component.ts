@@ -1,11 +1,9 @@
 import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef, ThemePalette} from '@angular/material';
-import {FileService} from '../../shared/service/file.service';
 import {Store, select} from '@ngrx/store';
-import {TWBase} from '../../shared/TWBase.ui';
-import {downloadApk} from '../../core/ngrx/actions/application.actions';
-import {DeviceService} from '../../shared/service/device.service';
-import {interval} from 'rxjs';
+import {TWBase} from '../../TWBase.ui';
+import {FileService} from '../../service/file.service';
+import {DeviceService} from '../../service/device.service';
 
 
 @Component({

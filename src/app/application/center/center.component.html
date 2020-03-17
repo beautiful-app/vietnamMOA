@@ -1,6 +1,6 @@
 <tw-header title="{{'Lang_12' | translate}}" [backButton]="false"></tw-header>
 
-<ion-content class="tw-background-color" style="color: red">
+<ion-content class="tw-background-color text-primary-color">
     
     <div class="avatar-box" mat-ripple routerLink="/user/details">
         <tw-avatar class="avatar" [avatar]="avatar"></tw-avatar>
@@ -9,30 +9,11 @@
             <p class="department text-secondary-color">{{department}}</p>
         </div>
         <span class="flex-right"></span>
-        <mat-icon class="text-secondary-color2">chevron_right</mat-icon>
+        <mat-icon class="arrow-color">chevron_right</mat-icon>
     </div>
     
-    <!--    <mat-list class="setting-list">-->
-    <!--        <div mat-ripple routerLink="/application/about">-->
-    <!--            <mat-list-item>-->
-    <!--                <mat-icon mat-list-icon>folder</mat-icon>-->
-    <!--                <h4 style="position: relative" translate>Lang_31-->
-    <!--                </h4>-->
-    <!--            </mat-list-item>-->
-    <!--            <mat-divider></mat-divider>-->
-    <!--        </div>-->
-    <!--        <div mat-ripple routerLink="/user/update-password">-->
-    <!--            <mat-list-item>-->
-    <!--                <mat-icon mat-list-icon>folder</mat-icon>-->
-    <!--                <h4 mat-line translate>Lang_32</h4>-->
-    <!--            </mat-list-item>-->
-    <!--            <mat-divider></mat-divider>-->
-    <!--        </div>-->
-    <!--    </mat-list>-->
-    
-    
     <ion-list>
-        <ion-item mat-ripple style="--color-activated:none" routerLink="/application/about">
+        <ion-item mat-ripple routerLink="/application/about">
             <ion-avatar slot="start">
                 <mat-icon mat-list-icon svgIcon="alien">alien</mat-icon>
             </ion-avatar>
@@ -56,6 +37,7 @@
     
     
     <div class="example-button-row exit-box">
-        <button mat-raised-button (click)="loginOut()" translate>{{'Lang_33' | translate}}</button>
+        <button class="logout-button" mat-raised-button (click)="loginOut()"
+                translate>{{'Lang_33' | translate}}</button>
     </div>
 </ion-content>

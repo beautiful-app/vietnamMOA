@@ -23,6 +23,6 @@ export class VersionDetailComponent implements OnInit {
                 if(r) this.contnet = r.data;
                 else this.contnet = '';
             });
-        }, 5000);
+        }, 500);
     }
 }

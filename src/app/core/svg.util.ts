@@ -19,9 +19,7 @@ export const loadSvgResources = (ir: MatIconRegistry, ds: DomSanitizer) => {
     // ir.addSvgIcon('week', ds.bypassSecurityTrustResourceUrl(`${sidebarDir}/week.svg`));
     // ir.addSvgIcon('day', ds.bypassSecurityTrustResourceUrl(`${sidebarDir}/day.svg`));
     ir.addSvgIcon('alien', ds.bypassSecurityTrustResourceUrl(`${svgDir}/alien.svg`));
-    
-    console.log('进来加载了', svgDir);
-    // ir.addSvgIcon('tw_logo', ds.bypassSecurityTrustResourceUrl('assets/svg/tw_logo.svg'));
+    ir.addSvgIcon('tw_logo', ds.bypassSecurityTrustResourceUrl(`${svgDir}/tw_logo.svg`));
     // // ir.addSvgIcon('tw_logo', ds.bypassSecurityTrustResourceUrl(`${svgDir}/icon-font-set.svg`));
     // console.log('导入完毕');
     //

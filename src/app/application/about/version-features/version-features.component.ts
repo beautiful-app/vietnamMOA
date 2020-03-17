@@ -29,9 +29,9 @@ export class VersionFeaturesComponent extends TWBase implements OnInit {
     }
     
     ngOnInit() {
-        // setTimeout(_ => {
-        this.getData(this.page);
-        // }, 10000);
+        setTimeout(_ => {
+            this.getData(this.page);
+        }, 1000);
     }
     
     getData(page: number) {
@@ -50,9 +50,8 @@ export class VersionFeaturesComponent extends TWBase implements OnInit {
     
     loadData($event) {
         setTimeout(_ => {
-            // $event.target.complete();
             this.getData(++this.page);
-        }, 1000);
+        }, 500);
         
     }
 }

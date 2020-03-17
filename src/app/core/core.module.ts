@@ -1,6 +1,6 @@
 import {NgModule, Optional, SkipSelf} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MatDialog, MatIconRegistry} from '@angular/material';
+import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {loadSvgResources} from './svg.util';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -12,8 +12,6 @@ import {UserService} from '../shared/service/user.service';
 import {HttpInterceptor} from './interceptor/http.interceptor';
 import {select, Store, StoreModule} from '@ngrx/store';
 import {_userReducer} from './ngrx/reducers/user.reducer';
-import {UpgradeModule} from '../application/upgrade/upgrade.module';
-import {UpgradeService} from '../application/upgrade/upgrade.service';
 import {_downloadApkReducer, _newVersion} from './ngrx/reducers/application.reducer';
 import {StorageService} from '../shared/service/storage.service';
 import {LanguageService} from '../shared/service/language.service';
@@ -23,7 +21,7 @@ import {DeviceService} from '../shared/service/device.service';
 import {newVersion} from './ngrx/actions/application.actions';
 import {ApplicationService} from '../shared/service/application.service';
 import {TWBase} from '../shared/TWBase.ui';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
+import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
@@ -37,7 +35,7 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
             user: _userReducer,
             newVersion: _newVersion
         }),
-        UpgradeModule,
+        SharedModule
     ],
     exports: [],
     providers: [
@@ -45,9 +43,8 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
             provide: HTTP_INTERCEPTORS,
             useClass: HttpInterceptor,
             multi: true
-        }
-    ]
-    
+        },
+    ],
 })
 export class CoreModule extends TWBase {
     // 两个注解是防止循环调用和第一次的时候可以调用
@@ -60,13 +57,10 @@ export class CoreModule extends TWBase {
                 private userSV: UserService,
                 private storageSV: StorageService,
                 private store: Store<{ user: 'user', newVersion: 'newVersion' }>,
-                private upgradeSV: UpgradeService,
                 private languageSV: LanguageService,
                 private routerSV: RouterService,
                 private deviceSV: DeviceService,
                 private appSV: ApplicationService,
-                private dialog: MatDialog,
-                private statusBar: StatusBar,
     ) {
         super();
         if(parent) throw new Error('模块已经存在，不能再次加载');
@@ -100,11 +94,6 @@ export class CoreModule extends TWBase {
         
         // 检查版本有没有更新,并做强制升级处理
         this.appSV.checkNewVersionOnLoad();
-        
-        this.platform.ready().then(() => {
-        
-        });
-        
     }
 }
 

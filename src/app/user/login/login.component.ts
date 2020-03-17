@@ -50,26 +50,19 @@ export class LoginComponent implements OnInit {
     
     
     doLogin() {
-        
-        // this.routerSV.to(WHERE.home);
-        //
-        // return;
-        
         // 禁用登录按钮
         this.inLogging = true;
-        console.log(this.inLogging);
-        
-        // 勾选了记住密码，那么保存信息,否则忘记...
-        if(this.form.getRawValue().remember) this.storage.set(STORAGE_KEY.login_info, this.form.getRawValue());
-        else this.storage.remove(STORAGE_KEY.login_info);
-        
-        this.userSV.doLogin(this.form.getRawValue()).subscribe(r => {
-            if(RETURN.isTrue(r)) {
-                this.routerSV.to(WHERE.home);
-                this.loginError = false;
-            } else this.loginError = true;
-            this.inLogging = false;
-            
-        });
+        setTimeout(_ => {
+            // 勾选了记住密码，那么保存信息,否则忘记...
+            if(this.form.getRawValue().remember) this.storage.set(STORAGE_KEY.login_info, this.form.getRawValue());
+            else this.storage.remove(STORAGE_KEY.login_info);
+            this.userSV.doLogin(this.form.getRawValue()).subscribe(r => {
+                if(RETURN.isTrue(r)) {
+                    this.routerSV.to(WHERE.home);
+                    this.loginError = false;
+                } else this.loginError = true;
+                this.inLogging = false;
+            });
+        }, 2000);
     }
 }

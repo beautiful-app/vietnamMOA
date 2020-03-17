@@ -13,13 +13,13 @@ export class TwHeaderComponent implements OnInit {
     @Input() buttonTitle: string = Lang.Lang_910;
     @Input() showButtonRight: boolean = false;
     @Output() buttonAction = new EventEmitter();
+    @Input() showLoadingButtonRight: boolean = false;
     
     
     constructor() {
     }
     
     ngOnInit() {
-        console.log(this.backButton);
     }
     
     actionEmit() {

@@ -13,7 +13,6 @@ export class Tabs {
     ) {
         
         this.store.pipe(select('newVersion')).subscribe(r => {
-            console.log('newVersion check:', r);
             this.newMark = Boolean(r);
         });
         

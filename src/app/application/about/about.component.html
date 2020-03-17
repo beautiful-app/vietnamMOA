@@ -1,34 +1,29 @@
 <tw-header title="{{'Lang_31' | translate}}"></tw-header>
-
-<ion-content>
+<ion-content class="tw-background-color">
     <div class="img-div">
         <img cache="true" class="img-content" src="../../../assets/img/tw-icon.png">
     </div>
     <p align="center" class="about-us-p"> 同维OA v{{version}}</p>
-    
     <mat-list class="setting-list">
         <div mat-ripple routerLink="/application/about/version-features">
             <mat-list-item>
                 <h4 mat-line translate>Lang_51</h4>
-                <mat-icon>chevron_right</mat-icon>
+                <mat-icon class="arrow-color">chevron_right</mat-icon>
             </mat-list-item>
-            <mat-divider></mat-divider>
+            <mat-divider class="cut-off"></mat-divider>
         </div>
         <div mat-ripple>
             <mat-list-item (click)="checkUpdate()">
                 <h4 mat-line translate>Lang_52
                     <span class="new-tip" *ngIf="newMark">NEW</span>
                 </h4>
-                <ion-spinner name="crescent" *ngIf="onChekVerion"></ion-spinner>
+                <ion-spinner name="crescent" color="secondary" *ngIf="onChekVerion"></ion-spinner>
             </mat-list-item>
             <mat-divider></mat-divider>
         </div>
-    
     </mat-list>
-
 </ion-content>
-
-<ion-footer align="center">
+<ion-footer class="tw-background-color" align="center">
     <p class="about-us-p-bottom">深圳市共进电子股份有限公司
         <span style="margin-left:10px;">版权所有</span>
     </p>

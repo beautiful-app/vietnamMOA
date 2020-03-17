@@ -2,25 +2,44 @@
 // http://ionicframework.com/docs/theming/
 
 
+.mat-dialog-container {
+  padding: 0;
+}
+
+
+.text-primary-color {
+  color: #575757;
+}
+
 .text-secondary-color {
-  color: #7d828d;
+  color: #979797;
 }
 
 .text-secondary-color2 {
   color: #9b9b9b;
 }
 
-.text-primary-color {
-  color: #2c2c2c;
+.line-color {
+  color: #e5e5e5;
 }
+
+.arrow-color {
+  color: #d8d8d8;
+}
+
 
 .tw-background-color {
   --background: var(--ion-background-color, #f5f5f5);
-
+  background-color: #f5f5f5;
 }
 
 .app-primary {
   color: #37a5f3;
+}
+
+.app-primary-button {
+  color: #fdfdfd !important;
+  background-color: #65ccff !important;
 }
 
 
@@ -94,8 +113,8 @@ $my-custom-accent-color: (
 );
 
 $my-app-primary: mat-palette($my-custom-primary-color);
-//$my-app-accent: mat-palette($my-custom-accent-color, 500, 900, A100);
-$my-app-accent: mat-palette($my-custom-primary-color, 600, 900, A400);
+//$my-app-accent: mat-palette($my-custom-primary-color, 600, 700, A400);
+$my-app-accent: mat-palette($my-custom-primary-color, 500, 400, 400);
 $my-app-warn: mat-palette($mat-deep-orange);
 
 $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);

@@ -1,17 +1,18 @@
 <tw-header title="{{'Lang_51' | translate}}"></tw-header>
 
-<ion-content>
+<ion-content class="tw-background-color">
     
     <div *ngIf="featuresList.length > 0">
-        <div class="avatar-box" mat-ripple [routerLink]="['details',item.id]"
+        <div class="list-box" mat-ripple [routerLink]="['details',item.id]"
              *ngFor="let item of featuresList">
-            <div class="user-info">
+            <div class="list">
                 <p class="name">vietnamMOA{{item.version}}主要更新</p>
-                <p class="department">{{item.releaseTime}}</p>
+                <p class="time text-secondary-color">{{item.releaseTime}}</p>
             </div>
             <span class="flex-right"></span>
-            <mat-icon>chevron_right</mat-icon>
+            <mat-icon class="arrow-color">chevron_right</mat-icon>
         </div>
+        
         <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
             <ion-infinite-scroll-content
                     loadingSpinner="bubbles"
@@ -19,13 +20,9 @@
             </ion-infinite-scroll-content>
         </ion-infinite-scroll>
         <br>
-        <div style=" width:100%; text-align:left; margin-left:15px; margin-right:15px;" *ngIf="noData">
-            <hr class="hrLine" style="width:60px;"/>
-            加载完毕
-            <hr class="hrLine" style="width:60px;"/>
-        </div>
+        
+        <tw-load-complete [isShow]="noData"></tw-load-complete>
     </div>
-    
     
     <div *ngIf="featuresList.length<=0">
         <ion-list>

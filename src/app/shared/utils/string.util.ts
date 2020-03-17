@@ -12,7 +12,6 @@ export class StringUtil {
     
     static isIncludeArr(handleArray: Array<any>) {
         let include = false;
-        console.log('handleArray:', handleArray);
         handleArray.forEach(r => {
             if(this.isInclude(r[0], r[1])) include = true;
         });

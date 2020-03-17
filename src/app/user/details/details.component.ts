@@ -40,22 +40,16 @@ export class DetailsComponent implements OnInit {
             this.cellphone = USER.get().cellphone;
             this.jobTitle = USER.get().jobTitle;
             this.department = USER.get().department;
-            console.log('用户详情初始化时:', USER.get());
         });
         
     }
     
     changeInfo() {
         this.router.navigate(['./']);
-        
     }
     
     go() {
         
         this.deviceSV.openUrlInNaviteBrowser('http://baidu.com');
-        
-        
-        // this.navCtrl.back();
-        
     }
 }

@@ -10,10 +10,10 @@ import {DeviceService} from './device.service';
 import {AppVersion} from '@ionic-native/app-version/ngx';
 import {APP} from '../../core/singleton.export';
 import {Device} from '@ionic-native/device/ngx';
-import {UpgradeComponent} from '../../application/upgrade/upgrade.component';
 import {newVersion} from '../../core/ngrx/actions/application.actions';
 import {MatDialog} from '@angular/material';
 import {Store} from '@ngrx/store';
+import {UpgradeComponent} from '../component/tw-upgrade/upgrade.component';
 
 @Injectable({providedIn: 'root'})
 export class ApplicationService extends Httpbase {

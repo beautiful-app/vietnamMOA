@@ -1,6 +1,7 @@
 import {LoadingController, ToastController} from '@ionic/angular';
 import {MatDialog} from '@angular/material';
 import {Observable} from 'rxjs';
+import {tipsMode, TwSuccessComponent} from './component/tw-success/tw-success.component';
 
 export abstract class TWBase {
     protected _loading: LoadingController;
@@ -24,6 +25,9 @@ export abstract class TWBase {
         toast.present();
     }
     
+    successTip(dialog: MatDialog, mode?: tipsMode): Observable<any> {
+        return this.openDialog(dialog, TwSuccessComponent, mode ? mode : tipsMode.successMode1);
+    }
     
     protected openDialog(dialog: MatDialog, component: any, date?: any): Observable<boolean | any> {
         const dialogRef = dialog.open(component, {

@@ -1,6 +1,7 @@
 <tw-header title="{{'Lang_51' | translate}}"></tw-header>
 
-<ion-content>
+<ion-content class="tw-background-color">
+    
     <div [innerHTML]="contnet" *ngIf="contnet"></div>
     
     <ion-label class="skeleton" *ngIf="!contnet">
