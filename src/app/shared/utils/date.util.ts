@@ -6,12 +6,12 @@ export class DateUtil {
         return '' + this._date.getFullYear();
     }
     
-    public static getCuttentMonth() {
-        return this._date.getMonth() + 1;
+    public static getCurrentMonth(): string {
+        return this._date.getMonth() + 1 >= 10 ? '' + (this._date.getMonth() + 1) : '0' + (this._date.getMonth() + 1);
     }
     
     
     public static getYearMonth(separator: string = '/'): string {
-        return this.getFullYear() + separator + this.getCuttentMonth();
+        return this.getFullYear() + separator + this.getCurrentMonth();
     }
 }

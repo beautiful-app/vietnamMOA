@@ -31,7 +31,6 @@ export function twoValueMatch(controlName: string, matchingControlName: string, 
             // 验证复杂度
             let reg = `^(?![a-zA-Z]+$)(?![A-Z0-9]+$)(?![A-Z\\W_]+$)(?![a-z0-9]+$)(?![a-z\\W_]+$)(?![0-9\\W_]+$)[a-zA-Z0-9\\W_]{${APP.minPasswordLength},}$`;
             var re = new RegExp(reg);
-            console.log('testjjjjj', re.test('jd%￥￥jjHHH'));
             if(!re.test(matchingControl.value)) matchingControl.setErrors({msg: Lang.Lang_88});
             else matchingControl.setErrors(null);
         }

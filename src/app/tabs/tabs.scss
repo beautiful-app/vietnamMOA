@@ -1,9 +1,22 @@
-.tabbar {
-  justify-content: center;
-}
+//.tabbar {
+//  justify-content: center;
+//}
+//
+//.tab-button {
+//  max-width: 200px;
+//}
 
-.tab-button {
-  max-width: 200px;
+ion-tab-bar {
+  --border: none;
+
+  ion-tab-button {
+    background-color: #fdfdfdf0;
+    color: #a6a6a6;
+  }
+
+  ion-tab-button.tab-selected {
+    color: #37a5f3;
+  }
 }
 
 .hint-badge {
@@ -22,3 +35,4 @@
   //font-size: 12px;
   //line-height: 16px;
 }
+

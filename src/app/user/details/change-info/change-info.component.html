@@ -1,13 +1,13 @@
-<tw-header title="{{'Lang_32'|translate}}"
+<tw-header title="修改手机号"
            [showButtonRight]="true"
-           buttonTitle="确定"
+           buttonTitle="{{'Lang_910' | translate}}"
            [showLoadingButtonRight]="inModify"
            (buttonAction)="changePhoneNumber()"></tw-header>
 
 <ion-content class="tw-background-color">
     <form [formGroup]="form">
         <mat-form-field class="width-100 padding-20">
-            <mat-label>Telephone</mat-label>
+            <mat-label>手机号码</mat-label>
             <input type="tel" matInput formControlName="phoneNumber">
             <button mat-icon-button matSuffix (click)="form.patchValue({phoneNumber:''})">
                 <mat-icon>clear</mat-icon>

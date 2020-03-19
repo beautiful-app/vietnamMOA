@@ -1,6 +1,24 @@
 .content {
   --padding-top: 20px;
 
+  mat-accordion {
+    mat-expansion-panel {
+      background-color: #fdfdfdf0;
+
+      mat-panel-title {
+        color: #414141;
+      }
+
+      mat-panel-description {
+        color: #a4a4a4;
+      }
+    }
+  }
+
+  .tw-theme .mat-expansion-panel-header[aria-disabled=true] {
+    color: red;
+  }
+
   .date-picker {
     display: flex;
     align-items: center;

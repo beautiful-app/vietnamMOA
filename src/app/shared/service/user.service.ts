@@ -12,6 +12,7 @@ import {result} from '../entity/result.bo';
 import {EntityUtil} from '../utils/entity.util';
 import {RouterService} from './router.service';
 import {WHERE} from '../entity/where.enum';
+import {userLogOut} from '../../core/ngrx/actions/user.actions';
 
 @Injectable({
     providedIn: 'root'
@@ -20,7 +21,7 @@ export class UserService extends Httpbase {
     
     constructor(public httpClient: HttpClient,
                 private storageSV: StorageService,
-                private store: Store<{ user: 'user' }>,
+                private store: Store<{ user: 'user', userLogout: 'userLogout' }>,
                 private routerSV: RouterService
     ) {
         super(httpClient);
@@ -48,8 +49,8 @@ export class UserService extends Httpbase {
         return new Observable<any>(o => {
             this.get(URL.get_user_info + USER.get().id).subscribe(r => {
                 if(RETURN.isSucceed(r)) {
-                    USER.assign(r.data, this.store);
-                    // 广播数据变化
+                    console.log('查询到用户信息啦AAAAAAAAAAAAAA', r);
+                    USER.assign(r.data, this.store, null, true);
                     o.next(true);
                 } else o.next(false);
             });
@@ -59,7 +60,6 @@ export class UserService extends Httpbase {
     getUserFromStorage(): Observable<CheckBo> {
         return new Observable<any>(o => {
             this.storageSV.getUser().subscribe(r => {
-                console.log('缓存中获取到的用户信息为:', r);
                 if(r && r._token) {
                     USER.assign(r, this.store, true);
                     o.next(true);
@@ -122,12 +122,11 @@ export class UserService extends Httpbase {
     }
     
     loginOut() {
-        this.clearData();
+        USER.reset(this.store);
+        this.storageSV.clearUserInfo();
         this.routerSV.to(WHERE.login);
     }
     
     clearData() {
-        USER.reset(this.store);
-        this.storageSV.clearUserInfo();
     }
 }

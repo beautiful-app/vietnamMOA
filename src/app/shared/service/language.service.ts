@@ -15,9 +15,8 @@ export class LanguageService {
         // // 当在assets/i18n中找不到对应的语言翻译时，使用'zh-CN'作为默认语言
         this.translate.setDefaultLang('vi');
         let language = this.translate.getBrowserLang();
-        // this.translate.use(language.substr(0, 2));
-        this.translate.use('en');
-        console.log('#################成功设置语言');
+        this.translate.use(language.substr(0, 2));
+        // this.translate.use('en');
     }
     
     // 获取代码中需要的语言

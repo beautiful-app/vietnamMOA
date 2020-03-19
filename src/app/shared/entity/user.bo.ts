@@ -1,4 +1,4 @@
-import {userInfoUpddate} from '../../core/ngrx/actions/user.actions';
+import {userInfoUpddate, userLogOut} from '../../core/ngrx/actions/user.actions';
 
 export class USER {
     private _id: string = '';
@@ -17,16 +17,17 @@ export class USER {
     private _state: number = -1;
     private _username: string = '';
     private _workAddress: string = '';
+    private _isActive: boolean = false;           // 对象是否已经激活并且可用
     
     
-    // 类加载时，实例的创建
+    // 饿汉模式实例化user对象
     private static _instance: USER = new USER();
     
     static get(): USER {
         return this._instance;
     }
     
-    public static assign(info: USER, store, fromStorage?: boolean): USER {
+    public static assign(info: USER, store, fromStorage?: boolean, newInfo?: boolean): USER {
         for (let propertyName in USER.get()) {
             let infoName;
             if(!fromStorage) infoName = propertyName.substr(1, propertyName.length);
@@ -34,14 +35,19 @@ export class USER {
             if(info[infoName]) USER.get()[propertyName] = info[infoName];
             if(propertyName == '_token' && info['access_token']) USER.get().token = info['access_token'];
         }
-        console.log('用户重新赋值了');
-        store.dispatch(userInfoUpddate());
+        // 如果重新获取了用户信息，那么设置标识为真
+        if(newInfo) {
+            USER.get().isActive = true;
+            store.dispatch(userInfoUpddate());
+            store.dispatch(userLogOut({hasLogout: false}));
+        }
         return this._instance;
     }
     
     public static reset(store) {
         this._instance = new USER();
-        store.dispatch(userInfoUpddate());
+        // store.dispatch(userInfoUpddate());
+        store.dispatch(userLogOut({hasLogout: true}));
     }
     
     private constructor() {
@@ -52,7 +58,6 @@ export class USER {
     }
     
     set id(value: string) {
-        console.log('设置了id');
         this._id = value;
     }
     
@@ -62,9 +67,6 @@ export class USER {
     
     set token(value: string) {
         this._token = value;
-        // this._token = 'kdjfkdjfj';
-        console.log('设置了token');
-        // this.token = 'dkjfkjd';
     }
     
     get avatar(): string {
@@ -125,5 +127,14 @@ export class USER {
     
     get workAddress(): string {
         return this._workAddress;
+    }
+    
+    
+    get isActive(): boolean {
+        return this._isActive;
+    }
+    
+    set isActive(value: boolean) {
+        this._isActive = value;
     }
 }

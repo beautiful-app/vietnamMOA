@@ -8,6 +8,7 @@ import {RETURN} from '../../shared/utils/return-verify.util';
 import {RouterService} from '../../shared/service/router.service';
 import {WHERE} from '../../shared/entity/where.enum';
 import {TwoPasswordValidator, TwoPasswordMatchValidator, VALIDATORS} from '../../shared/utils/validators/validators.collection';
+import {Lang} from '../../shared/const/language.const';
 
 @Component({
     selector: 'app-reset-password',
@@ -69,7 +70,7 @@ export class ResetPasswordComponent extends TWBase implements OnInit {
         this.userSV.resetPassword(this.form.getRawValue()).subscribe(r => {
             if(RETURN.isSucceed(r)) {
                 this.form.reset();
-                this.presentToast('修改成功!');
+                this.presentToast(Lang.Lang_73);
                 this.routerSV.to(WHERE.login);
             } else {
                 this.presentToast('修改失败,请重新尝试!');

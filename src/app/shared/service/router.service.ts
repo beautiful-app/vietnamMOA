@@ -56,7 +56,7 @@ export class RouterService extends TWBase {
                     this.statusBar.backgroundColorByHexString('#3dc2ff');
                 }, 100);
             }
-            console.log('路由变换:', this._previousUrl, this._currentUrl, this._routeHistory);
+            // console.log('路由变换:', this._previousUrl, this._currentUrl, this._routeHistory);
         });
     }
     

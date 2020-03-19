@@ -47,9 +47,12 @@
   "Lang_52":"Phát hiện cập nhật",
 
 
-  "Lang_61":"Mật khẩu cũ (vui lòng nhập mật khẩu cũ)",
-  "Lang_62":"Mật khẩu mới (vui lòng nhập mật khẩu mới)",
-  "Lang_63":"Xác nhận mật khẩu (vui lòng nhập lại mật khẩu mới)",
+  "Lang_61_1":"Mật khẩu cũ",
+  "Lang_61_2":"Mật khẩu cũ (vui lòng nhập mật khẩu cũ)",
+  "Lang_62_1":"Mật khẩu mới",
+  "Lang_62_2":"Mật khẩu mới (vui lòng nhập mật khẩu mới)",
+  "Lang_63_1":"Xác nhận mật khẩu",
+  "Lang_63_2":"Xác nhận mật khẩu (vui lòng nhập lại mật khẩu mới)",
   "Lang_64":"Hoàn thành",
   "Lang_65":"Mật khẩu phải là ít nhất bảy ký tự, với ít nhất ba loại ký tự: số, trường hợp, chữ cái hay đặc trưng.",
 
@@ -90,11 +93,15 @@
   "Lang_92":"Nhập mật khẩu đi.",
   "Lang_93":"Quên mật khẩu",
   "Lang_94":"Ký vô",
-  "Lang_95":"Số công việc（ Hãy nhập số công việc）",
+  "Lang_95_1":"Số công việc",
+  "Lang_95_2":"Số công việc（ Hãy nhập số công việc）",
   "Lang_96":"Lấy mật khẩu",
-  "Lang_97":"Mật khẩu（ Hãy nhập mật mã kiểm tra）",
-  "Lang_98":"Mật khẩu（Hãy đặt mật khẩu OA）",
-  "Lang_99":"Xác nhận mật khẩu（Xin nhập lại mật khẩu）",
+  "Lang_97_1":"Mật khẩu",
+  "Lang_97_2":"Mật khẩu（ Hãy nhập mật mã kiểm tra）",
+  "Lang_98_1":"Mật khẩu",
+  "Lang_98_2":"Mật khẩu（Hãy đặt mật khẩu OA）",
+  "Lang_99_1":"Xác nhận mật khẩu",
+  "Lang_99_2":"Xác nhận mật khẩu（Xin nhập lại mật khẩu）",
   "Lang_910":"Hoàn",
   "Lang_911":"Mật khẩu phải là ít nhất bảy ký tự, với ít nhất ba loại ký tự: số, trường hợp, chữ cái hay đặc trưng."
 }

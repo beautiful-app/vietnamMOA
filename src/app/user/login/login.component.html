@@ -8,29 +8,32 @@
     <form [formGroup]="form">
         <div class="input-box">
             <mat-form-field appearance="legacy">
-                <input matInput placeholder="{{ 'Lang_82' | translate }}" formControlName="username">
+                <input matInput placeholder="{{ 'Lang_95_1' | translate }}" formControlName="username">
                 <mat-error
-                        *ngIf="form.controls['username'].errors" translate> Lang_95
+                        *ngIf="form.controls['username'].errors" translate> Lang_95_2
                 </mat-error>
                 <button mat-icon-button matPrefix>
-                    <mat-icon>person</mat-icon>
+                    <mat-icon svgIcon="username"></mat-icon>
                 </button>
                 <button mat-icon-button matSuffix (click)="form.patchValue({username:''})">
                     <mat-icon>clear</mat-icon>
                 </button>
             </mat-form-field>
             <mat-form-field appearance="legacy">
-                <input matInput placeholder="{{ 'Lang_81' | translate }}" formControlName="password"
+                <input matInput placeholder="{{ 'Lang_98_1' | translate }}" formControlName="password"
                        [type]="passwordHide ? 'password' : 'text'">
+                <mat-error
+                        *ngIf="form.controls['password'].errors" translate> Lang_81
+                </mat-error>
                 <button mat-icon-button matPrefix>
-                    <mat-icon>vpn_key</mat-icon>
+                    <mat-icon svgIcon="password"></mat-icon>
                 </button>
                 <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide"
                         [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
                     <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
             </mat-form-field>
-            <div class="login-error" *ngIf="loginError">用户名或密码错误</div>
+            <div class="login-error" *ngIf="loginError" translate>Lang_84</div>
             
             <mat-checkbox checked="false" formControlName="remember">记住密码</mat-checkbox>
             

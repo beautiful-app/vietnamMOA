@@ -1,10 +1,22 @@
 import {createReducer, on} from '@ngrx/store';
-import {userInfoUpddate} from '../actions/user.actions';
+import {userInfoUpddate, userLogOut} from '../actions/user.actions';
 
-export const initialState = 0;
+const initialState = 0;
+const hasLogout = false;
 
 export const _userReducer = createReducer(initialState,
-    on(userInfoUpddate, (state, user) => state + 1),
+    on(userInfoUpddate, (state, user) => {
+        console.log('userReducer:', state);
+        return state + 1;
+    }),
 );
+
+export const _userLogoutReducer = createReducer(hasLogout,
+    on(userLogOut, (state, hasLogout) => {
+        console.log('userLogout', hasLogout);
+        return hasLogout.hasLogout;
+    }),
+);
+
 
 

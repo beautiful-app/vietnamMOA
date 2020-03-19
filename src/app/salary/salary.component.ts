@@ -1,8 +1,11 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {datePicker, DatePickerOptions} from '../shared/entity/date-picker-options.vo';
-import {PlanA, Salary} from '../shared/entity/salary.vo';
+import {PlanA, PlanB, Salary} from '../shared/entity/salary.vo';
 import {DateUtil} from '../shared/utils/date.util';
 import {SalaryService} from '../shared/service/salary.service';
+import {select, Store} from '@ngrx/store';
+import {USER} from '../shared/entity/user.bo';
+import {TWBase} from '../shared/TWBase.ui';
 
 
 @Component({
@@ -10,26 +13,48 @@ import {SalaryService} from '../shared/service/salary.service';
     templateUrl: './salary.component.html',
     styleUrls: ['./salary.component.scss'],
 })
-export class SalaryComponent implements OnInit, AfterViewInit {
+export class SalaryComponent extends TWBase implements AfterViewInit {
     @ViewChild('datePicker', {static: false}) datePicker: any;
     
     panelOpenState = false;
     private customPickerOptions: DatePickerOptions = datePicker.options(this);
     private salary: Salary;
-    private date: string = DateUtil.getYearMonth();
+    private hasGetData: boolean = false;
     
-    constructor(private salsrySV: SalaryService) {
+    constructor(
+        private salarySV: SalaryService,
+        private store: Store<{ user: 'user', newVersion: 'newVersion', userLogout: 'userLogout' }>,
+    ) {
+        super();
         // 从缓存中获取已保存的数据
-        this.salsrySV.getDataFromStorage().subscribe(r => {
-            this.salary = r;
-            // 根据语言环境进行数据处理
-            this.salsrySV.languageProcessing(r).subscribe(r => {
-            
+        this.salarySV.getDataFromStorage().subscribe(r => {
+            // 先展示缓存数据
+            if(r) this.salary = r;
+            // 使用基础数据
+            else this.salary = PlanA;
+            this.salarySV.languageProcessing(this.salary).subscribe(r => {
+                this.store.pipe(select('user')).subscribe(_ => {
+                    // 用户为激活状态，并且还未获取数据
+                    console.log('获取到了salary的用户变化:', this.hasGetData, USER.get().isActive);
+                    if(!this.hasGetData && USER.get().isActive) {
+                        this.hasGetData = true;
+                        this.salary.date = DateUtil.getYearMonth();
+                        this.getSalary(DateUtil.getFullYear(), DateUtil.getCurrentMonth());
+                    }
+                });
             });
-            // 通过http请求判断当月有没有新的工资数据
-            this.salsrySV.getData(DateUtil.getFullYear(), DateUtil.getYearMonth());
         });
         
+        // 退出登录：初始化数据获取标识,初始化salary数据
+        this.store.pipe(select('userLogout')).subscribe(r => {
+            if(r) {
+                this.hasGetData = false;
+                // this.salarySV.reinitSalaryData(this.salary);
+                this.salarySV.reinitSalaryData().subscribe(_ => {
+                    this.salary = PlanB;
+                });
+            }
+        });
     }
     
     dateHandle(pick) {
@@ -38,23 +63,37 @@ export class SalaryComponent implements OnInit, AfterViewInit {
         let month = pick.month.text;
         let pickerDate = year + '/' + month;
         // 重新获取数据
-        if(this.date != pickerDate) {
-            this.date = pickerDate;
-            this.salsrySV.getData(year, month);
+        if(this.salary.date != pickerDate) {
+            this.salary.date = pickerDate;
+            console.log('salary data:', this.salary);
+            this.getSalary(year, month);
         }
-        this.date = pickerDate;
     }
     
-    
-    ngOnInit(): void {
-    }
-    
-    openDatePicker(): void {
-        this.datePicker.open();
+    getSalary(year, month) {
+        // 显示loding
+        this.loadingShow();
+        setTimeout(_ => {
+            this.salarySV.getData(year, month).subscribe(r => {
+                if(!r) {
+                    this.presentToast('当月无数据');
+                    // this.salarySV.reinitSalaryData(this.salary);
+                    this.salarySV.reinitSalaryData().subscribe(_ => {
+                        PlanB.date = this.salary.date;
+                        this.salary = PlanB;
+                        console.log('salary data:', this.salary);
+                    });
+                } else {
+                    PlanA.date = this.salary.date;
+                    this.salary = PlanA;
+                    this.salarySV.salaryDataProcessing(this.salary, r);
+                }
+                this.loadingDismiss();
+            });
+        }, 2000);
     }
     
     ngAfterViewInit(): void {
-        // this.datePicker.open();
     }
     
 }

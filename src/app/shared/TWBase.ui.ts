@@ -2,14 +2,16 @@ import {LoadingController, ToastController} from '@ionic/angular';
 import {MatDialog} from '@angular/material';
 import {Observable} from 'rxjs';
 import {tipsMode, TwSuccessComponent} from './component/tw-success/tw-success.component';
+import {Lang} from './const/language.const';
 
 export abstract class TWBase {
-    protected _loading: LoadingController;
+    protected _loadCtrl: LoadingController;
+    private _loading: any;
     protected _toast: ToastController;
     protected _dialog: MatDialog;
     
     constructor() {
-        this._loading = new LoadingController();
+        this._loadCtrl = new LoadingController();
         this._toast = new ToastController();
     }
     
@@ -45,15 +47,15 @@ export abstract class TWBase {
     
     
     protected async loadingShow(message?: string) {
-        // this._loading = await this._loadingCtrl.create({
-        // // this._loading = await this._loading.create({
-        //     message: message ? message : '加载中...',
-        // });
-        // this._loading.present();
+        this._loading = await this._loadCtrl.create({
+            message: message ? message : Lang.Lang_815,
+            cssClass: 'custom-class custom-loading',
+        });
+        this._loading.present();
     }
     
     protected async loadingDismiss() {
-        if(this._loading) this._loading.dismiss();
+        if(this._loading) await this._loading.dismiss();
     }
     
 }

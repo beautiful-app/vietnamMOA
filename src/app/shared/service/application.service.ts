@@ -37,7 +37,7 @@ export class ApplicationService extends Httpbase {
                 size: APP.versonFeaturesPZ
             };
             this.postJson(URL.version_features_list, queryObj).subscribe(r => {
-                RETURN.nextData(r, o);
+                RETURN.nextData(o, r);
             });
         });
     }

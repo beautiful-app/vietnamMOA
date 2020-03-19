@@ -7,6 +7,7 @@ export const URL = {
     get_code_for_reset_password: 'api/user/sendCode?userId=',
     reset_password: 'api/user/resetPassword',
     get_version_detail: 'api/user/version/note?id=',
+    get_salary_info: 'api/partner/hrms/worker/salary/get?y=_&m=_',
     
     change_password: 'api/user/modifyPassword',
     change_phone_number: 'api/bpm/changeAddressBookInfo',

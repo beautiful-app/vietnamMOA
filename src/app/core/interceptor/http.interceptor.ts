@@ -21,29 +21,29 @@ export class HttpInterceptor implements HttpInterceptor {
         
         // const token: string = sessionStorage.getItem('token');
         // if(token) {
+        // console.log('进来拦截器，此时用户token为:', USER.get().token, req.urlWithParams);
+        
         req = req.clone({headers: req.headers.set('Authorization', USER.get().token)});
         // }
         // console.log('id是:' + USER.get().id);
         
         // if(!req.headers.has('Content-Type')) {
         // req = req.clone({headers: req.headers.set('Content-Type', 'application/x-www-form-urlencoded')});
-        console.log(req.urlWithParams);
         // if(req.url.indexOf('user/version/mlist') != -1)
         //     req = req.clone({headers: req.headers.set('Content-Type', 'application/json')});
+        
+        // TODO 如果在登陆页，而且不是登录请求，或者本地语言等静态资源请求，那么禁止所有http
         
         // }
         //
         // req = req.clone({headers: req.headers.set('Accept', 'application/json'), url: `${this.apiUrl}/${req.url}`});
-        console.log('进来拦截器');
         return next.handle(req).pipe(
             map((event: HttpEvent<any>) => {
                 if(event instanceof HttpResponse) {
                     if(event.body.code && event.body.code == 7) {
-                        this.userSV.clearData();
                         // 访问过期了就导航到登录页
-                        this.routerSV.to(WHERE.login);
+                        this.userSV.loginOut();
                     }
-                    // this.errorDialogService.openDialog(event);
                 }
                 return event;
             }));

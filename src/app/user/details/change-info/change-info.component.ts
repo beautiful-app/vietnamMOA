@@ -34,12 +34,7 @@ export class ChangeInfoComponent extends TWBase implements OnInit {
     }
     
     changePhoneNumber() {
-        // this.successTip(this.dialog).subscribe(_ => {
-        //     console.log('guabbb');
-        // });
-        // return;
-        
-        if(this.form.valid) {
+        if(this.form.valid && !this.inModify) {
             this.inModify = true;
             setTimeout(_ => {
                 this.userSV.setPhoneNumber(this.form.getRawValue().phoneNumber).subscribe(r => {
@@ -48,18 +43,12 @@ export class ChangeInfoComponent extends TWBase implements OnInit {
                         this.userSV.getUserInfoByToken().subscribe(rr => {
                             this.inModify = false;
                             this.successTip(this.dialog).subscribe(_ => {
-                                console.log('guabbb');
                                 this.routerSV.to(WHERE.back);
                             });
                         });
                     } else this.presentToast('修改失败,请重新提交');
                 });
-                
             }, 1000);
         }
-    }
-    
-    deleteFile() {
-    
     }
 }

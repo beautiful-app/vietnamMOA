@@ -14,7 +14,7 @@ export class RETURN {
         else observable.next();
     }
     
-    static nextData(res: result, observable: any) {
+    static nextData(observable: any, res: result) {
         if(this.isSucceed(res)) observable.next(res.data);
         else observable.next();
     }

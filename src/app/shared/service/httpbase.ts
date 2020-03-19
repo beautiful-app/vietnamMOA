@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {result, resultObj} from '../entity/result.bo';
 import {APP} from '../../core/singleton.export';
 import {TWBase} from '../TWBase.ui';
+import {URL} from '../const/url.const';
 
 export class Httpbase extends TWBase {
     
@@ -20,8 +21,17 @@ export class Httpbase extends TWBase {
         return this.httpClient.post<result>(APP.fullURL(url), queryObj, httpOptions);
     }
     
-    get(url: string): Observable<result> {
+    get(url: string, ...params): Observable<result> {
+        if(params) url = Httpbase.processiongParams(url, ...params);
         return this.httpClient.get<resultObj>(APP.fullURL(url));
     }
+    
+    private static processiongParams(url, ...params): any {
+        params.forEach(r => {
+            url = url.replace('_', r);
+        });
+        return url;
+    }
+    
     
 }

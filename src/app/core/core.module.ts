@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 import {UserService} from '../shared/service/user.service';
 import {HttpInterceptor} from './interceptor/http.interceptor';
 import {select, Store, StoreModule} from '@ngrx/store';
-import {_userReducer} from './ngrx/reducers/user.reducer';
+import {_userLogoutReducer, _userReducer} from './ngrx/reducers/user.reducer';
 import {_downloadApkReducer, _newVersion} from './ngrx/reducers/application.reducer';
 import {StorageService} from '../shared/service/storage.service';
 import {LanguageService} from '../shared/service/language.service';
@@ -22,6 +22,7 @@ import {newVersion} from './ngrx/actions/application.actions';
 import {ApplicationService} from '../shared/service/application.service';
 import {TWBase} from '../shared/TWBase.ui';
 import {SharedModule} from '../shared/shared.module';
+import {USER} from '../shared/entity/user.bo';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {SharedModule} from '../shared/shared.module';
         StoreModule.forRoot({
             downloadApk: _downloadApkReducer,
             user: _userReducer,
-            newVersion: _newVersion
+            newVersion: _newVersion,
+            userLogout: _userLogoutReducer
         }),
         SharedModule
     ],
@@ -56,7 +58,7 @@ export class CoreModule extends TWBase {
                 private router: Router,
                 private userSV: UserService,
                 private storageSV: StorageService,
-                private store: Store<{ user: 'user', newVersion: 'newVersion' }>,
+                private store: Store<{ user: 'user', newVersion: 'newVersion', userLogout: 'userLogout' }>,
                 private languageSV: LanguageService,
                 private routerSV: RouterService,
                 private deviceSV: DeviceService,
@@ -74,16 +76,21 @@ export class CoreModule extends TWBase {
         // 设置系统需要的语言常量
         this.languageSV.initStaticLanguage();
         
-        // 获取用户信息
+        // 从缓存中获取用户信息
         this.userSV.getUserFromStorage().subscribe(r => {
-            if(r)// 通过token查询用户信息,此步骤也作为token验证是否过期的目的
-                this.userSV.getUserInfoByToken().subscribe();
+            // 通过token查询用户信息
+            if(r) this.userSV.getUserInfoByToken().subscribe();
             else this.routerSV.to(WHERE.login);
         });
         
-        // 设置user信息变化的监听,如果有变化就更新缓存里的值
+        // 用户信息有更新的业务:更新缓存
         this.store.pipe(select('user')).subscribe(_ => {
             this.storageSV.storageUserInfo().subscribe();
+        });
+        
+        // 用户退出登录候的业务
+        this.store.pipe(select('userLogout')).subscribe(_ => {
+        
         });
         
         // 开启路由检测
