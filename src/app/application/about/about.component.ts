@@ -9,6 +9,7 @@ import {MatDialog} from '@angular/material';
 import {Lang} from '../../shared/const/language.const';
 import {select, Store} from '@ngrx/store';
 import {UpgradeComponent} from '../../shared/component/tw-upgrade/upgrade.component';
+import {delay} from 'rxjs/operators';
 
 @Component({
     selector: 'app-about',
@@ -45,15 +46,13 @@ export class AboutComponent extends TWBase {
     checkUpdate() {
         if(!this.onChekVerion) {
             this.onChekVerion = true;
-            setTimeout(_ => {
-                this.appSV.checkNewVersion().subscribe(r => {
-                    // 有新版本 打开升级对话框
-                    if(r) {
-                        this.openDialog(this.dialog, UpgradeComponent, r);
-                    } else this.presentToast(Lang.Lang_76);
-                    this.onChekVerion = false;
-                });
-            }, 2500);
+            this.appSV.checkNewVersion().pipe(delay(2500)).subscribe(r => {
+                // 有新版本 打开升级对话框
+                if(r) {
+                    this.openDialog(this.dialog, this.deviceSV, UpgradeComponent, r).subscribe();
+                } else this.presentToast(Lang.Lang_76);
+                this.onChekVerion = false;
+            });
         }
     }
     

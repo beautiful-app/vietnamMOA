@@ -14,6 +14,7 @@ import {newVersion} from '../../core/ngrx/actions/application.actions';
 import {MatDialog} from '@angular/material';
 import {Store} from '@ngrx/store';
 import {UpgradeComponent} from '../component/tw-upgrade/upgrade.component';
+import {delay} from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class ApplicationService extends Httpbase {
@@ -82,9 +83,9 @@ export class ApplicationService extends Httpbase {
     checkNewVersionOnLoad() {
         let _this = this;
         window.addEventListener('load', function() {
-            _this.checkNewVersion().subscribe(r => {
+            _this.checkNewVersion().pipe(delay(2000)).subscribe(r => {
                 if(r) {
-                    _this.openDialog(_this.dialog, UpgradeComponent, r);
+                    _this.openDialog(_this.dialog, _this.deviceSV, UpgradeComponent, r).subscribe();
                     _this.store.dispatch(newVersion({newVersion: true}));
                 }
             });

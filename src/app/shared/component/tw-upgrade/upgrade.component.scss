@@ -9,12 +9,16 @@
   padding: 0 !important;
 }
 
+.progress-panel {
+  text-align: right;
+  width: 150px;
 
-.download {
-  font-size: 15px;
-  padding-left: 100px;
-  width: 300px;
+  .download {
+    font-size: 15px;
+    width: 300px;
+  }
 }
+
 
 .button {
   text-align: right;

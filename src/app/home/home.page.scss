@@ -1,21 +1,46 @@
-.content {
-  --padding-top: 80px;
+:host{
+  --img-logo: 80px;
 }
 
-.mat-expansion-panel {
-  margin: 5px;
+ion-grid,
+ion-row {
+  height: 100%;
 }
 
-.example-headers-align .mat-expansion-panel-header-title,
-.example-headers-align .mat-expansion-panel-header-description {
-  flex-basis: 0;
+
+ion-img {
+  width: var(--img-logo);
+  text-align: center;
+  margin: 0 auto;
 }
 
-.example-headers-align .mat-expansion-panel-header-description {
-  justify-content: space-between;
-  align-items: center;
+ion-item {
+  ion-input {
+    --padding-end: 8px;
+  }
+  ion-icon {
+    position: absolute;
+    right: 0;
+    bottom: 8px
+  }
 }
 
-.example-headers-align .mat-form-field + .mat-form-field {
-  margin-left: 8px;
+.background-size {
+  position: relative;
+  background-color: var(--cs-text-primary, #ffffff);
+  background-blend-mode: luminosity;
+
+  &:before {
+    content: "";
+    display: block;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    position: absolute;
+    pointer-events: none;
+    mix-blend-mode: var(--cs-mode-image);
+    background: var(--cs-gradient-linear);
+  }
 }

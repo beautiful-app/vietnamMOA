@@ -25,6 +25,9 @@ export class RouterService extends TWBase {
         super();
     }
     
+    to1(where: any, data?: any) {
+        this.router.navigate([where]);
+    }
     
     to(where: any, data?: any) {
         switch (where) {
@@ -37,6 +40,10 @@ export class RouterService extends TWBase {
                 } else this.to(WHERE.home);
                 break;
             case WHERE.home:
+                this.router.navigate([route.tabs_home]);
+                // this.router.navigate([route.tabs_center]);
+                break;
+            case WHERE.resetPassword:
                 this.router.navigate([route.tabs_home]);
                 break;
         }

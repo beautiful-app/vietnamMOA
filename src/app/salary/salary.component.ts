@@ -6,6 +6,7 @@ import {SalaryService} from '../shared/service/salary.service';
 import {select, Store} from '@ngrx/store';
 import {USER} from '../shared/entity/user.bo';
 import {TWBase} from '../shared/TWBase.ui';
+import {delay} from 'rxjs/operators';
 
 
 @Component({
@@ -28,14 +29,13 @@ export class SalaryComponent extends TWBase implements AfterViewInit {
         super();
         // 从缓存中获取已保存的数据
         this.salarySV.getDataFromStorage().subscribe(r => {
-            // 先展示缓存数据
+            // 展示缓存数据
             if(r) this.salary = r;
-            // 使用基础数据
-            else this.salary = PlanA;
+            // 使用基础模板数据
+            else this.salary = PlanB;
             this.salarySV.languageProcessing(this.salary).subscribe(r => {
-                this.store.pipe(select('user')).subscribe(_ => {
+                this.store.pipe(select('user'), delay(3000)).subscribe(_ => {
                     // 用户为激活状态，并且还未获取数据
-                    console.log('获取到了salary的用户变化:', this.hasGetData, USER.get().isActive);
                     if(!this.hasGetData && USER.get().isActive) {
                         this.hasGetData = true;
                         this.salary.date = DateUtil.getYearMonth();
@@ -73,24 +73,24 @@ export class SalaryComponent extends TWBase implements AfterViewInit {
     getSalary(year, month) {
         // 显示loding
         this.loadingShow();
-        setTimeout(_ => {
-            this.salarySV.getData(year, month).subscribe(r => {
-                if(!r) {
-                    this.presentToast('当月无数据');
-                    // this.salarySV.reinitSalaryData(this.salary);
-                    this.salarySV.reinitSalaryData().subscribe(_ => {
-                        PlanB.date = this.salary.date;
-                        this.salary = PlanB;
-                        console.log('salary data:', this.salary);
-                    });
-                } else {
-                    PlanA.date = this.salary.date;
-                    this.salary = PlanA;
-                    this.salarySV.salaryDataProcessing(this.salary, r);
-                }
-                this.loadingDismiss();
-            });
-        }, 2000);
+        // setTimeout(_ => {
+        this.salarySV.getData(year, month).pipe(delay(1000)).subscribe(r => {
+            if(!r) {
+                this.presentToast('当月无数据');
+                // this.salarySV.reinitSalaryData(this.salary);
+                this.salarySV.reinitSalaryData().subscribe(_ => {
+                    PlanB.date = this.salary.date;
+                    this.salary = PlanB;
+                    console.log('salary data:', this.salary);
+                });
+            } else {
+                PlanA.date = this.salary.date;
+                this.salary = PlanA;
+                this.salarySV.salaryDataProcessing(this.salary, r);
+            }
+            this.loadingDismiss();
+        });
+        // }, 2000);
     }
     
     ngAfterViewInit(): void {

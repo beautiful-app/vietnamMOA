@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Lang} from '../../const/language.const';
+import {RouterService} from '../../service/router.service';
 
 @Component({
     selector: 'tw-header',
@@ -16,7 +17,7 @@ export class TwHeaderComponent implements OnInit {
     @Input() showLoadingButtonRight: boolean = false;
     
     
-    constructor() {
+    constructor(private routeSV: RouterService) {
     }
     
     ngOnInit() {
@@ -24,5 +25,9 @@ export class TwHeaderComponent implements OnInit {
     
     actionEmit() {
         this.buttonAction.emit();
+    }
+    
+    back() {
+        this.routeSV.back();
     }
 }

@@ -8,6 +8,7 @@ import {TWBase} from '../../shared/TWBase.ui';
 import {Lang} from '../../shared/const/language.const';
 import {RouterService} from '../../shared/service/router.service';
 import {WHERE} from '../../shared/entity/where.enum';
+import {delay} from 'rxjs/operators';
 
 @Component({
     selector: 'app-update-password',
@@ -19,6 +20,7 @@ export class UpdatePasswordComponent extends TWBase implements OnInit {
     oldPasswordHide: boolean = true;
     passwordHide: boolean = true;
     form: FormGroup;
+    updating: boolean = false;      // true为在修改密码中
     
     constructor(
         private formBuilder: FormBuilder,
@@ -35,11 +37,17 @@ export class UpdatePasswordComponent extends TWBase implements OnInit {
     }
     
     commitChanges() {
-        this.userSV.changePassword(this.form.getRawValue()).subscribe(r => {
-            if(!r) {
-                this.presentToast(Lang.Lang_73);
-                this.routerSV.to(WHERE.login);
-            } else this.presentToast(String(r.msg));
-        });
+        if(!this.updating) {
+            this.updating = true;
+            this.userSV.changePassword(this.form.getRawValue()).pipe(delay(2000)).subscribe(r => {
+                if(!r) {
+                    this.presentToast(Lang.Lang_73, null, 900);
+                    setTimeout(_ => {
+                        this.routerSV.to(WHERE.login);
+                    }, 1500);
+                } else this.presentToast(String(r.msg));
+                this.updating = false;
+            });
+        }
     }
 }

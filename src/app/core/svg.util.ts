@@ -12,7 +12,8 @@ export const loadSvgResources = (ir: MatIconRegistry, ds: DomSanitizer) => {
     ir.addSvgIcon('password', ds.bypassSecurityTrustResourceUrl(`${svgDir}/password.svg`));
     ir.addSvgIcon('update-password', ds.bypassSecurityTrustResourceUrl(`${svgDir}/update-password.svg`));
     ir.addSvgIcon('about', ds.bypassSecurityTrustResourceUrl(`${svgDir}/about.svg`));
-
+    ir.addSvgIcon('calendar', ds.bypassSecurityTrustResourceUrl(`${svgDir}/calendar.svg`));
+    
 };
 
 

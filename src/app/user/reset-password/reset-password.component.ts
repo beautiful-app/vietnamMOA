@@ -9,6 +9,8 @@ import {RouterService} from '../../shared/service/router.service';
 import {WHERE} from '../../shared/entity/where.enum';
 import {TwoPasswordValidator, TwoPasswordMatchValidator, VALIDATORS} from '../../shared/utils/validators/validators.collection';
 import {Lang} from '../../shared/const/language.const';
+import {delay} from 'rxjs/operators';
+import {DeviceService} from '../../shared/service/device.service';
 
 @Component({
     selector: 'app-reset-password',
@@ -25,6 +27,7 @@ export class ResetPasswordComponent extends TWBase implements OnInit {
     headShow: boolean = true;
     
     @ViewChild('header', {static: false}) div3: ElementRef;
+    updating: boolean = false;
     
     
     constructor(
@@ -34,6 +37,7 @@ export class ResetPasswordComponent extends TWBase implements OnInit {
         private routerSV: RouterService,
         private render2: Renderer2,
         private cdr: ChangeDetectorRef,
+        private deviceSV: DeviceService
     ) {
         super();
         let validatorGroup = {...TwoPasswordValidator};
@@ -43,13 +47,13 @@ export class ResetPasswordComponent extends TWBase implements OnInit {
     }
     
     ngOnInit() {
-    
+        
     }
     
     getCode() {
         this.inLoad = true;
         this.userSV.confirmPhoneForResetPassword(this.form.getRawValue().account).subscribe(r => {
-            this.openDialog(this.dialog, PhoneConfirmDialog, r).subscribe(rr => {
+            this.openDialog(this.dialog, this.deviceSV, PhoneConfirmDialog, r).subscribe(rr => {
                 // 请求接口获取验证码
                 if(rr) this.userSV.getCodeForRestPassword(r.id).subscribe(rrr => {
                     if(rrr) {
@@ -67,23 +71,27 @@ export class ResetPasswordComponent extends TWBase implements OnInit {
     }
     
     commitChanges() {
-        this.userSV.resetPassword(this.form.getRawValue()).subscribe(r => {
-            if(RETURN.isSucceed(r)) {
-                this.form.reset();
-                this.presentToast(Lang.Lang_73);
-                this.routerSV.to(WHERE.login);
-            } else {
-                this.presentToast('修改失败,请重新尝试!');
-                if(r.msg) this.resultMsg = r.msg;
-            }
-        });
+        if(!this.updating) {
+            this.updating = true;
+            this.userSV.resetPassword(this.form.getRawValue()).pipe(delay(2000)).subscribe(r => {
+                if(RETURN.isSucceed(r)) {
+                    this.form.reset();
+                    this.presentToast(Lang.Lang_73);
+                    this.routerSV.to(WHERE.login);
+                } else {
+                    // this.presentToast('修改失败,请重新尝试!');
+                    if(r.msg) this.resultMsg = r.msg;
+                }
+                this.updating = false;
+            });
+        }
     }
     
-    ionViewWillLeave() {
-        setTimeout(_ => {
-            this.headShow = false;
-            this.cdr.detectChanges();
-        }, 100);
-    }
-    
+    // ionViewWillLeave() {
+    //     setTimeout(_ => {
+    //         this.headShow = false;
+    //         this.cdr.detectChanges();
+    //     }, 100);
+    // }
+    //
 }

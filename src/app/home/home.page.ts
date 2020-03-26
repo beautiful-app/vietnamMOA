@@ -16,7 +16,6 @@ export class HomePage implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         console.log('datepicker', this.datePicker);
         // this.datePicker.open();
-        
     }
     
     customYearValues = [2020, 2016, 2008, 2004, 2000, 1996];

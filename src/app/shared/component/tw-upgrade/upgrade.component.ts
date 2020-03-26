@@ -4,6 +4,7 @@ import {Store, select} from '@ngrx/store';
 import {TWBase} from '../../TWBase.ui';
 import {FileService} from '../../service/file.service';
 import {DeviceService} from '../../service/device.service';
+import {downloadApk} from '../../../core/ngrx/actions/application.actions';
 
 
 @Component({
@@ -50,7 +51,8 @@ export class UpgradeComponent extends TWBase {
     }
     
     close() {
-        this.dialogRef.close();
+        this.dialogRef.close(_ => {
+        });
     }
     
     update() {
@@ -60,5 +62,9 @@ export class UpgradeComponent extends TWBase {
         let url = this.data.downloadUrl;
         let appPath = 'android.apk';
         this.fileSV.downloadFile(url, appPath);
+        // let a = 2;
+        // setInterval(_ => {
+        //     this.store.dispatch(downloadApk({rate: a += 2}));
+        // }, 2000);
     }
 }

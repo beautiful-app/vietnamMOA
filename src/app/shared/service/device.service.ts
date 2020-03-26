@@ -28,8 +28,8 @@ export class DeviceService extends TWBase {
     
     constructor(private platform: Platform,
                 private file: File,
-                 private routerSV: RouterService,
-                private inj:Injector,
+                private routerSV: RouterService,
+                private inj: Injector,
                 private naviteBr: InAppBrowser,
                 private statusBar: StatusBar
     ) {
@@ -41,17 +41,21 @@ export class DeviceService extends TWBase {
         this.platform.backButton.subscribeWithPriority(29, () => {
             if(!this._dialogMode) {
                 if(!this.routerSV.back()) {
+                    // 指定时间内用户仅手动触发一次物理返回
                     if(this._exitApp < exitMark.finish) {
                         if(this.exitTimeOut) clearTimeout(this.exitTimeOut);
                         this.presentToast(Lang.Lang_01);
                         this._exitApp += exitMark.step1;
                     } else navigator['app'].exitApp();
+                    
                     this.exitTimeOut = setTimeout(_ => {
                         this._exitApp = exitMark.init;
                     }, APP.backButtonTime);
                 }
+                this.presentToast('监听到物理返回键', 'bottom');
             } else {
-                this._dialogMode.close();
+                this.presentToast('监听到物理返回键，关闭dialog', 'bottom');
+                if(this.dialogMode) this._dialogMode.close();
                 this._dialogMode = false;
             }
         });
@@ -117,6 +121,11 @@ export class DeviceService extends TWBase {
                 this.statusBar.overlaysWebView(true);
                 break;
         }
+    }
+    
+    dialog() {
+        
+        console.log('jjj', this.dialogMode);
     }
 }
 

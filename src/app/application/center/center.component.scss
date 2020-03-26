@@ -18,6 +18,10 @@ ion-header {
   --background: red;
 }
 
+.avatar-box:focus {
+  outline: none;
+}
+
 .avatar-box {
   display: flex;
   //justify-content: center;

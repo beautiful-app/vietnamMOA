@@ -22,7 +22,7 @@ import {newVersion} from './ngrx/actions/application.actions';
 import {ApplicationService} from '../shared/service/application.service';
 import {TWBase} from '../shared/TWBase.ui';
 import {SharedModule} from '../shared/shared.module';
-import {USER} from '../shared/entity/user.bo';
+import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 
 
 @NgModule({
@@ -63,6 +63,7 @@ export class CoreModule extends TWBase {
                 private routerSV: RouterService,
                 private deviceSV: DeviceService,
                 private appSV: ApplicationService,
+                private splash: SplashScreen
     ) {
         super();
         if(parent) throw new Error('模块已经存在，不能再次加载');
@@ -101,6 +102,10 @@ export class CoreModule extends TWBase {
         
         // 检查版本有没有更新,并做强制升级处理
         this.appSV.checkNewVersionOnLoad();
+        
+        this.platform.ready().then(_ => {
+            // this.presentToast('平台准备好了');
+        });
     }
 }
 

@@ -3,7 +3,7 @@
     <ion-toolbar color="secondary">
         <ion-buttons slot="start" *ngIf="backButton">
             <ion-button>
-                <ion-back-button defaultHref="/"></ion-back-button>
+                <mat-icon svgIcon="calendar" (click)="back()"></mat-icon>
             </ion-button>
         </ion-buttons>
         <ion-buttons slot="end" (click)="actionEmit()" *ngIf="showButtonRight">

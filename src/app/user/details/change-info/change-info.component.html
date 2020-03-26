@@ -6,7 +6,7 @@
 
 <ion-content class="tw-background-color">
     <form [formGroup]="form">
-        <mat-form-field class="width-100 padding-20">
+        <mat-form-field class="width-100 padding-20" floatLabel="never">
             <mat-label>手机号码</mat-label>
             <input type="tel" matInput formControlName="phoneNumber">
             <button mat-icon-button matSuffix (click)="form.patchValue({phoneNumber:''})">

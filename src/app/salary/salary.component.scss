@@ -28,8 +28,13 @@
       display: flex;
       align-items: center;
 
+      .mat-icon {
+        height: 20px;
+      }
+
       .date-number {
         line-height: 100%;
+        margin-left: 3px;
       }
     }
 

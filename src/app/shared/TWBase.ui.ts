@@ -3,6 +3,7 @@ import {MatDialog} from '@angular/material';
 import {Observable} from 'rxjs';
 import {tipsMode, TwSuccessComponent} from './component/tw-success/tw-success.component';
 import {Lang} from './const/language.const';
+import {DeviceService} from './service/device.service';
 
 export abstract class TWBase {
     protected _loadCtrl: LoadingController;
@@ -13,6 +14,7 @@ export abstract class TWBase {
     constructor() {
         this._loadCtrl = new LoadingController();
         this._toast = new ToastController();
+        
     }
     
     protected async presentToast(message: string | number, position?: 'bottom' | 'middle', duration?: number, header?: string, closeButtons?: string[]) {
@@ -28,18 +30,19 @@ export abstract class TWBase {
     }
     
     successTip(dialog: MatDialog, mode?: tipsMode): Observable<any> {
-        return this.openDialog(dialog, TwSuccessComponent, mode ? mode : tipsMode.successMode1);
+        return this.openDialog(dialog, null, TwSuccessComponent, mode ? mode : tipsMode.successMode1);
     }
     
-    protected openDialog(dialog: MatDialog, component: any, date?: any): Observable<boolean | any> {
-        const dialogRef = dialog.open(component, {
-            disableClose: true,
-            panelClass: 'custom-dialog-container',
-            data: date
-        });
-        
+    protected openDialog(dialog: MatDialog, deviceSV: DeviceService, component: any, date?: any): Observable<boolean | any> {
         return new Observable<boolean>(o => {
+            const dialogRef = dialog.open(component, {
+                disableClose: true,
+                panelClass: 'custom-dialog-container',
+                data: date
+            });
+            if(deviceSV) deviceSV.dialogMode(dialogRef);
             dialogRef.afterClosed().subscribe(r => {
+                if(deviceSV) deviceSV.dialogMode(false);
                 o.next(r);
             });
         });
@@ -56,6 +59,7 @@ export abstract class TWBase {
     
     protected async loadingDismiss() {
         if(this._loading) await this._loading.dismiss();
+        // todo 全局控制loading
     }
     
 }

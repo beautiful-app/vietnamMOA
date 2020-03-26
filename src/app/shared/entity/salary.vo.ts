@@ -181,7 +181,7 @@ export const PlanB: Salary = {
     totalIncoming: '0,00',
     currencySymbol: '₫',
     hasTranslated: false,
-    date:'',
+    date: DateUtil.getYearMonth(),
     incomes: [
         {
             name: 'Lang_25',
