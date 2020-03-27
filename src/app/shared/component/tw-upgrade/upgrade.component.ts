@@ -36,8 +36,9 @@ export class UpgradeComponent extends TWBase {
         this.deviceSV.dialogMode(this.dialogRef);
         this.store.pipe(select('downloadApk')).subscribe(r => {
             let rate = Number(r);
-            if(this.downloading && rate == -1) this.close();
-            if(rate >= 0) {
+            if(this.downloading && rate <= -1) this.close();
+            if(rate > 0) {
+                // if(rate >= 0) {
                 this.rate = rate;
                 this.downloading = true;
                 if(this.rate + 5 > this.bufferValue) this.bufferValue = this.rate + Math.ceil(Math.random() * 25);
@@ -62,9 +63,5 @@ export class UpgradeComponent extends TWBase {
         let url = this.data.downloadUrl;
         let appPath = 'android.apk';
         this.fileSV.downloadFile(url, appPath);
-        // let a = 2;
-        // setInterval(_ => {
-        //     this.store.dispatch(downloadApk({rate: a += 2}));
-        // }, 2000);
     }
 }

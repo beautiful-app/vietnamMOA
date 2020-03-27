@@ -29,8 +29,9 @@ export abstract class TWBase {
         toast.present();
     }
     
-    successTip(dialog: MatDialog, mode?: tipsMode): Observable<any> {
-        return this.openDialog(dialog, null, TwSuccessComponent, mode ? mode : tipsMode.successMode1);
+    successTip(dialog: MatDialog, mode?: { mode?: tipsMode, time?: Number }): Observable<any> {
+        // mode = {mode: tipsMode.successMode2, time: 2000};
+        return this.openDialog(dialog, null, TwSuccessComponent, mode ? mode : {});
     }
     
     protected openDialog(dialog: MatDialog, deviceSV: DeviceService, component: any, date?: any): Observable<boolean | any> {
@@ -53,6 +54,8 @@ export abstract class TWBase {
         this._loading = await this._loadCtrl.create({
             message: message ? message : Lang.Lang_815,
             cssClass: 'custom-class custom-loading',
+            mode: 'md',
+            spinner: 'lines',
         });
         this._loading.present();
     }

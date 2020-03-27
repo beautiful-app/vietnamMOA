@@ -5,7 +5,7 @@ import {DetailsComponent} from './details.component';
 const routes: Routes = [
     // {path: '', loadChildren: () => import('./details.module').then(m => m.DetailsModule)},
     {path: '', component: DetailsComponent},
-    {path: 'change-info/:cellphone', loadChildren: () => import('./change-info/change-info.module').then(m => m.ChangeInfoModule)}
+    {path: 'change-info/:phoneNumber', loadChildren: () => import('./change-info/change-info.module').then(m => m.ChangeInfoModule)}
 ];
 
 @NgModule({

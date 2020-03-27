@@ -49,7 +49,6 @@ export class UserService extends Httpbase {
         return new Observable<any>(o => {
             this.get(URL.get_user_info + USER.get().id).subscribe(r => {
                 if(RETURN.isSucceed(r)) {
-                    console.log('查询到用户信息啦AAAAAAAAAAAAAA', r);
                     USER.assign(r.data, this.store, null, true);
                     o.next(true);
                 } else o.next(false);
@@ -84,6 +83,7 @@ export class UserService extends Httpbase {
                 type: '2',
                 value: phoneNum
             };
+            
             this.postJson(URL.change_phone_number, param).subscribe(r => {
                 RETURN.next(r, o);
             });

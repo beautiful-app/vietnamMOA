@@ -1,18 +1,16 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {style} from '@angular/animations';
 
 @Component({
     selector: 'app-phone-confirm-dialog',
     template: `
         <div *ngIf="mode">
-            <h4 class="confirm-title app-primary" style="font-size: 16px;margin-top: 5px;">手机号确认</h4>
-            <p class="" style="font-size: 15px;margin-bottom: 5px;">我们要向一下手机号发送验证码:</p>
+            <h4 class="confirm-title app-primary" style="font-size: 16px;margin-top: 5px;" translate>Lang_89_1</h4>
+            <p class="" style="font-size: 15px;margin-bottom: 5px;" translate>Lang_89_2</p>
             <span style="font-size: 15px;margin-top: -4px">{{cellphone}}</span>
             <div class="align-right">
-                <button mat-button color="primary">Primary</button>
-                <button mat-button color="primary" (click)="close(false)">取消</button>
-                <button mat-button color="primary" (click)="close(true)">确定</button>
+                <button mat-button color="primary" (click)="close(false)"> {{ 'Lang_89_3' | translate }} </button>
+                <button mat-button color="primary" (click)="close(true)"> {{ 'Lang_89_4' | translate }} </button>
             </div>
         </div>
         <div *ngIf="!mode">

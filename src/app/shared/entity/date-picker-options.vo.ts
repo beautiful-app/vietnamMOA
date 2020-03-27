@@ -1,9 +1,11 @@
+import {Lang} from '../const/language.const';
+
 export class datePicker {
     static options(page: any): DatePickerOptions {
         return {
             buttons: [
                 {
-                    text: '取消',
+                    text: Lang.Lang_89_3,
                     handler: ($event) => {
                     }
                 },

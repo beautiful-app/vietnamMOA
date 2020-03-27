@@ -15,18 +15,20 @@ export enum tipsMode {
 export class TwSuccessComponent implements OnInit {
     @Input() mode: tipsMode;
     tipsMode = tipsMode;
+    closeTime: number;
     
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         public dialogRef: MatDialogRef<TwSuccessComponent>,
     ) {
-        this.mode = data;
+        this.mode = data.mode ? data.mode : tipsMode.successMode2;
+        this.closeTime = data.time ? data.time : 2000;
     }
     
     ngOnInit() {
         setTimeout(_ => {
             this.dialogRef.close();
-        }, 2000);
+        }, this.closeTime);
     }
     
 }

@@ -16,7 +16,7 @@ export class DetailsComponent implements OnInit {
     avatar: string;
     username: string;
     gender: string;
-    cellphone: string;
+    phoneNumber: string;
     email: string;
     jobTitle: string;
     department: string;
@@ -37,19 +37,10 @@ export class DetailsComponent implements OnInit {
             this.username = USER.get().username;
             this.gender = USER.get().gender;
             this.email = USER.get().email;
-            this.cellphone = USER.get().cellphone;
+            this.phoneNumber = USER.get().cellphone;
             this.jobTitle = USER.get().jobTitle;
             this.department = USER.get().department;
         });
         
-    }
-    
-    changeInfo() {
-        this.router.navigate(['./']);
-    }
-    
-    go() {
-        
-        this.deviceSV.openUrlInNaviteBrowser('http://baidu.com');
     }
 }

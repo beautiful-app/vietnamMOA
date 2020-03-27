@@ -1,12 +1,13 @@
 <ion-header mode="md">
     <!--<ion-header mode="ios">-->
     <ion-toolbar color="secondary">
-        <ion-buttons slot="start" *ngIf="backButton">
-            <ion-button>
-                <mat-icon svgIcon="calendar" (click)="back()"></mat-icon>
-            </ion-button>
+        <ion-buttons slot="start" *ngIf="backButton" (click)="back()">
+            <!--            <ion-button class="back_button">-->
+            <mat-icon mat-ripple class="back-button" svgIcon="back_arrow"></mat-icon>
+            <!--                <ion-back-button defaultHref="/"></ion-back-button>-->
+            <!--            </ion-button>-->
         </ion-buttons>
-        <ion-buttons slot="end" (click)="actionEmit()" *ngIf="showButtonRight">
+        <ion-buttons class="end-button" slot="end" (click)="actionEmit()" *ngIf="showButtonRight">
             <button mat-button *ngIf="!showLoadingButtonRight">{{buttonTitle}}</button>
             <ion-spinner name="lines-small" color="light" *ngIf="showLoadingButtonRight"></ion-spinner>
         </ion-buttons>

@@ -8,7 +8,7 @@
     <form [formGroup]="form">
         <div class="input-box">
             <mat-form-field appearance="legacy" floatLabel="never" errorState="false">
-                <input matInput placeholder="{{ 'Lang_95_1' | translate }}" formControlName="username">
+                <input matInput placeholder="{{ 'Lang_82' | translate }}" formControlName="username">
                 <button mat-icon-button matPrefix>
                     <mat-icon svgIcon="username"></mat-icon>
                 </button>
@@ -17,7 +17,7 @@
                 </button>
             </mat-form-field>
             <mat-form-field appearance="legacy" floatLabel="never">
-                <input matInput placeholder="{{ 'Lang_98_1' | translate }}" formControlName="password"
+                <input matInput placeholder="{{ 'Lang_81' | translate }}" formControlName="password"
                        [type]="passwordHide ? 'password' : 'text'">
                 <button mat-icon-button matPrefix>
                     <mat-icon svgIcon="password"></mat-icon>
@@ -29,7 +29,8 @@
             </mat-form-field>
             <div class="login-error" *ngIf="loginError" translate>Lang_84</div>
             
-            <mat-checkbox checked="false" formControlName="remember">记住密码</mat-checkbox>
+            <mat-checkbox class="remenber-info" checked="false"
+                          formControlName="remember">{{ 'Lang_912' | translate }}</mat-checkbox>
             
             <ion-button class="login-button" type="submit" color="secondary" expand="block"
                         [disabled]="!form.valid || inLogging ||  !form.get('username').value || !form.get('password').value"
@@ -38,7 +39,7 @@
                 <span *ngIf="!inLogging" translate>Lang_94</span>
             </ion-button>
             
-                <div class="reset-password" (click)="resetPassword()">
+            <div class="reset-password" (click)="resetPassword()">
                 <button mat-button>{{ 'Lang_93' | translate }}?</button>
             </div>
         

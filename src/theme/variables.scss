@@ -34,12 +34,16 @@
 }
 
 .app-primary {
-  color: #37a5f3;
+  color: #37a5f3 !important;
 }
 
 .app-primary-button {
   color: #fdfdfd !important;
   background-color: #65ccff !important;
+}
+
+.custom-loading {
+  --spinner-color: #270000;
 }
 
 

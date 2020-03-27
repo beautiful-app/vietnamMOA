@@ -1,4 +1,4 @@
-<tw-header title="修改手机号"
+<tw-header title="{{'Lang_710' | translate}}"
            [showButtonRight]="true"
            buttonTitle="{{'Lang_910' | translate}}"
            [showLoadingButtonRight]="inModify"
@@ -7,14 +7,14 @@
 <ion-content class="tw-background-color">
     <form [formGroup]="form">
         <mat-form-field class="width-100 padding-20" floatLabel="never">
-            <mat-label>手机号码</mat-label>
+            <mat-label translate>Lang_44</mat-label>
             <input type="tel" matInput formControlName="phoneNumber">
             <button mat-icon-button matSuffix (click)="form.patchValue({phoneNumber:''})">
                 <mat-icon>clear</mat-icon>
             </button>
-            <mat-error
-                    *ngIf="form.controls['phoneNumber'].errors">手机号填写不正确!
-            </mat-error>
+            <!--            <mat-error-->
+            <!--                    *ngIf="form.controls['phoneNumber'].errors">手机号填写不正确!-->
+            <!--            </mat-error>-->
         </mat-form-field>
     </form>
 </ion-content>

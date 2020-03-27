@@ -47,6 +47,7 @@ export class FileService extends TWBase {
     downloadFile(url: string, relativePath: string) {
         if(this.deviceSV.isIos()) {
             this.deviceSV.openUrlInNaviteBrowser(url);
+            this.store.dispatch(downloadApk({rate: -1}));
             return;
         }
         

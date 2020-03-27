@@ -9,10 +9,11 @@ import {
     MatInputModule, MatListModule, MatNativeDateModule, MatRippleModule, MatTreeModule
 } from '@angular/material';
 import {TwComponentModule} from './component/tw-component.module';
+import {SafeHTMLPipe} from './pipes/save-html';
 
 
 @NgModule({
-    declarations: [],
+    declarations: [SafeHTMLPipe],
     imports: [
         CommonModule,
         

@@ -1,12 +1,12 @@
-<tw-header title="{{'Lang_12' | translate}}"></tw-header>
+<tw-header title="{{'Lang_48' | translate}}"></tw-header>
 
-<ion-content class="tw-background-color" >
+<ion-content class="tw-background-color">
     <ion-list>
         <ion-item>
             <tw-avatar [avatar]="avatar" slot="end"></tw-avatar>
             <ion-label translate>Lang_41</ion-label>
         </ion-item>
-        <ion-item class="info-item" (click)="go()">
+        <ion-item class="info-item">
             <span translate>Lang_42</span>
             <span class="flex-right"></span>
             <span>{{username}}</span>
@@ -17,10 +17,10 @@
             <span>{{gender}}</span>
         </ion-item>
         
-        <ion-item class="info-item" [routerLink]="['change-info',cellphone]">
+        <ion-item class="info-item" [routerLink]="['change-info',phoneNumber]">
             <span translate>Lang_44</span>
             <span class="flex-right"></span>
-            <span>{{cellphone}}</span>
+            <span>{{phoneNumber}}</span>
             <!--            <mat-icon>chevron_right</mat-icon>-->
         </ion-item>
         <ion-item class="info-item">

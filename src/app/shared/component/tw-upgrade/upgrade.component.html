@@ -12,14 +12,14 @@
     <div class="button">
         <button mat-button *ngIf="!downloading" (click)="close()">{{'Lang_75_4'| translate}}</button>
         <button mat-button class="upgrade" *ngIf="!downloading" (click)="update()">{{'Lang_75_5' | translate}}</button>
-        <button mat-button color="primary" *ngIf="downloading" (click)="close()">后台下载</button>
+        <button class="app-primary" mat-button color="primary" *ngIf="downloading"
+                (click)="close()">{{'Lang_53' | translate}}</button>
     </div>
 </div>
 
 <div *ngIf="!canUpgrade">
-    <p class="title">已是最新版本</p>
-    <p>当前版本号: 同维OA 8.5.5</p>
-    <button mat-button color="primary" (click)="close()">Ok</button>
+    <p class="title" translate>Lang_76</p>
+    <button mat-button color="primary" (click)="close()"> {{'Lang_89_4' | translate}}</button>
 </div>
 
 

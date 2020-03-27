@@ -11,23 +11,23 @@
   "Lang_27":"Overtime pay",
   "Lang_28":"Overtime allowance",
   "Lang_29":"The total subsidy",
-  "Lang_210":"Subsidies of child",
-  "Lang_211":"Subsidies of gasoline",
+  "Lang_210":"Subsidy of child",
+  "Lang_211":"Subsidy of gasoline",
   "Lang_212":"Bonus",
   "Lang_213":"Performance bonus",
   "Lang_214":"Discipline award",
   "Lang_215":"Others",
   "Lang_216":"Welfare",
-  "Lang_217":"Subsidies of working years",
+  "Lang_217":"Subsidy of seniority",
   "Lang_218":"Deducted",
   "Lang_219":"Social insurance",
   "Lang_220":"Medical Insurance",
   "Lang_221":"Unemployment insurance",
-  "Lang_222":"Individual income tax",
+  "Lang_222":"Income tax",
   "Lang_223":"Union dues",
 
 
-  "Lang_31":"About 同维OA",
+  "Lang_31":"khoảng TWOA",
   "Lang_32":"Change the password",
   "Lang_33":"Log out",
 
@@ -38,9 +38,13 @@
   "Lang_45":"Mail",
   "Lang_46":"Position",
   "Lang_47":"Department",
+  "Lang_48": "Personal info",
+
 
   "Lang_51":"Version features",
   "Lang_52":"Check for Updates",
+  "Lang_53": "Background download",
+  "Lang_54": "TWOA",
 
   "Lang_61_1":"Old password",
   "Lang_61_2":"Old password (please enter old password)",
@@ -49,7 +53,7 @@
   "Lang_63_1":"Confirm the password",
   "Lang_63_2":"Confirm the password (please enter the new password again)",
   "Lang_64":"Done",
-  "Lang_65":"Passwords must be at least seven characters and contain at least three types of characters: Numbers, letter case, letters, or special characters",
+  "Lang_65":"The password must be at least 7 characters, and the characters must contain at least three types: numbers, uppercase and lowercase English letters, or special characters",
 
   "Lang_71":"Modified successfully",
   "Lang_72":"Modification failed",
@@ -64,6 +68,8 @@
   "Lang_77":"The old and new passwords are the same.",
   "Lang_78":"The two passwords are not the same. Please re-enter",
   "Lang_79":"Password complexity does not meet the requirements, please re-ente",
+  "Lang_710": "Modify Tel",
+
 
 
   "Lang_81":"Please enter your password",
@@ -74,7 +80,10 @@
   "Lang_86":"The old and new passwords are the same",
   "Lang_87":"The two passwords are not the same. Please re-enter",
   "Lang_88":"Password complexity does not meet the requirements, please re-ente",
-  "Lang_89":"【Confirm Tel.--cancel/ok】We will send a verification message to your mobile phone number \"166****1736\"",
+  "Lang_89_1": "Confirm Tel",
+  "Lang_89_2": "We will send a verification message to your mobile phone number",
+  "Lang_89_3": "cancel",
+  "Lang_89_4": "ok",
   "Lang_810":"The password has been changed, please login again",
   "Lang_811":"Access expired, please login again",
   "Lang_812":"Network anomalies",
@@ -97,5 +106,6 @@
   "Lang_99_1":"Confirm password",
   "Lang_99_2":"Confirm password（Please enter a new password again）",
   "Lang_910":"Done",
-  "Lang_911":"Passwords must be at least seven characters and contain at least three types of characters: Numbers, letter case, letters, or special characters"
+  "Lang_911":"Passwords must be at least seven characters and contain at least three types of characters: Numbers, letter case, letters, or special characters",
+  "Lang_912": "Remember password"
 }

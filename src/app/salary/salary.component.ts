@@ -18,9 +18,9 @@ export class SalaryComponent extends TWBase implements AfterViewInit {
     @ViewChild('datePicker', {static: false}) datePicker: any;
     
     panelOpenState = false;
-    private customPickerOptions: DatePickerOptions = datePicker.options(this);
-    private salary: Salary;
-    private hasGetData: boolean = false;
+    customPickerOptions: DatePickerOptions = datePicker.options(this);
+    salary: Salary;
+    hasGetData: boolean = false;
     
     constructor(
         private salarySV: SalaryService,
@@ -49,7 +49,6 @@ export class SalaryComponent extends TWBase implements AfterViewInit {
         this.store.pipe(select('userLogout')).subscribe(r => {
             if(r) {
                 this.hasGetData = false;
-                // this.salarySV.reinitSalaryData(this.salary);
                 this.salarySV.reinitSalaryData().subscribe(_ => {
                     this.salary = PlanB;
                 });
@@ -71,13 +70,10 @@ export class SalaryComponent extends TWBase implements AfterViewInit {
     }
     
     getSalary(year, month) {
-        // 显示loding
         this.loadingShow();
-        // setTimeout(_ => {
         this.salarySV.getData(year, month).pipe(delay(1000)).subscribe(r => {
             if(!r) {
                 this.presentToast('当月无数据');
-                // this.salarySV.reinitSalaryData(this.salary);
                 this.salarySV.reinitSalaryData().subscribe(_ => {
                     PlanB.date = this.salary.date;
                     this.salary = PlanB;
@@ -90,7 +86,6 @@ export class SalaryComponent extends TWBase implements AfterViewInit {
             }
             this.loadingDismiss();
         });
-        // }, 2000);
     }
     
     ngAfterViewInit(): void {

@@ -14,7 +14,7 @@
     <mat-accordion class="salary-panel" [displayMode]="'flat'">
         <mat-expansion-panel matRipple
                              *ngFor="let income of salary.incomes"
-                             [hideToggle]="!income.items.length > 0"
+                             [hideToggle]="!(income.items.length > 0)"
                              [disabled]="income.items.length <= 0"
         >
             <mat-expansion-panel-header>

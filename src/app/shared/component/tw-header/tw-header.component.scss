@@ -1,3 +1,26 @@
 ion-spinner {
   margin-right: 12px;
 }
+
+.back-button {
+  margin-right: -10px;
+  width: 18px;
+  margin-left: 5px;
+}
+
+.end-button {
+  button {
+    font-size: 15px;
+    background-color: #3bbbf6;
+    padding: 1px 1px;
+    width: 30px;
+    min-width: 60px;
+    height: 33px;
+    line-height: 32px;
+    margin-right: 10px;
+  }
+}
+
+ion-title {
+  font-size: 18px;
+}

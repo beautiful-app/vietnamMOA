@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {Lang} from '../const/language.const';
+import {environment} from '../../../environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class LanguageService {
@@ -15,8 +16,8 @@ export class LanguageService {
         // // 当在assets/i18n中找不到对应的语言翻译时，使用'zh-CN'作为默认语言
         this.translate.setDefaultLang('vi');
         let language = this.translate.getBrowserLang();
-        this.translate.use(language.substr(0, 2));
-        // this.translate.use('en');
+        if(!environment.production) this.translate.use('en');
+        else this.translate.use(language.substr(0, 2));
     }
     
     // 获取代码中需要的语言

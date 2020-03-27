@@ -10,6 +10,7 @@ import {statusStyle} from '../const/status-style.enum';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {StringUtil} from '../utils/string.util';
 import {route} from '../const/route.enum';
+import {Network} from '@ionic-native/network/ngx';
 
 enum exitMark {
     init,
@@ -31,7 +32,8 @@ export class DeviceService extends TWBase {
                 private routerSV: RouterService,
                 private inj: Injector,
                 private naviteBr: InAppBrowser,
-                private statusBar: StatusBar
+                private statusBar: StatusBar,
+                private network: Network
     ) {
         super();
     }
@@ -52,9 +54,7 @@ export class DeviceService extends TWBase {
                         this._exitApp = exitMark.init;
                     }, APP.backButtonTime);
                 }
-                this.presentToast('监听到物理返回键', 'bottom');
             } else {
-                this.presentToast('监听到物理返回键，关闭dialog', 'bottom');
                 if(this.dialogMode) this._dialogMode.close();
                 this._dialogMode = false;
             }

@@ -29,7 +29,7 @@
   "Lang_223":"Phí công đoàn",
 
 
-  "Lang_31":"khoảng 同维OA",
+  "Lang_31":"About TWOA",
   "Lang_32":"Đổi mật khẩu",
   "Lang_33":"Đăng xuất",
 
@@ -41,10 +41,13 @@
   "Lang_45":"Hộp thư",
   "Lang_46":"Vị trí",
   "Lang_47":"Sở",
+  "Lang_48": "Thông tin cá nhân",
 
 
   "Lang_51":"Tính năng phiên bản",
   "Lang_52":"Phát hiện cập nhật",
+  "Lang_53": "Tải xuống nền",
+  "Lang_54": "TWOA",
 
 
   "Lang_61_1":"Mật khẩu cũ",
@@ -54,7 +57,7 @@
   "Lang_63_1":"Xác nhận mật khẩu",
   "Lang_63_2":"Xác nhận mật khẩu (vui lòng nhập lại mật khẩu mới)",
   "Lang_64":"Hoàn thành",
-  "Lang_65":"Mật khẩu phải là ít nhất bảy ký tự, với ít nhất ba loại ký tự: số, trường hợp, chữ cái hay đặc trưng.",
+  "Lang_65":"Mật khẩu phải có ít nhất 7 ký tự và các ký tự phải chứa ít nhất ba loại: số, chữ in hoa và chữ thường hoặc ký tự đặc biệt",
 
 
   "Lang_71":"Sửa thành công",
@@ -70,6 +73,8 @@
   "Lang_77":"Mật khẩu cũ và mới đều giống nhau.",
   "Lang_78":"Mới nhập mật khẩu hai lần không khớp, xin nhập lại.",
   "Lang_79":"Mật khẩu phức tạp không đáp ứng yêu cầu, xin nhập lại",
+  "Lang_710": "Thay đổi số di đông",
+
 
 
   "Lang_81":"Nhập mật khẩu đi",
@@ -80,7 +85,10 @@
   "Lang_86":"Mật khẩu cũ và mới đều giống nhau.",
   "Lang_87":"Mới nhập mật khẩu hai lần không khớp, xin nhập lại.",
   "Lang_88":"Mật khẩu phức tạp không đáp ứng yêu cầu, xin nhập lại",
-  "Lang_89":"【Xác nhận số điện thoại--hủy/Được】Chúng tôi sẽ gửi thông điệp kiểm tra tới số điện thoại \"166*** 1736\"",
+  "Lang_89_1": "Xác nhận số điện thoại",
+  "Lang_89_2": "Chúng tôi sẽ gửi thông điệp kiểm tra tới số điện thoại",
+  "Lang_89_3": "hủy",
+  "Lang_89_4": "Được",
   "Lang_810":"Duyệt mật khẩu thành công, xin đăng nhập lại",
   "Lang_811":"Lối vào đã hết hạn, xin đăng nhập lại lần nữa",
   "Lang_812":"Kết nối mạng dị dạng",
@@ -103,7 +111,8 @@
   "Lang_99_1":"Xác nhận mật khẩu",
   "Lang_99_2":"Xác nhận mật khẩu（Xin nhập lại mật khẩu）",
   "Lang_910":"Hoàn",
-  "Lang_911":"Mật khẩu phải là ít nhất bảy ký tự, với ít nhất ba loại ký tự: số, trường hợp, chữ cái hay đặc trưng."
+  "Lang_911":"Mật khẩu phải là ít nhất bảy ký tự, với ít nhất ba loại ký tự: số, trường hợp, chữ cái hay đặc trưng.",
+  "Lang_912": "Nhớ mật khẩu"
 }
 
 
