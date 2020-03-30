@@ -116,7 +116,6 @@ export class UserService extends Httpbase {
         return new Observable(o => {
             this.postJson(URL.reset_password, queryObj).subscribe(r => {
                 o.next(r);
-                console.log('password reset result:', r);
             });
         });
     }

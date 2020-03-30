@@ -11,11 +11,9 @@ export class Tabs {
     constructor(
         private store: Store<{ userInfoUpddate: 'user', newVersion: 'newVersion' }>,
     ) {
-        
         this.store.pipe(select('newVersion')).subscribe(r => {
             this.newMark = Boolean(r);
         });
-        
     }
     
     

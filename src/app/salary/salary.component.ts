@@ -85,6 +85,8 @@ export class SalaryComponent extends TWBase implements AfterViewInit {
                 this.salarySV.salaryDataProcessing(this.salary, r);
             }
             this.loadingDismiss();
+        }, error => {
+            console.log('出错啦!');
         });
     }
     

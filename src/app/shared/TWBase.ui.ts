@@ -4,6 +4,8 @@ import {Observable} from 'rxjs';
 import {tipsMode, TwSuccessComponent} from './component/tw-success/tw-success.component';
 import {Lang} from './const/language.const';
 import {DeviceService} from './service/device.service';
+import {GCONST} from '../core/singleton.export';
+import {ObjectUtil} from './utils/object.util';
 
 export abstract class TWBase {
     protected _loadCtrl: LoadingController;
@@ -57,12 +59,27 @@ export abstract class TWBase {
             mode: 'md',
             spinner: 'lines',
         });
-        this._loading.present();
+        GCONST.Loading.push(this._loading);
+        this._loading.present().then(_ => {
+        });
     }
     
     protected async loadingDismiss() {
         if(this._loading) await this._loading.dismiss();
         // todo 全局控制loading
     }
+    
+    protected loadingDismissAll(): Observable<any> {
+        return new Observable<any>(o => {
+            if(ObjectUtil.isNotNull(GCONST.Loading)) {
+                GCONST.Loading.forEach(r => {
+                    r.dismiss();
+                });
+                GCONST.Loading = [];
+            }
+            o.next();
+        });
+    }
+    
     
 }

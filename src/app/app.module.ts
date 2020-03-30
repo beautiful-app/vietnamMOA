@@ -15,6 +15,7 @@ import {FileOpener} from '@ionic-native/file-opener/ngx';
 import {AppVersion} from '@ionic-native/app-version/ngx';
 import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 import {Device} from '@ionic-native/device/ngx';
+import {Network} from '@ionic-native/network/ngx';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {Device} from '@ionic-native/device/ngx';
         CoreModule,
         IonicModule.forRoot({
             mode: 'ios',
-            animated: true
+            animated: true,
+            swipeBackEnabled: false
         }),
         IonicStorageModule.forRoot(),
     ],
@@ -41,6 +43,7 @@ import {Device} from '@ionic-native/device/ngx';
         FileOpener,
         AppVersion,
         Device,
+        Network,
         // {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     ],
     bootstrap: [AppComponent],
