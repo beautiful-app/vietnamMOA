@@ -46,13 +46,15 @@ export class AboutComponent extends TWBase {
     checkUpdate() {
         if(!this.onChekVerion) {
             this.onChekVerion = true;
-            this.appSV.checkNewVersion().pipe(delay(2500)).subscribe(r => {
-                // 有新版本 打开升级对话框
-                if(r) {
-                    this.openDialog(this.dialog, this.deviceSV, UpgradeComponent, r).subscribe();
-                } else this.presentToast(Lang.Lang_76);
-                this.onChekVerion = false;
-            });
+            this.appSV.checkNewVersion().pipe(delay(2500)).subscribe(
+                r => {
+                    // 有新版本 打开升级对话框
+                    if(r) {
+                        this.openDialog(this.dialog, this.deviceSV, UpgradeComponent, r).subscribe();
+                    } else this.presentToast(Lang.Lang_76);
+                }, null,
+                () => this.onChekVerion = false
+            );
         }
     }
     

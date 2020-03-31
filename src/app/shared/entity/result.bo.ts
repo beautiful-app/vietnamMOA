@@ -3,6 +3,7 @@ export class result {
     public code: string;
     public msg?: string;
     public data?: data | any;
+    public hasError?: boolean;
 }
 
 export class resultObj {

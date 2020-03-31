@@ -60,8 +60,7 @@ export abstract class TWBase {
             spinner: 'lines',
         });
         GCONST.Loading.push(this._loading);
-        this._loading.present().then(_ => {
-        });
+        this._loading.present();
     }
     
     protected async loadingDismiss() {

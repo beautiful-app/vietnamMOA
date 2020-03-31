@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpRequest, HttpResponse} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import {USER} from '../../shared/entity/user.bo';
 import {catchError, delay, map, retry, timeout} from 'rxjs/operators';
 import {RouterService} from '../../shared/service/router.service';
@@ -21,7 +21,6 @@ export class HttpInterceptor extends TWBase implements HttpInterceptor {
     }
     
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      
         req = req.clone({headers: req.headers.set('Authorization', USER.get().token)});
         const started = Date.now();
         return next.handle(req).pipe(
@@ -38,10 +37,11 @@ export class HttpInterceptor extends TWBase implements HttpInterceptor {
             }),
             retry(1),
             catchError((error: HttpErrorResponse) => {
-                console.log('connection', this.network.Connection);
                 this.presentToast('请求失败，请检查网络并重新尝试');
-                this.loadingDismissAll().pipe(delay(5500)).subscribe();
-                return Observable.throw(new HttpErrorResponse({}));
+                // this.loadingDismissAll().subscribe();
+                // return Observable.throo(new HttpErrorResponse({status: -1}));
+                // return new HttpResponse()
+                return of(new HttpResponse({status: 200, body: {hasError: true}}));
             })
         );
     }

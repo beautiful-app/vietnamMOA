@@ -6,8 +6,9 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
     template: `
         <div *ngIf="mode">
             <h4 class="confirm-title app-primary" style="font-size: 16px;margin-top: 5px;" translate>Lang_89_1</h4>
-            <p class="" style="font-size: 15px;margin-bottom: 5px;" translate>Lang_89_2</p>
-            <span style="font-size: 15px;margin-top: -4px">{{cellphone}}</span>
+            <p class="" style="font-size: 15px;margin-bottom: 5px;" translate>Lang_89_2
+                <span style="font-size: 15px;margin-top: -4px">{{cellphone}}</span>
+            </p>
             <div class="align-right">
                 <button mat-button color="primary" (click)="close(false)"> {{ 'Lang_89_3' | translate }} </button>
                 <button mat-button color="primary" (click)="close(true)"> {{ 'Lang_89_4' | translate }} </button>
@@ -32,7 +33,6 @@ export class PhoneConfirmDialog {
     ) {
         if(data) {
             this.mode = true;
-            console.log('有手机号', data);
             this.numberProcessing(data.cellphone);
         }
     }

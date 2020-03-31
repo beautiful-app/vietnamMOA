@@ -44,7 +44,7 @@ export class ChangeInfoComponent extends TWBase implements OnInit {
                 if(r) {
                     this.userSV.getUserInfoByToken().subscribe(rr => {
                         this.inModify = false;
-                        this.successTip(this.dialog).subscribe(_ => {
+                        this.successTip(this.dialog, {time: 5000000}).subscribe(_ => {
                             this.routerSV.to(WHERE.back);
                         });
                     });

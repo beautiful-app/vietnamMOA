@@ -19,6 +19,7 @@ export class CenterComponent extends TWBase implements OnInit {
     department: string;
     avatar: string;
     newMark: boolean = false;
+    private isLogout: boolean = false;
     
     constructor(
         private userSV: UserService,
@@ -43,6 +44,12 @@ export class CenterComponent extends TWBase implements OnInit {
     }
     
     loginOut() {
-        this.userSV.loginOut();
+        if(!this.isLogout) {
+            this.isLogout = true;
+            setTimeout(_ => {
+                this.userSV.loginOut();
+                this.isLogout = false;
+            }, 1000);
+        }
     }
 }

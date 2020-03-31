@@ -125,7 +125,4 @@ export class UserService extends Httpbase {
         this.storageSV.clearUserInfo();
         this.routerSV.to(WHERE.login);
     }
-    
-    clearData() {
-    }
 }

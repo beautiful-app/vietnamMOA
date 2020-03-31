@@ -71,10 +71,8 @@ export class ApplicationService extends Httpbase {
                     deviceType: this.deviceSV.isIos() ? APP.downloadIos : APP.downloadAndroid,
                     version: r
                 };
-                this.postJson(URL.version_check, params).subscribe(r => {
-                    if(RETURN.isSucceed(r) && r.data) {
-                        o.next(r.data);
-                    } else o.next();
+                this.postJson(URL.version_check, params).subscribe(rr => {
+                    RETURN.nextData(o, rr);
                 });
             });
         });

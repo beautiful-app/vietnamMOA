@@ -17,7 +17,6 @@ import {delay} from 'rxjs/operators';
 export class SalaryComponent extends TWBase implements AfterViewInit {
     @ViewChild('datePicker', {static: false}) datePicker: any;
     
-    panelOpenState = false;
     customPickerOptions: DatePickerOptions = datePicker.options(this);
     salary: Salary;
     hasGetData: boolean = false;
@@ -64,33 +63,33 @@ export class SalaryComponent extends TWBase implements AfterViewInit {
         // 重新获取数据
         if(this.salary.date != pickerDate) {
             this.salary.date = pickerDate;
-            console.log('salary data:', this.salary);
             this.getSalary(year, month);
         }
     }
     
     getSalary(year, month) {
         this.loadingShow();
-        this.salarySV.getData(year, month).pipe(delay(1000)).subscribe(r => {
-            if(!r) {
-                this.presentToast('当月无数据');
-                this.salarySV.reinitSalaryData().subscribe(_ => {
-                    PlanB.date = this.salary.date;
-                    this.salary = PlanB;
-                    console.log('salary data:', this.salary);
-                });
-            } else {
-                PlanA.date = this.salary.date;
-                this.salary = PlanA;
-                this.salarySV.salaryDataProcessing(this.salary, r);
+        this.salarySV.getData(year, month).pipe(delay(1000)).subscribe(
+            (r) => {
+                if(!r) {
+                    this.presentToast('当月无数据');
+                    this.salarySV.reinitSalaryData().subscribe(_ => {
+                        PlanB.date = this.salary.date;
+                        this.salary = PlanB;
+                    });
+                } else {
+                    PlanA.date = this.salary.date;
+                    this.salary = PlanA;
+                    this.salarySV.salaryDataProcessing(this.salary, r);
+                }
+            },
+            null,
+            () => {
+                this.loadingDismiss();
             }
-            this.loadingDismiss();
-        }, error => {
-            console.log('出错啦!');
-        });
+        );
     }
     
     ngAfterViewInit(): void {
     }
-    
 }
