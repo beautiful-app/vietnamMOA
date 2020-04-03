@@ -40,16 +40,20 @@ export class ChangeInfoComponent extends TWBase implements OnInit {
         if(this.form.valid && !this.inModify) {
             this.inModify = true;
             this.userSV.setPhoneNumber(this.form.getRawValue().phoneNumber).pipe(delay(1000)).subscribe(r => {
-                // 重新获取用户数据，并导航到个人信息页
-                if(r) {
-                    this.userSV.getUserInfoByToken().subscribe(rr => {
-                        this.inModify = false;
-                        this.successTip(this.dialog, {time: 5000000}).subscribe(_ => {
-                            this.routerSV.to(WHERE.back);
+                    console.log('r:', r);
+                    // 重新获取用户数据，并导航到个人信息页
+                    if(r) {
+                        this.userSV.getUserInfoByToken().subscribe(rr => {
+                            this.inModify = false;
+                            this.successTip(this.dialog).subscribe(_ => {
+                                this.routerSV.to(WHERE.back);
+                            });
                         });
-                    });
-                } else this.presentToast('修改失败,请重新提交');
-            });
+                    } else this.presentToast('修改失败,请重新提交');
+                },
+                null,
+                () => this.inModify = false
+            );
         }
     }
 }

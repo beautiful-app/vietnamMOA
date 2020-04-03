@@ -9,10 +9,10 @@ export class RETURN {
         return res && res.code === this.succeedCode;
     }
     
-    static next(res: result, observable: any) {
+    static next(observable: any, res: result) {
         if(this.isSucceed(res)) observable.next(res);
-        else if(res.hasError) observable.next();
-        else observable.next(0);
+        else if(!res.hasError) observable.next(0);
+        observable.complete();
     }
     
     static nextData(observable: any, res: result) {
@@ -21,15 +21,25 @@ export class RETURN {
         observable.complete();
     }
     
+    static nextMsg(observable: any, r: result) {
+        if(this.isSucceed(r)) observable.next();
+        else if(!r.hasError && r.msg) observable.next(r.msg);
+        observable.complete();
+    }
+    
     static isTrue(res): boolean {
         return res === true;
     }
     
-    static hasData(res): boolean {
-        return res != undefined && res != 0;
+    static hasData(r): boolean {
+        return r != undefined && r != 0;
     }
     
-    static notData(res: any) {
-        return res === 0;
+    static notData(r: any) {
+        return r === 0;
+    }
+    
+    static networkError(r: any) {
+        return r.hasError == true;
     }
 }

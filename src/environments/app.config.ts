@@ -50,7 +50,6 @@ export class app {
         return this._baseURL;
     }
     
-    
     get invalidationCode(): number {
         return this._invalidationCode;
     }
@@ -82,7 +81,6 @@ export class app {
     get pageSize(): number {
         return this._pageSize;
     }
-    
     
     get minPasswordLength(): number {
         return this._minPasswordLength;

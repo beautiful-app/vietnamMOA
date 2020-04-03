@@ -13,7 +13,7 @@ const userReducer = createReducer(initialState,
 
 const userLogoutReducer = createReducer(hasLogout,
     on(userLogOut, (state, hasLogout) => {
-        console.log('userLogout', hasLogout);
+        console.log('调用了userLogout', hasLogout);
         return hasLogout.hasLogout;
     }),
 );

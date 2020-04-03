@@ -13,7 +13,7 @@
                     <mat-icon svgIcon="username"></mat-icon>
                 </button>
                 <button mat-icon-button matSuffix (click)="form.patchValue({username:''})">
-                    <mat-icon>clear</mat-icon>
+                    <mat-icon svgIcon="clear"></mat-icon>
                 </button>
             </mat-form-field>
             <mat-form-field appearance="legacy" floatLabel="never">
@@ -24,7 +24,7 @@
                 </button>
                 <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide"
                         [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
-                    <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-icon svgIcon="{{passwordHide ? 'eye-off' : 'eye-open'}}"></mat-icon>
                 </button>
             </mat-form-field>
             <div class="login-error" *ngIf="loginError" translate>Lang_84</div>
@@ -42,10 +42,8 @@
             <div class="reset-password" (click)="resetPassword()">
                 <button mat-button>{{ 'Lang_93' | translate }}?</button>
             </div>
-        
         </div>
     </form>
     <!--            <div class="reset-password" routerLink="{{resetPasswordRoute}}">-->
-
 
 </ion-content>

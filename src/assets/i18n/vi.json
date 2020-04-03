@@ -29,7 +29,7 @@
   "Lang_223":"Phí công đoàn",
 
 
-  "Lang_31":"About TWOA",
+  "Lang_31":"khoảng TWOA",
   "Lang_32":"Đổi mật khẩu",
   "Lang_33":"Đăng xuất",
 
@@ -74,6 +74,7 @@
   "Lang_78":"Mới nhập mật khẩu hai lần không khớp, xin nhập lại.",
   "Lang_79":"Mật khẩu phức tạp không đáp ứng yêu cầu, xin nhập lại",
   "Lang_710": "Thay đổi số di đông",
+  "Lang_711": "Không có dữ liệu cho tháng này",
 
 
 
@@ -89,6 +90,7 @@
   "Lang_89_2": "Chúng tôi sẽ gửi thông điệp kiểm tra tới số điện thoại",
   "Lang_89_3": "hủy",
   "Lang_89_4": "Được",
+  "Lang_89_5": "Hoàn",
   "Lang_810":"Duyệt mật khẩu thành công, xin đăng nhập lại",
   "Lang_811":"Lối vào đã hết hạn, xin đăng nhập lại lần nữa",
   "Lang_812":"Kết nối mạng dị dạng",
@@ -112,7 +114,9 @@
   "Lang_99_2":"Xác nhận mật khẩu（Xin nhập lại mật khẩu）",
   "Lang_910":"Hoàn",
   "Lang_911":"Mật khẩu phải là ít nhất bảy ký tự, với ít nhất ba loại ký tự: số, trường hợp, chữ cái hay đặc trưng.",
-  "Lang_912": "Nhớ mật khẩu"
+  "Lang_912": "Nhớ mật khẩu",
+  "Lang_913": "Gửi lại sau",
+  "Lang_914": "Số điện thoại không được duy trì cho tài khoản này, vui lòng liên hệ với HR"
 }
 
 

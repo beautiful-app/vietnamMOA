@@ -29,7 +29,7 @@ import {Network} from '@ionic-native/network/ngx';
         IonicModule.forRoot({
             mode: 'ios',
             animated: true,
-            swipeBackEnabled: false
+            swipeBackEnabled: false,
         }),
         IonicStorageModule.forRoot(),
     ],

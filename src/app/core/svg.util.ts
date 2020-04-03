@@ -14,6 +14,10 @@ export const loadSvgResources = (ir: MatIconRegistry, ds: DomSanitizer) => {
     ir.addSvgIcon('about', ds.bypassSecurityTrustResourceUrl(`${svgDir}/about.svg`));
     ir.addSvgIcon('calendar', ds.bypassSecurityTrustResourceUrl(`${svgDir}/calendar.svg`));
     ir.addSvgIcon('back_arrow', ds.bypassSecurityTrustResourceUrl(`${svgDir}/back_arrow.svg`));
+    ir.addSvgIcon('arrow-right', ds.bypassSecurityTrustResourceUrl(`${svgDir}/arrow-right.svg`));
+    ir.addSvgIcon('clear', ds.bypassSecurityTrustResourceUrl(`${svgDir}/clear.svg`));
+    ir.addSvgIcon('eye-off', ds.bypassSecurityTrustResourceUrl(`${svgDir}/eye-off.svg`));
+    ir.addSvgIcon('eye-open', ds.bypassSecurityTrustResourceUrl(`${svgDir}/eye-open.svg`));
     
 };
 

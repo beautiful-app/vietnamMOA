@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {IonInfiniteScroll, LoadingController} from '@ionic/angular';
-import {LoadingService} from 'src/app/shared/service/loading.service';
 import {TWBase} from '../../../shared/TWBase.ui';
 import {Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {ApplicationService} from '../../../shared/service/application.service';
 import {APP} from '../../../core/singleton.export';
+import {PromptService} from '../../../shared/service/prompt.service';
 
 @Component({
     selector: 'app-version-features',
@@ -19,7 +19,7 @@ export class VersionFeaturesComponent extends TWBase implements OnInit {
     noData = false;
     
     constructor(
-        private loadingSV: LoadingService,
+        private loadingSV: PromptService,
         private loadingCtrl: LoadingController,
         private router: Router,
         private location: Location,

@@ -46,7 +46,6 @@ export class USER {
     
     public static reset(store) {
         this._instance = new USER();
-        // store.dispatch(userInfoUpddate());
         store.dispatch(userLogOut({hasLogout: true}));
     }
     

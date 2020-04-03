@@ -71,8 +71,9 @@ export class UserService extends Httpbase {
         let changesObj = EntityUtil.fieldReplacement(queryObj, [['oldPassword', 'oldPwd'], ['confirmPassword', 'newPwd']]);
         return new Observable<result>(o => {
             this.postJson(URL.change_password, changesObj).subscribe(r => {
-                if(RETURN.isSucceed(r)) o.next();
-                else o.next(r);
+                RETURN.nextMsg(o, r);
+                // if(RETURN.isSucceed(r)) o.next();
+                // else o.next(r);
             });
         });
     }
@@ -83,9 +84,8 @@ export class UserService extends Httpbase {
                 type: '2',
                 value: phoneNum
             };
-            
             this.postJson(URL.change_phone_number, param).subscribe(r => {
-                RETURN.next(r, o);
+                RETURN.next(o, r);
             });
         });
     }
@@ -93,20 +93,15 @@ export class UserService extends Httpbase {
     confirmPhoneForResetPassword(account: string): Observable<result | boolean | any> {
         return new Observable<result | boolean>(o => {
             this.get(URL.get_confirm_phone_for_reset_password + account).subscribe(r => {
-                if(r.data && r.data.cellphone) {
-                    o.next(r.data);
-                } else o.next(false);
+                RETURN.nextData(o, r);
             });
-            
         });
-        
     }
     
     getCodeForRestPassword(account: string): Observable<boolean | result | any> {
         return new Observable<boolean | result>(o => {
             this.get(URL.get_code_for_reset_password + account).subscribe(r => {
-                if(RETURN.isSucceed(r)) o.next(r.data);
-                else o.next(false);
+                RETURN.nextData(o, r);
             });
         });
     }

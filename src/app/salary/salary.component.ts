@@ -7,6 +7,7 @@ import {select, Store} from '@ngrx/store';
 import {USER} from '../shared/entity/user.bo';
 import {TWBase} from '../shared/TWBase.ui';
 import {delay} from 'rxjs/operators';
+import {Lang} from '../shared/const/language.const';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class SalaryComponent extends TWBase implements AfterViewInit {
         private store: Store<{ user: 'user', newVersion: 'newVersion', userLogout: 'userLogout' }>,
     ) {
         super();
+        console.log('salary实例化了');
         // 从缓存中获取已保存的数据
         this.salarySV.getDataFromStorage().subscribe(r => {
             // 展示缓存数据
@@ -72,7 +74,7 @@ export class SalaryComponent extends TWBase implements AfterViewInit {
         this.salarySV.getData(year, month).pipe(delay(1000)).subscribe(
             (r) => {
                 if(!r) {
-                    this.presentToast('当月无数据');
+                    this.presentToast(Lang.Lang_711);
                     this.salarySV.reinitSalaryData().subscribe(_ => {
                         PlanB.date = this.salary.date;
                         this.salary = PlanB;

@@ -27,7 +27,7 @@
   "Lang_223":"Union dues",
 
 
-  "Lang_31":"khoảng TWOA",
+  "Lang_31":"About TWOA",
   "Lang_32":"Change the password",
   "Lang_33":"Log out",
 
@@ -69,6 +69,7 @@
   "Lang_78":"The two passwords are not the same. Please re-enter",
   "Lang_79":"Password complexity does not meet the requirements, please re-ente",
   "Lang_710": "Modify Tel",
+  "Lang_711": "No data for this month",
 
 
 
@@ -84,6 +85,7 @@
   "Lang_89_2": "We will send a verification message to your mobile phone number",
   "Lang_89_3": "cancel",
   "Lang_89_4": "ok",
+  "Lang_89_5": "Done",
   "Lang_810":"The password has been changed, please login again",
   "Lang_811":"Access expired, please login again",
   "Lang_812":"Network anomalies",
@@ -107,5 +109,7 @@
   "Lang_99_2":"Confirm password（Please enter a new password again）",
   "Lang_910":"Done",
   "Lang_911":"Passwords must be at least seven characters and contain at least three types of characters: Numbers, letter case, letters, or special characters",
-  "Lang_912": "Remember password"
+  "Lang_912": "Remember password",
+  "Lang_913": "Resend after",
+  "Lang_914": "Phone number is not maintained for this account, please contact HR"
 }

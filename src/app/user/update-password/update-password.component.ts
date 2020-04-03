@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {UserService} from '../../shared/service/user.service';
-import {twoValueMatch} from '../../shared/utils/validators/password-match';
-import {RETURN} from '../../shared/utils/return-verify.util';
 import {TwoPasswordMatchValidator, TwoPasswordValidator, VALIDATORS} from '../../shared/utils/validators/validators.collection';
 import {TWBase} from '../../shared/TWBase.ui';
 import {Lang} from '../../shared/const/language.const';
@@ -40,14 +38,15 @@ export class UpdatePasswordComponent extends TWBase implements OnInit {
         if(!this.updating) {
             this.updating = true;
             this.userSV.changePassword(this.form.getRawValue()).pipe(delay(2000)).subscribe(r => {
-                if(!r) {
-                    this.presentToast(Lang.Lang_73, null, 900);
-                    setTimeout(_ => {
-                        this.routerSV.to(WHERE.login);
-                    }, 1500);
-                } else this.presentToast(String(r.msg));
-                this.updating = false;
-            });
+                    console.log('msg:', r);
+                    if(!r) {
+                        this.presentToast(Lang.Lang_73, null, 1500);
+                        setTimeout(_ => {
+                            this.userSV.loginOut();
+                        }, 1500);
+                    } else this.presentToast(String(r));
+                }, null,
+                () => this.updating = false);
         }
     }
 }

@@ -11,28 +11,37 @@ export abstract class TWBase {
     protected _loadCtrl: LoadingController;
     private _loading: any;
     protected _toast: ToastController;
-    protected _dialog: MatDialog;
     
     constructor() {
         this._loadCtrl = new LoadingController();
         this._toast = new ToastController();
-        
+        // this._toast.create({animated: false}).then(t => {
+        //     t.present();
+        //     t.dismiss();
+        // });
+        // console.log('实例化了。。。。');
     }
     
     protected async presentToast(message: string | number, position?: 'bottom' | 'middle', duration?: number, header?: string, closeButtons?: string[]) {
+        duration = duration ? duration : 1500;
         const toast = await this._toast.create({
             header: header,
             message: String(message),
-            duration: duration ? duration : 1500,
+            // duration: duration ? duration : 1500,
+            duration: duration,
             position: position ? position : 'top',
             cssClass: 'toast',
             mode: 'ios'
+        }).then(r => {
+            r.present();
+            setTimeout(_ => {
+                r.dismiss();
+            }, duration);
         });
-        toast.present();
     }
     
     successTip(dialog: MatDialog, mode?: { mode?: tipsMode, time?: Number }): Observable<any> {
-        // mode = {mode: tipsMode.successMode2, time: 2000};
+        mode = {mode: tipsMode.successMode2, time: 2000};
         return this.openDialog(dialog, null, TwSuccessComponent, mode ? mode : {});
     }
     

@@ -10,7 +10,7 @@ export class datePicker {
                     }
                 },
                 {
-                    text: '确定',
+                    text: Lang.Lang_89_5,
                     handler: (event) => {
                         page.dateHandle(event);
                     }

@@ -1,4 +1,4 @@
-import {forwardRef, Inject, Injectable, Injector, Optional, SkipSelf} from '@angular/core';
+import {Injectable, Injector} from '@angular/core';
 import {Platform} from '@ionic/angular';
 import {File} from '@ionic-native/file/ngx';
 import {TWBase} from '../TWBase.ui';
@@ -8,9 +8,8 @@ import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 import {Lang} from '../const/language.const';
 import {statusStyle} from '../const/status-style.enum';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
-import {StringUtil} from '../utils/string.util';
-import {route} from '../const/route.enum';
 import {Network} from '@ionic-native/network/ngx';
+import {LanguageService} from './language.service';
 
 enum exitMark {
     init,
@@ -33,7 +32,8 @@ export class DeviceService extends TWBase {
                 private inj: Injector,
                 private naviteBr: InAppBrowser,
                 private statusBar: StatusBar,
-                private network: Network
+                private network: Network,
+                private languageSV: LanguageService
     ) {
         super();
     }

@@ -46,6 +46,10 @@
   --spinner-color: #270000;
 }
 
+.color-white-lower {
+  color: #f7f7f7 !important;
+}
+
 
 @import '~@angular/material/theming';
 @include mat-core();
