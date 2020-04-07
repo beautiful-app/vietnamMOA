@@ -54,14 +54,6 @@ export class ResetPasswordComponent extends TWBase {
     }
     
     getCode() {
-        
-        this.countDown = 60;
-        let interval = setInterval(_ => {
-            --this.countDown;
-            if(this.countDown == 0) clearInterval(interval);
-        }, 1000);
-        return;
-        
         this.inLoad = true;
         this.userSV.confirmPhoneForResetPassword(this.form.getRawValue().account).subscribe(r => {
             console.log('r:', r);
