@@ -23,6 +23,7 @@ import {ApplicationService} from '../shared/service/application.service';
 import {TWBase} from '../shared/TWBase.ui';
 import {SharedModule} from '../shared/shared.module';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
+import {Keyboard} from '@ionic-native/keyboard/ngx';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ export class CoreModule extends TWBase {
                 private routerSV: RouterService,
                 private deviceSV: DeviceService,
                 private appSV: ApplicationService,
-                private splash: SplashScreen
+                private splash: SplashScreen,
+                private keyboard: Keyboard,
     ) {
         super();
         if(parent) throw new Error('模块已经存在，不能再次加载');
@@ -105,6 +107,8 @@ export class CoreModule extends TWBase {
         
         this.platform.ready().then(_ => {
             // this.presentToast('平台准备好了');
+            this.keyboard.hideFormAccessoryBar(false);
+    
         });
     }
 }

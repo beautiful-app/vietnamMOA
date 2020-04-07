@@ -19,7 +19,7 @@ export class CenterComponent extends TWBase implements OnInit {
     department: string;
     avatar: string;
     newMark: boolean = false;
-    private isLogout: boolean = false;
+    isLogout: boolean = false;
     
     constructor(
         private userSV: UserService,
