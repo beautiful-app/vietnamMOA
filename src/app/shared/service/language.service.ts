@@ -19,7 +19,6 @@ export class LanguageService {
         // 语言初始化(若未设置语言, 则取浏览器语言)
         // // 当在assets/i18n中找不到对应的语言翻译时，使用'zh-CN'作为默认语言
         this.translate.setDefaultLang(LanguageType.vi);
-        // if(!environment.production) this.translate.use(LanguageType.en);
         this.translate.use(this._sysLanguage);
     }
     

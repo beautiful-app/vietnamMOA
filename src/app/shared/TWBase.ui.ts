@@ -15,11 +15,6 @@ export abstract class TWBase {
     constructor() {
         this._loadCtrl = new LoadingController();
         this._toast = new ToastController();
-        // this._toast.create({animated: false}).then(t => {
-        //     t.present();
-        //     t.dismiss();
-        // });
-        // console.log('实例化了。。。。');
     }
     
     protected async presentToast(message: string | number, position?: 'bottom' | 'middle', duration?: number, header?: string, closeButtons?: string[]) {

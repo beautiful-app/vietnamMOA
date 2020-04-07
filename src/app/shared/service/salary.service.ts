@@ -6,7 +6,6 @@ import {TranslateService} from '@ngx-translate/core';
 import {HttpClient} from '@angular/common/http';
 import {URL} from '../const/url.const';
 import {RETURN} from '../utils/return-verify.util';
-import {salaryReturnFieldMatch} from '../const/salary-field-match.enum';
 
 @Injectable({
     providedIn: 'root'
@@ -29,8 +28,6 @@ export class SalaryService extends Httpbase {
     
     getDataFromStorage(): Observable<Salary> {
         return new Observable<Salary>(o => {
-            // 根据语言进行字段
-            // o.next(PlanA);
             o.next();
         });
     }
@@ -40,7 +37,7 @@ export class SalaryService extends Httpbase {
             this.translate.getLangs();
             let nameArray = this.getNameIdArray(salary.incomes);
             this.translate.get(nameArray).subscribe(r => {
-                let setNameResult = this.setName(salary.incomes, r);
+                this.setName(salary.incomes, r);
                 o.next();
             });
         });
@@ -85,16 +82,5 @@ export class SalaryService extends Httpbase {
             });
         });
     }
-    
-    // reinitSalaryData(salary: Salary) {
-    //     salary = PlanB;
-    //     // let initNum = '0.00';
-    //     // salary.totalIncoming = initNum;
-    //     // salary.incomes.forEach(r => {
-    //     //     r.income = initNum;
-    //     //     r.items.forEach(rr => {
-    //     //         rr.income = initNum;
-    //     //     });
-    //     // });
-    // }
+
 }

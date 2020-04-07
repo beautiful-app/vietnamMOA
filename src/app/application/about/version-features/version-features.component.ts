@@ -6,6 +6,7 @@ import {Location} from '@angular/common';
 import {ApplicationService} from '../../../shared/service/application.service';
 import {APP} from '../../../core/singleton.export';
 import {PromptService} from '../../../shared/service/prompt.service';
+import {delay} from 'rxjs/operators';
 
 @Component({
     selector: 'app-version-features',
@@ -31,11 +32,11 @@ export class VersionFeaturesComponent extends TWBase implements OnInit {
     ngOnInit() {
         setTimeout(_ => {
             this.getData(this.page);
-        }, 1000);
+        }, 500);
     }
     
     getData(page: number) {
-        this.appSV.getVersionFeaturesList(page).subscribe(r => {
+        this.appSV.getVersionFeaturesList(page).pipe(delay(500)).subscribe(r => {
             if(r) {
                 let dataList = r.records;
                 this.featuresList = this.featuresList.concat(dataList);
@@ -49,9 +50,6 @@ export class VersionFeaturesComponent extends TWBase implements OnInit {
     }
     
     loadData($event) {
-        setTimeout(_ => {
-            this.getData(++this.page);
-        }, 500);
-        
+        this.getData(++this.page);
     }
 }

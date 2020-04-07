@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {File} from '@ionic-native/file/ngx';
 import {TWBase} from '../../shared/TWBase.ui';
-import {LoadingController, Platform, ToastController} from '@ionic/angular';
+import {Platform} from '@ionic/angular';
 import {DeviceService} from '../../shared/service/device.service';
 import {FileService} from '../../shared/service/file.service';
 import {ApplicationService} from '../../shared/service/application.service';
@@ -34,7 +34,6 @@ export class AboutComponent extends TWBase {
         this.appSV.getVersion().subscribe(r => {
             this.version = r;
         });
-        
         this.store.pipe(select('newVersion')).subscribe(r => {
             this.newMark = Boolean(r);
         });

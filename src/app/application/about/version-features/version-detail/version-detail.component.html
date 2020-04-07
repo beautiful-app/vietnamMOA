@@ -1,9 +1,6 @@
 <tw-header title="{{'Lang_51' | translate}}"></tw-header>
-
 <ion-content class="tw-background-color">
-    
     <div [innerHTML]="contnet" *ngIf="contnet"></div>
-    
     <ion-label class="skeleton" *ngIf="!contnet">
         <h3 class="first-line">
             <ion-skeleton-text animated style="width: 100%;"></ion-skeleton-text>
@@ -15,5 +12,4 @@
             <ion-skeleton-text animated></ion-skeleton-text>
         </p>
     </ion-label>
-
 </ion-content>

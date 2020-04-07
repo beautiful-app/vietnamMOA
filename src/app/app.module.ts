@@ -44,7 +44,6 @@ import {Network} from '@ionic-native/network/ngx';
         AppVersion,
         Device,
         Network,
-        // {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     ],
     bootstrap: [AppComponent],
     

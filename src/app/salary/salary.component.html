@@ -1,5 +1,4 @@
 <tw-header title="{{'Lang_11' | translate}}" [backButton]="false"></tw-header>
-
 <ion-content class="content tw-background-color">
     <div class="date-picker">
         <div class="date-picker-button" (click)="datePicker.open()" matRipple>
@@ -10,7 +9,6 @@
             {{salary.currencySymbol + salary.totalIncoming}}
         </div>
     </div>
-    
     <mat-accordion class="salary-panel" [displayMode]="'flat'">
         <mat-expansion-panel matRipple
                              *ngFor="let income of salary.incomes"

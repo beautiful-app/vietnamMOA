@@ -8,5 +8,4 @@ export enum route {
     login = '/user/login',
     reset_password = '/user/reset-password'
     
-    
 }

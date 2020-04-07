@@ -13,6 +13,7 @@ export const VALIDATORS = {
     case4: ['', Validators.compose([Validators.required, Validators.maxLength(APP.minPhoneNum), Validators.minLength(APP.maxPhoneNum)])],
     // 匹配越南等地手机位数
     case5: ['', Validators.compose([Validators.required, Validators.pattern(`\\d{${APP.minPhoneNum},${APP.maxPhoneNum}}`)])],
+    case6: ['', Validators.compose([Validators.minLength(4)])],
 };
 
 export const TwoPasswordValidator = {

@@ -25,7 +25,6 @@ export class USER_TEST {
     }
     
     set id(value: string) {
-        console.log('设置了id');
         this._id = value;
     }
     

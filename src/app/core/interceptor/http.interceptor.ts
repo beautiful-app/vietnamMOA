@@ -24,12 +24,10 @@ export class HttpInterceptor extends TWBase {
         super();
     }
     
-    
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         req = req.clone({headers: req.headers.set('Authorization', USER.get().token)});
         let errorRespone = new HttpResponse({status: 200, body: {hasError: true}});
         return next.handle(req).pipe(
-            // delay(10000),
             timeout(20000),
             map((event: HttpEvent<any>) => {
                 if(event instanceof HttpResponse) {
@@ -39,26 +37,13 @@ export class HttpInterceptor extends TWBase {
                         setTimeout(_ => {
                             this.userSV.loginOut();
                         }, 1500);
-                        // throwError('has Error');
                         return errorRespone;
                     } else return event;
                 } else return event;
             }),
-            // retry(1),
+            retry(1),
             catchError((error: HttpErrorResponse) => {
-                console.log('请求失败了2');
-                // this.successTip(this.dialog);
-                // this.loadingSV.presentLoading();
-                // this.presentToast('请求失败，请检查网络并重新尝试');
-                // this.promptSV.presentToast('请求失败，请检查网络并重新尝试');
                 this.promptSV.networkErrorToast();
-                
-                // this.presentToast('请求失败，请检查网络并重新尝试');
-                // this.successTip(this.dialog).subscribe();
-                // this.loadingDismissAll().subscribe();
-                // return Observable.throo(new HttpErrorResponse({status: -1}));
-                // return new HttpResponse()
-                // return of(new HttpResponse({status: 200, body: {hasError: true}}));
                 return of(errorRespone);
             })
         );

@@ -20,14 +20,12 @@ import {LanguageService} from '../../shared/service/language.service';
     styleUrls: ['./reset-password.component.scss'],
 })
 export class ResetPasswordComponent extends TWBase {
-    oldPasswordHide: boolean = true;
     passwordHide: boolean = true;
     form: FormGroup;
     inLoad: boolean = false;
     countDown: number = 0;
     resultMsg: string = '';
     headShow: boolean = true;
-    // langType = LanguageType;
     langZH = LanguageType.zh;
     sysLangType: string;
     
@@ -98,12 +96,5 @@ export class ResetPasswordComponent extends TWBase {
             });
         }
     }
-    
-    // ionViewWillLeave() {
-    //     setTimeout(_ => {
-    //         this.headShow = false;
-    //         this.cdr.detectChanges();
-    //     }, 100);
-    // }
-    //
+
 }

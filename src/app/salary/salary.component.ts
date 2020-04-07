@@ -15,7 +15,7 @@ import {Lang} from '../shared/const/language.const';
     templateUrl: './salary.component.html',
     styleUrls: ['./salary.component.scss'],
 })
-export class SalaryComponent extends TWBase implements AfterViewInit {
+export class SalaryComponent extends TWBase {
     @ViewChild('datePicker', {static: false}) datePicker: any;
     
     customPickerOptions: DatePickerOptions = datePicker.options(this);
@@ -91,7 +91,5 @@ export class SalaryComponent extends TWBase implements AfterViewInit {
             }
         );
     }
-    
-    ngAfterViewInit(): void {
-    }
+
 }

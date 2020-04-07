@@ -38,17 +38,12 @@ export class UpgradeComponent extends TWBase {
             let rate = Number(r);
             if(this.downloading && rate <= -1) this.close();
             if(rate > 0) {
-                // if(rate >= 0) {
                 this.rate = rate;
                 this.downloading = true;
                 if(this.rate + 5 > this.bufferValue) this.bufferValue = this.rate + Math.ceil(Math.random() * 25);
                 this.cdr.detectChanges();
             }
         });
-    }
-    
-    ngOnDestroy() {
-    
     }
     
     close() {

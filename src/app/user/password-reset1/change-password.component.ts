@@ -10,8 +10,6 @@ import {RETURN} from '../../shared/utils/return-verify.util';
     styleUrls: ['./change-password.component.scss'],
 })
 export class ChangePasswordComponent implements OnInit {
-    oldPasswordHide: boolean = true;
-    passwordHide: boolean = true;
     form: FormGroup;
     
     constructor(

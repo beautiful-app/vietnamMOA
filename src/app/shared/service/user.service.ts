@@ -72,8 +72,6 @@ export class UserService extends Httpbase {
         return new Observable<result>(o => {
             this.postJson(URL.change_password, changesObj).subscribe(r => {
                 RETURN.nextMsg(o, r);
-                // if(RETURN.isSucceed(r)) o.next();
-                // else o.next(r);
             });
         });
     }

@@ -124,8 +124,6 @@ export class DeviceService extends TWBase {
     }
     
     dialog() {
-        
-        console.log('jjj', this.dialogMode);
     }
 }
 

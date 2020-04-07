@@ -14,7 +14,6 @@ export class PromptService {
     ) {
         this._loading = this.loadingCtrl;
         this._toast = new ToastController();
-        console.log('toast实例化了');
     }
     
     networkErrorToast() {
@@ -39,25 +38,19 @@ export class PromptService {
             mode: 'ios'
         }).then(toast => {
             toast.present();
-            // setTimeout(_ => {
-            //     toast.dismiss();
-            // }, duration);
         });
     }
     
     async presentLoading() {
-        
         await this.loadingCtrl.create({
             message: 'Please wait...',
             duration: 2000,
         }).then(loading => {
             loading.present();
         });
-        // this.loading.present();
     }
     
     
     hide() {
-        // this.loading.dismiss();
     }
 }

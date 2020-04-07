@@ -8,7 +8,6 @@ import {TwSuccessComponent} from './tw-success/tw-success.component';
 import {TwLoadCompleteComponent} from './tw-load-complete/tw-load-complete.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {UpgradeComponent} from './tw-upgrade/upgrade.component';
-import {SharedModule} from '../shared.module';
 
 
 @NgModule({

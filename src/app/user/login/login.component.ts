@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
 import {RouterService} from '../../shared/service/router.service';
 import {route} from '../../shared/const/route.enum';
 import {delay} from 'rxjs/operators';
+import {VALIDATORS} from '../../shared/utils/validators/validators.collection';
 
 @Component({
     selector: 'app-login',
@@ -18,13 +19,9 @@ import {delay} from 'rxjs/operators';
 export class LoginComponent implements OnInit {
     
     form: FormGroup;
-    loginForm: FormGroup;
-    isShow = false;
     passwordHide = true;
     loginError: boolean = false;
     inLogging: boolean = false;
-    resetPasswordRoute: string = route.reset_password;
-    private infoCheck: boolean = false;
     
     
     constructor(
@@ -36,8 +33,8 @@ export class LoginComponent implements OnInit {
         private routerSV: RouterService
     ) {
         this.form = this.formBuilder.group({
-            username: ['', Validators.compose([Validators.minLength(4)])],
-            password: ['', Validators.compose([Validators.minLength(4)])],
+            username: VALIDATORS.case6,
+            password: VALIDATORS.case6,
             remember: [false, []]
         });
     }
