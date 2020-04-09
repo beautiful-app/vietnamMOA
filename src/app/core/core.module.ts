@@ -29,8 +29,8 @@ import {Keyboard} from '@ionic-native/keyboard/ngx';
 @NgModule({
     declarations: [],
     imports: [
-        CommonModule,
-        HttpClientModule,
+        SharedModule,
+        // HttpClientModule,
         TranslateModule.forRoot(translateModuleConfig()),
         StoreModule.forRoot({
             downloadApk: _downloadApkReducer,
@@ -38,7 +38,6 @@ import {Keyboard} from '@ionic-native/keyboard/ngx';
             newVersion: _newVersion,
             userLogout: _userLogoutReducer
         }),
-        SharedModule
     ],
     exports: [],
     providers: [
@@ -108,7 +107,6 @@ export class CoreModule extends TWBase {
         this.platform.ready().then(_ => {
             // this.presentToast('平台准备好了');
             this.keyboard.hideFormAccessoryBar(false);
-    
         });
     }
 }

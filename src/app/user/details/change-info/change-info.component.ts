@@ -31,8 +31,6 @@ export class ChangeInfoComponent extends TWBase implements OnInit {
     ngOnInit() {
         this.form = this.formBuilder.group({phoneNumber: VALIDATORS.case5});
         let phoneNumber = this.route.snapshot.paramMap.get('phoneNumber');
-        console.log(this.route.snapshot.paramMap);
-        console.log('获取到的手机号:', phoneNumber);
         this.form.setValue({phoneNumber: phoneNumber});
     }
     
@@ -40,16 +38,16 @@ export class ChangeInfoComponent extends TWBase implements OnInit {
         if(this.form.valid && !this.inModify) {
             this.inModify = true;
             this.userSV.setPhoneNumber(this.form.getRawValue().phoneNumber).pipe(delay(1000)).subscribe(r => {
-                    console.log('r:', r);
                     // 重新获取用户数据，并导航到个人信息页
                     if(r) {
                         this.userSV.getUserInfoByToken().subscribe(rr => {
                             this.inModify = false;
+                            // this.successTip(this.dialog, {time: 200000000}).subscribe(_ => {
                             this.successTip(this.dialog).subscribe(_ => {
                                 this.routerSV.to(WHERE.back);
                             });
                         });
-                    } else this.presentToast('修改失败,请重新提交');
+                    }
                 },
                 null,
                 () => this.inModify = false

@@ -10,12 +10,14 @@ import {
 } from '@angular/material';
 import {TwComponentModule} from './component/tw-component.module';
 import {SafeHTMLPipe} from './pipes/save-html';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
     declarations: [SafeHTMLPipe],
     imports: [
         CommonModule,
+        HttpClientModule,
         
         IonicModule,
         TranslateModule,

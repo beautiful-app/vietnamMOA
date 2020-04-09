@@ -28,7 +28,9 @@ export class SalaryService extends Httpbase {
     
     getDataFromStorage(): Observable<Salary> {
         return new Observable<Salary>(o => {
+            // todo 缓存薪资的需求暂时没有
             o.next();
+            o.complete();
         });
     }
     
@@ -82,5 +84,5 @@ export class SalaryService extends Httpbase {
             });
         });
     }
-
+    
 }

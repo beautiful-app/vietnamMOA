@@ -1,4 +1,4 @@
-export enum route {
+export enum ROUTE {
     tabs_root = '/tabs',
     tabs_home = '/tabs/salary',
     tabs_center = '/tabs/application/center',

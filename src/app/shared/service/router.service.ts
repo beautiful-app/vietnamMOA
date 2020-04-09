@@ -6,8 +6,8 @@ import {filter} from 'rxjs/operators';
 import {StringUtil} from '../utils/string.util';
 import {TWBase} from '../TWBase.ui';
 import {NavController} from '@ionic/angular';
-import {route} from '../const/route.enum';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
+import {ROUTE} from '../const/route.enum';
 
 @Injectable({providedIn: 'root'})
 export class RouterService extends TWBase {
@@ -32,7 +32,7 @@ export class RouterService extends TWBase {
     to(where: any, data?: any) {
         switch (where) {
             case WHERE.login:
-                this.router.navigate([route.login]);
+                this.router.navigate([ROUTE.login]);
                 break;
             case WHERE.back:
                 if(this._previousUrl) {
@@ -40,11 +40,11 @@ export class RouterService extends TWBase {
                 } else this.to(WHERE.home);
                 break;
             case WHERE.home:
-                this.router.navigate([route.tabs_home]);
+                this.router.navigate([ROUTE.tabs_home]);
                 // this.router.navigate([route.tabs_center]);
                 break;
             case WHERE.resetPassword:
-                this.router.navigate([route.tabs_home]);
+                this.router.navigate([ROUTE.tabs_home]);
                 break;
         }
     }
@@ -55,9 +55,9 @@ export class RouterService extends TWBase {
         .subscribe((event: NavigationEnd) => {
             this._setURLs(event);
             // 当前登录页的
-            if(StringUtil.isInclude(this._currentUrl, route.login)) {
+            if(StringUtil.isInclude(this._currentUrl, ROUTE.login)) {
                 this.statusBar.overlaysWebView(true);
-            } else if(StringUtil.isIncludeArr([[this._currentUrl, route.tabs_home], [this._currentUrl, route.reset_password]])) {
+            } else if(StringUtil.isIncludeArr([[this._currentUrl, ROUTE.tabs_home], [this._currentUrl, ROUTE.reset_password]])) {
                 this.statusBar.overlaysWebView(false);
                 setTimeout(_ => {
                     this.statusBar.backgroundColorByHexString('#3dc2ff');
@@ -69,7 +69,7 @@ export class RouterService extends TWBase {
     private _setURLs(event: NavigationEnd): void {
         // 如果堆栈的历史大于零在做处理
         let url = event.urlAfterRedirects;
-        if(!StringUtil.isIncludeArr([[url, route.tabs_root], [url, route.login]])) {
+        if(!StringUtil.isIncludeArr([[url, ROUTE.tabs_root], [url, ROUTE.login]])) {
             if(url == this._previousUrl) {
                 this._routeHistory.pop();
             } else {
@@ -81,9 +81,11 @@ export class RouterService extends TWBase {
     }
     
     // 是否可返回
-    back(): boolean {
-        if(!StringUtil.isIncludeArr([[this._currentUrl, route.tabs_root], [this._currentUrl, route.login]])) {
-            this.navCtrl.navigateBack(this._previousUrl);
+    back() {
+        console.log(this._currentUrl, this._previousUrl);
+        if(!StringUtil.isIncludeArr([[this._currentUrl, ROUTE.tabs_root], [this._currentUrl, ROUTE.login]])) {
+            if(this._previousUrl) this.navCtrl.navigateBack(this._previousUrl);
+            else this.to1(ROUTE.tabs_home);
             return true;
         } else return false;
     }

@@ -36,8 +36,8 @@ export abstract class TWBase {
     }
     
     successTip(dialog: MatDialog, mode?: { mode?: tipsMode, time?: Number }): Observable<any> {
-        mode = {mode: tipsMode.successMode2, time: 2000};
-        return this.openDialog(dialog, null, TwSuccessComponent, mode ? mode : {});
+        // mode = {mode: tipsMode.successMode2, time: 2000};
+        return this.openDialog(dialog, null, TwSuccessComponent, mode);
     }
     
     protected openDialog(dialog: MatDialog, deviceSV: DeviceService, component: any, date?: any): Observable<boolean | any> {
@@ -45,7 +45,7 @@ export abstract class TWBase {
             const dialogRef = dialog.open(component, {
                 disableClose: true,
                 panelClass: 'custom-dialog-container',
-                data: date
+                data: date ? date : {}
             });
             if(deviceSV) deviceSV.dialogMode(dialogRef);
             dialogRef.afterClosed().subscribe(r => {

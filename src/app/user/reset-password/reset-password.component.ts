@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../shared/service/user.service';
 import {MatDialog} from '@angular/material';
@@ -19,7 +19,7 @@ import {LanguageService} from '../../shared/service/language.service';
     templateUrl: './reset-password.component.html',
     styleUrls: ['./reset-password.component.scss'],
 })
-export class ResetPasswordComponent extends TWBase {
+export class ResetPasswordComponent extends TWBase implements OnDestroy {
     passwordHide: boolean = true;
     form: FormGroup;
     inLoad: boolean = false;
@@ -52,6 +52,12 @@ export class ResetPasswordComponent extends TWBase {
         validatorGroup['account'] = VALIDATORS.case1;
         this.form = this.formBuilder.group(validatorGroup, TwoPasswordMatchValidator);
     }
+    
+    ngOnDestroy(): void {
+        console.log('resetPassword销毁了');
+        
+    }
+    
     
     getCode() {
         this.inLoad = true;
@@ -88,5 +94,5 @@ export class ResetPasswordComponent extends TWBase {
             });
         }
     }
-
+    
 }

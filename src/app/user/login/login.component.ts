@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {UserService} from '../../shared/service/user.service';
@@ -7,16 +7,16 @@ import {STORAGE_KEY} from '../../shared/const/storageKey.const';
 import {RETURN} from '../../shared/utils/return-verify.util';
 import {Router} from '@angular/router';
 import {RouterService} from '../../shared/service/router.service';
-import {route} from '../../shared/const/route.enum';
 import {delay} from 'rxjs/operators';
 import {VALIDATORS} from '../../shared/utils/validators/validators.collection';
+import {ROUTE} from '../../shared/const/route.enum';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
     
     form: FormGroup;
     passwordHide = true;
@@ -45,6 +45,10 @@ export class LoginComponent implements OnInit {
         });
     }
     
+    ngOnDestroy(): void {
+        console.log('login销毁了');
+    }
+    
     
     doLogin() {
         // 禁用登录按钮
@@ -56,13 +60,13 @@ export class LoginComponent implements OnInit {
         this.userSV.doLogin(this.form.getRawValue()).pipe(delay(2000)).subscribe(r => {
             this.inLogging = false;
             if(RETURN.isTrue(r)) {
-                this.routerSV.to1(route.tabs_home);
+                this.routerSV.to1(ROUTE.tabs_home);
                 this.loginError = false;
             } else if(!RETURN.networkError(r)) this.loginError = true;
         });
     }
     
     resetPassword() {
-        this.routerSV.to1(route.reset_password);
+        this.routerSV.to1(ROUTE.reset_password);
     }
 }

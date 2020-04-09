@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {datePicker, DatePickerOptions} from '../shared/entity/date-picker-options.vo';
 import {PlanA, PlanB, Salary} from '../shared/entity/salary.vo';
 import {DateUtil} from '../shared/utils/date.util';
@@ -8,6 +8,7 @@ import {USER} from '../shared/entity/user.bo';
 import {TWBase} from '../shared/TWBase.ui';
 import {delay} from 'rxjs/operators';
 import {Lang} from '../shared/const/language.const';
+import {Subscriber} from 'rxjs';
 
 
 @Component({
@@ -15,19 +16,20 @@ import {Lang} from '../shared/const/language.const';
     templateUrl: './salary.component.html',
     styleUrls: ['./salary.component.scss'],
 })
-export class SalaryComponent extends TWBase {
+export class SalaryComponent extends TWBase implements OnDestroy {
     @ViewChild('datePicker', {static: false}) datePicker: any;
     
     customPickerOptions: DatePickerOptions = datePicker.options(this);
     salary: Salary;
     hasGetData: boolean = false;
+
+    subscribers = [];
     
     constructor(
         private salarySV: SalaryService,
         private store: Store<{ user: 'user', newVersion: 'newVersion', userLogout: 'userLogout' }>,
     ) {
         super();
-        console.log('salary实例化了');
         // 从缓存中获取已保存的数据
         this.salarySV.getDataFromStorage().subscribe(r => {
             // 展示缓存数据
@@ -35,7 +37,7 @@ export class SalaryComponent extends TWBase {
             // 使用基础模板数据
             else this.salary = PlanB;
             this.salarySV.languageProcessing(this.salary).subscribe(r => {
-                this.store.pipe(select('user'), delay(3000)).subscribe(_ => {
+                this.subscribers[0] = this.store.pipe(select('user'), delay(2000)).subscribe(_ => {
                     // 用户为激活状态，并且还未获取数据
                     if(!this.hasGetData && USER.get().isActive) {
                         this.hasGetData = true;
@@ -47,7 +49,8 @@ export class SalaryComponent extends TWBase {
         });
         
         // 退出登录：初始化数据获取标识,初始化salary数据
-        this.store.pipe(select('userLogout')).subscribe(r => {
+        
+        this.subscribers[1] = this.store.pipe(select('userLogout')).subscribe(r => {
             if(r) {
                 this.hasGetData = false;
                 this.salarySV.reinitSalaryData().subscribe(_ => {
@@ -91,5 +94,13 @@ export class SalaryComponent extends TWBase {
             }
         );
     }
-
+    
+    ngOnDestroy(): void {
+        this.subscribers.forEach(r => {
+            console.log('r:', r);
+            if(r) r.unsubscribe();
+        });
+    }
+    
+    
 }
