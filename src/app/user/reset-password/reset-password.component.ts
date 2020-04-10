@@ -19,7 +19,7 @@ import {LanguageService} from '../../shared/service/language.service';
     templateUrl: './reset-password.component.html',
     styleUrls: ['./reset-password.component.scss'],
 })
-export class ResetPasswordComponent extends TWBase implements OnDestroy {
+export class ResetPasswordComponent extends TWBase {
     passwordHide: boolean = true;
     form: FormGroup;
     inLoad: boolean = false;
@@ -53,27 +53,20 @@ export class ResetPasswordComponent extends TWBase implements OnDestroy {
         this.form = this.formBuilder.group(validatorGroup, TwoPasswordMatchValidator);
     }
     
-    ngOnDestroy(): void {
-        console.log('resetPassword销毁了');
-        
-    }
-    
-    
     getCode() {
         this.inLoad = true;
         this.userSV.confirmPhoneForResetPassword(this.form.getRawValue().account).subscribe(r => {
-            console.log('r:', r);
             if(r) this.openDialog(this.dialog, this.deviceSV, PhoneConfirmDialog, r).subscribe(rr => {
                 // 请求接口获取验证码
                 if(rr) this.userSV.getCodeForRestPassword(r.id).subscribe(rrr => {
-                    if(rrr) {
+                    if(!rrr) {
                         this.inLoad = false;
                         this.countDown = 60;
                         let interval = setInterval(_ => {
                             --this.countDown;
                             if(this.countDown == 0) clearInterval(interval);
                         }, 1000);
-                    }
+                    } else this.presentToast(rrr);
                     this.inLoad = false;
                 });
             });
@@ -88,7 +81,8 @@ export class ResetPasswordComponent extends TWBase implements OnDestroy {
                 if(RETURN.isSucceed(r)) {
                     this.form.reset();
                     this.presentToast(Lang.Lang_73);
-                    this.routerSV.to(WHERE.login);
+                    // this.routerSV.to(WHERE.login);
+                    this.routerSV.toLogin();
                 } else if(r.msg) this.resultMsg = r.msg;
                 this.updating = false;
             });

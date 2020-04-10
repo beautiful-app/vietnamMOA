@@ -8,6 +8,7 @@ import {WHERE} from '../../../shared/entity/where.enum';
 import {TWBase} from '../../../shared/TWBase.ui';
 import {MatDialog} from '@angular/material';
 import {delay} from 'rxjs/operators';
+import {ROUTE} from '../../../shared/const/route.enum';
 
 @Component({
     selector: 'app-change-info',
@@ -44,7 +45,7 @@ export class ChangeInfoComponent extends TWBase implements OnInit {
                             this.inModify = false;
                             // this.successTip(this.dialog, {time: 200000000}).subscribe(_ => {
                             this.successTip(this.dialog).subscribe(_ => {
-                                this.routerSV.to(WHERE.back);
+                                this.routerSV.back();
                             });
                         });
                     }

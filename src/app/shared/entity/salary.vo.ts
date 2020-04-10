@@ -13,7 +13,7 @@ export class Incomes extends salaryItem {
 export class Salary {
     totalIncoming: string;
     currencySymbol: string;
-    hasTranslated?: boolean;
+    hasTranslated: boolean;
     date: string;
     incomes: Incomes[];
 }
@@ -21,6 +21,7 @@ export class Salary {
 export const PlanA: Salary = {
     totalIncoming: '0,00',
     currencySymbol: '₫',
+    hasTranslated: false,
     date: DateUtil.getYearMonth(),
     incomes: [
         {

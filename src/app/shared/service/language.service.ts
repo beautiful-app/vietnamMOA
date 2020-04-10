@@ -12,13 +12,13 @@ export class LanguageService {
         private translate: TranslateService,
     ) {
         if(environment.production) this._sysLanguage = this.translate.getBrowserLang().substr(0, 2);
-        else this._sysLanguage = LanguageType.vi;
+        else this._sysLanguage = LanguageType.en;
     }
     
     languageSettings() {
         // 语言初始化(若未设置语言, 则取浏览器语言)
         // // 当在assets/i18n中找不到对应的语言翻译时，使用'zh-CN'作为默认语言
-        this.translate.setDefaultLang(LanguageType.vi);
+        this.translate.setDefaultLang(LanguageType.en);
         this.translate.use(this._sysLanguage);
     }
     

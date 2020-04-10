@@ -13,6 +13,7 @@ import {EntityUtil} from '../utils/entity.util';
 import {RouterService} from './router.service';
 import {WHERE} from '../entity/where.enum';
 import {userLogOut} from '../../core/ngrx/actions/user.actions';
+import {ROUTE} from '../const/route.enum';
 
 @Injectable({
     providedIn: 'root'
@@ -99,7 +100,7 @@ export class UserService extends Httpbase {
     getCodeForRestPassword(account: string): Observable<boolean | result | any> {
         return new Observable<boolean | result>(o => {
             this.get(URL.get_code_for_reset_password + account).subscribe(r => {
-                RETURN.nextData(o, r);
+                RETURN.nextMsg(o, r);
             });
         });
     }
@@ -116,6 +117,6 @@ export class UserService extends Httpbase {
     loginOut() {
         USER.reset(this.store);
         this.storageSV.clearUserInfo();
-        this.routerSV.to(WHERE.login);
+        this.routerSV.to1(ROUTE.login);
     }
 }

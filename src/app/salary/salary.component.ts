@@ -22,7 +22,6 @@ export class SalaryComponent extends TWBase implements OnDestroy {
     customPickerOptions: DatePickerOptions = datePicker.options(this);
     salary: Salary;
     hasGetData: boolean = false;
-
     subscribers = [];
     
     constructor(
@@ -49,7 +48,6 @@ export class SalaryComponent extends TWBase implements OnDestroy {
         });
         
         // 退出登录：初始化数据获取标识,初始化salary数据
-        
         this.subscribers[1] = this.store.pipe(select('userLogout')).subscribe(r => {
             if(r) {
                 this.hasGetData = false;
@@ -74,8 +72,8 @@ export class SalaryComponent extends TWBase implements OnDestroy {
     
     getSalary(year, month) {
         this.loadingShow();
-        this.salarySV.getData(year, month).pipe(delay(1000)).subscribe(
-            (r) => {
+        this.salarySV.getData(year, month).pipe(delay(2000)).subscribe(
+            r => {
                 if(!r) {
                     this.presentToast(Lang.Lang_711);
                     this.salarySV.reinitSalaryData().subscribe(_ => {
@@ -85,6 +83,7 @@ export class SalaryComponent extends TWBase implements OnDestroy {
                 } else {
                     PlanA.date = this.salary.date;
                     this.salary = PlanA;
+                    this.salarySV.languageProcessing(this.salary).subscribe();
                     this.salarySV.salaryDataProcessing(this.salary, r);
                 }
             },
@@ -97,7 +96,6 @@ export class SalaryComponent extends TWBase implements OnDestroy {
     
     ngOnDestroy(): void {
         this.subscribers.forEach(r => {
-            console.log('r:', r);
             if(r) r.unsubscribe();
         });
     }

@@ -38,7 +38,6 @@ export class UpdatePasswordComponent extends TWBase implements OnInit {
         if(!this.updating) {
             this.updating = true;
             this.userSV.changePassword(this.form.getRawValue()).pipe(delay(2000)).subscribe(r => {
-                    console.log('msg:', r);
                     if(!r) {
                         this.presentToast(Lang.Lang_73, null, 1500);
                         setTimeout(_ => {

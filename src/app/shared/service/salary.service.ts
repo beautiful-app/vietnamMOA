@@ -36,12 +36,15 @@ export class SalaryService extends Httpbase {
     
     languageProcessing(salary: Salary): Observable<Salary> {
         return new Observable<Salary>(o => {
-            this.translate.getLangs();
-            let nameArray = this.getNameIdArray(salary.incomes);
-            this.translate.get(nameArray).subscribe(r => {
-                this.setName(salary.incomes, r);
-                o.next();
-            });
+            if(!salary.hasTranslated) {
+                this.translate.getLangs();
+                let nameArray = this.getNameIdArray(salary.incomes);
+                this.translate.get(nameArray).subscribe(r => {
+                    this.setName(salary.incomes, r);
+                    salary.hasTranslated = true;
+                    o.next();
+                });
+            }
         });
     }
     

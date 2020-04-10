@@ -29,24 +29,26 @@ export class RouterService extends TWBase {
         this.router.navigate([where]);
     }
     
-    to(where: any, data?: any) {
-        switch (where) {
-            case WHERE.login:
-                this.router.navigate([ROUTE.login]);
-                break;
-            case WHERE.back:
-                if(this._previousUrl) {
-                    this.navCtrl.back();
-                } else this.to(WHERE.home);
-                break;
-            case WHERE.home:
-                this.router.navigate([ROUTE.tabs_home]);
-                // this.router.navigate([route.tabs_center]);
-                break;
-            case WHERE.resetPassword:
-                this.router.navigate([ROUTE.tabs_home]);
-                break;
-        }
+    toLogin() {
+        this.to1(ROUTE.login);
+        // switch (where) {
+        //     case WHERE.login:
+        //         this.router.navigate([ROUTE.login]);
+        //         break;
+        //     case WHERE.back:
+        //         if(this._previousUrl) {
+        //             this.navCtrl.back();
+        //             // } else this.to(WHERE.home);
+        //         } else this.to1(ROUTE.tabs_home);
+        //         break;
+        //     case WHERE.home:
+        //         this.router.navigate([ROUTE.tabs_home]);
+        //         // this.router.navigate([route.tabs_center]);
+        //         break;
+        //     case WHERE.resetPassword:
+        //         this.router.navigate([ROUTE.tabs_home]);
+        //         break;
+        // }
     }
     
     routeDetection() {
@@ -82,7 +84,6 @@ export class RouterService extends TWBase {
     
     // 是否可返回
     back() {
-        console.log(this._currentUrl, this._previousUrl);
         if(!StringUtil.isIncludeArr([[this._currentUrl, ROUTE.tabs_root], [this._currentUrl, ROUTE.login]])) {
             if(this._previousUrl) this.navCtrl.navigateBack(this._previousUrl);
             else this.to1(ROUTE.tabs_home);

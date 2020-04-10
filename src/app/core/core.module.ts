@@ -24,6 +24,7 @@ import {TWBase} from '../shared/TWBase.ui';
 import {SharedModule} from '../shared/shared.module';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {Keyboard} from '@ionic-native/keyboard/ngx';
+import {ROUTE} from '../shared/const/route.enum';
 
 
 @NgModule({
@@ -82,7 +83,9 @@ export class CoreModule extends TWBase {
         this.userSV.getUserFromStorage().subscribe(r => {
             // 通过token查询用户信息
             if(r) this.userSV.getUserInfoByToken().subscribe();
-            else this.routerSV.to(WHERE.login);
+            // else this.routerSV.to(WHERE.login);
+            else this.routerSV.toLogin();
+            
         });
         
         // 用户信息有更新的业务:更新缓存
