@@ -8,21 +8,22 @@
     <form [formGroup]="form">
         <div class="input-box">
             <mat-form-field appearance="legacy" floatLabel="never" errorState="false">
-                <input type="tel" matInput placeholder="{{ 'Lang_82' | translate }}" formControlName="username">
-                <button mat-icon-button matPrefix>
+                <input type="tel" matInput placeholder="{{ 'Lang_82' | translate }}" TWInputKeyupStop
+                       formControlName="username">
+                <button mat-icon-button type="button" matPrefix>
                     <mat-icon svgIcon="username"></mat-icon>
                 </button>
-                <button mat-icon-button matSuffix (click)="form.patchValue({username:''})">
+                <button mat-icon-button type="button" matSuffix (click)="form.patchValue({username:''})">
                     <mat-icon svgIcon="clear"></mat-icon>
                 </button>
             </mat-form-field>
             <mat-form-field appearance="legacy" floatLabel="never">
-                <input matInput placeholder="{{ 'Lang_81' | translate }}" formControlName="password"
+                <input matInput TWInputKeyupStop placeholder="{{ 'Lang_81' | translate }}" formControlName="password"
                        [type]="passwordHide ? 'password' : 'text'">
-                <button mat-icon-button matPrefix>
+                <button mat-icon-button type="button" matPrefix>
                     <mat-icon svgIcon="password"></mat-icon>
                 </button>
-                <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide"
+                <button mat-icon-button type="button" matSuffix (click)="passwordHide = !passwordHide"
                         [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
                     <mat-icon svgIcon="{{passwordHide ? 'eye-off' : 'eye-open'}}"></mat-icon>
                 </button>
@@ -40,7 +41,7 @@
             </ion-button>
             
             <div class="reset-password" (click)="resetPassword()">
-                <button mat-button>{{ 'Lang_93' | translate }}?</button>
+                <button mat-button type="button">{{ 'Lang_93' | translate }}?</button>
             </div>
         </div>
     </form>

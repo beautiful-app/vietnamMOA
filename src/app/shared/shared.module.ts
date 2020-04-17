@@ -11,10 +11,11 @@ import {
 import {TwComponentModule} from './component/tw-component.module';
 import {SafeHTMLPipe} from './pipes/save-html';
 import {HttpClientModule} from '@angular/common/http';
+import { InputKeyupStopDirective } from './directive/input-keyup-stop.directive';
 
 
 @NgModule({
-    declarations: [SafeHTMLPipe],
+    declarations: [SafeHTMLPipe, InputKeyupStopDirective],
     imports: [
         CommonModule,
         HttpClientModule,
@@ -56,6 +57,7 @@ import {HttpClientModule} from '@angular/common/http';
         MatNativeDateModule,
         MatDatepickerModule,
         TwComponentModule,
+        InputKeyupStopDirective,
     ]
 })
 export class SharedModule {
