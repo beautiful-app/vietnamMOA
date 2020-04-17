@@ -69,9 +69,11 @@ export class ResetPasswordComponent extends TWBase {
                     } else this.presentToast(rrr);
                     this.inLoad = false;
                 });
+                else this.inLoad = false;
+                
             });
-            this.inLoad = false;
-        }, null, () => this.inLoad = false);
+            
+        });
     }
     
     commitChanges() {

@@ -10,10 +10,9 @@
 }
 
 
-
 .progress-panel {
   text-align: right;
-  width: 150px;
+  //width: 150px;
 
 
   .download {
@@ -29,4 +28,13 @@
   .upgrade {
     color: #37a5f3;
   }
+
+  .mat-button {
+    padding-right: 0;
+  }
+
+  .mat-button-wrapper {
+    font-size: 13px;
+  }
+
 }

@@ -7,10 +7,7 @@ export function twoValueMatch(controlName: string, matchingControlName: string, 
     return (formGroup: FormGroup) => {
         const control = formGroup.controls[controlName];
         const matchingControl = formGroup.controls[matchingControlName];
-        
-        if(matchingControl.errors && control.errors) {
-            return;
-        }
+        if(matchingControl.errors && control.errors) return;
         
         if(control.value !== matchingControl.value) {
             matchingControl.setErrors({msg: Lang.Lang_87});

@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     doLogin() {
         // 禁用登录按钮
         this.inLogging = true;
-        // 如果用户记住密码，那么保存信息,否则忘记...
+        // 如果用户记住密码，那么保存信息,否则忘记密码
         if(this.form.getRawValue().remember) this.storage.set(STORAGE_KEY.login_info, this.form.getRawValue());
         else this.storage.remove(STORAGE_KEY.login_info);
         
@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                 this.routerSV.to1(ROUTE.tabs_home);
                 this.loginError = false;
             } else if(!RETURN.networkError(r)) this.loginError = true;
-        });
+        }, null, () => this.inLogging = false);
     }
     
     resetPassword() {

@@ -3,7 +3,6 @@ import {Observable} from 'rxjs';
 import {result, resultObj} from '../entity/result.bo';
 import {APP} from '../../core/singleton.export';
 import {TWBase} from '../TWBase.ui';
-import {URL} from '../const/url.const';
 
 export class Httpbase extends TWBase {
     

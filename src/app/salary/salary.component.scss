@@ -41,6 +41,7 @@
     .all-income {
       flex: 1;
       text-align: right;
+      padding-right: 5px;
     }
   }
 
@@ -66,5 +67,10 @@
 
 .item-details {
   display: flex;
+}
+
+
+::ng-deep .specific-class > .mat-expansion-indicator::after {
+  color: red !important;
 }
 

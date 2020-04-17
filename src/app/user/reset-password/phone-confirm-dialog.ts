@@ -15,9 +15,9 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
             </div>
         </div>
         <div *ngIf="!mode">
-            <p>该账号为设置手机号，请联系hr修改</p>
+            <p translate>Lang_914</p>
             <div class="align-right">
-                <button mat-button color="primary" (click)="close(false)">好的</button>
+                <button mat-button color="primary" (click)="close(false)">{{ 'Lang_89_4' | translate}}</button>
             </div>
         </div>
     `,
@@ -31,7 +31,7 @@ export class PhoneConfirmDialog {
         @Inject(MAT_DIALOG_DATA) public data: any,
         public dialogRef: MatDialogRef<PhoneConfirmDialog>,
     ) {
-        if(data) {
+        if(data.cellphone && data.cellphone.length > 0) {
             this.mode = true;
             this.numberProcessing(data.cellphone);
         }

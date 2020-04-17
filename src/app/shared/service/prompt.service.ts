@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {LoadingController, ToastController} from '@ionic/angular';
+import {Lang} from '../const/language.const';
 
 @Injectable({
     providedIn: 'root'
@@ -19,7 +20,7 @@ export class PromptService {
     networkErrorToast() {
         if(!this._networkErrorOnShow) {
             this._networkErrorOnShow = true;
-            this.presentToast('网络错误，请从新尝试');
+            this.presentToast(Lang.Lang_812);
             setTimeout(_ => {
                 this._networkErrorOnShow = false;
             }, 3000);
