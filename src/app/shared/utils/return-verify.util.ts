@@ -6,7 +6,7 @@ export class RETURN {
     private static succeedCode = APP.succeedCode;
     
     static isSucceed(res): boolean {
-        return res && res.code === this.succeedCode;
+        return res && res.code == this.succeedCode;
     }
     
     static next(observable: any, res: result) {
@@ -18,6 +18,13 @@ export class RETURN {
     static nextData(observable: any, res: result) {
         if(this.isSucceed(res) && res.data) observable.next(res.data);
         else if(!res.hasError) observable.next(0);
+        observable.complete();
+    }
+    
+    static nextDataAndError(observable: any, res: result) {
+        if(this.isSucceed(res) && res.data) observable.next(res.data);
+        else if(res.hasError) observable.next(res);
+        else observable.next(0);
         observable.complete();
     }
     

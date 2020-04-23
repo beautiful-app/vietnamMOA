@@ -56,8 +56,8 @@ export class ResetPasswordComponent extends TWBase {
     getCode() {
         this.inLoad = true;
         this.userSV.confirmPhoneForResetPassword(this.form.getRawValue().account).subscribe(r => {
-            this.inLoad = true;
-            if(r) this.openDialog(this.dialog, this.deviceSV, PhoneConfirmDialog, r).subscribe(rr => {
+            if(!r) this.inLoad = false;
+            this.openDialog(this.dialog, this.deviceSV, PhoneConfirmDialog, r).subscribe(rr => {
                 // 请求接口获取验证码
                 if(rr) this.userSV.getCodeForRestPassword(r.id).subscribe(rrr => {
                     if(!rrr) {
@@ -72,7 +72,7 @@ export class ResetPasswordComponent extends TWBase {
                 });
                 else this.inLoad = false;
             });
-            else this.inLoad = false;
+            // this.inLoad = false;
         });
     }
     

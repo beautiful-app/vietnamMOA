@@ -9,6 +9,7 @@ import {TWBase} from '../../../shared/TWBase.ui';
 import {MatDialog} from '@angular/material';
 import {delay} from 'rxjs/operators';
 import {ROUTE} from '../../../shared/const/route.enum';
+import {Lang} from '../../../shared/const/language.const';
 
 @Component({
     selector: 'app-change-info',
@@ -40,15 +41,15 @@ export class ChangeInfoComponent extends TWBase implements OnInit {
             this.inModify = true;
             this.userSV.setPhoneNumber(this.form.getRawValue().phoneNumber).pipe(delay(1000)).subscribe(r => {
                     // 重新获取用户数据，并导航到个人信息页
-                    if(r) {
+                    if(!r) {
+                        console.log('shoji', r);
                         this.userSV.getUserInfoByToken().subscribe(rr => {
                             this.inModify = false;
-                            // this.successTip(this.dialog, {time: 200000000}).subscribe(_ => {
                             this.successTip(this.dialog).subscribe(_ => {
                                 this.routerSV.back();
                             });
                         });
-                    }
+                    } else this.presentToast(Lang.Lang_72);
                 },
                 null,
                 () => this.inModify = false

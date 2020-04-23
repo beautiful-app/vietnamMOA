@@ -9,6 +9,7 @@ import {TWBase} from '../shared/TWBase.ui';
 import {delay} from 'rxjs/operators';
 import {Lang} from '../shared/const/language.const';
 import {Subscriber} from 'rxjs';
+import {not} from 'rxjs/internal-compatibility';
 
 
 @Component({
@@ -74,17 +75,25 @@ export class SalaryComponent extends TWBase implements OnDestroy {
         this.loadingShow();
         this.salarySV.getData(year, month).pipe(delay(2000)).subscribe(
             r => {
-                if(!r) {
-                    this.presentToast(Lang.Lang_711);
+                let notData = false;
+                if(!r) notData = true;     // 当月没有数据
+                else {
+                    if(r.hasError) notData = true;
+                    else {
+                        PlanA.date = this.salary.date;
+                        this.salary = PlanA;
+                        this.salarySV.languageProcessing(this.salary).subscribe();
+                        this.salarySV.salaryDataProcessing(this.salary, r);
+                    }
+                }
+                
+                if(notData) {
+                    if(!r.hasError) this.presentToast(Lang.Lang_711);
                     this.salarySV.reinitSalaryData().subscribe(_ => {
                         PlanB.date = this.salary.date;
                         this.salary = PlanB;
                     });
-                } else {
-                    PlanA.date = this.salary.date;
-                    this.salary = PlanA;
-                    this.salarySV.languageProcessing(this.salary).subscribe();
-                    this.salarySV.salaryDataProcessing(this.salary, r);
+                    
                 }
             },
             null,

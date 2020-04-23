@@ -22,7 +22,6 @@ export class InputKeyupStopDirective {
             this.element.nativeElement, 'keyup', (event) => {
                 event.stopPropagation();
                 event.preventDefault();
-                console.log('监听到了:', event);
                 // this.stopPropEvent.emit(event);
             });
     }

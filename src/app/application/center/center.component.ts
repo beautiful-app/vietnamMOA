@@ -7,6 +7,7 @@ import {TWBase} from '../../shared/TWBase.ui';
 import {PhoneConfirmDialog} from '../../user/reset-password/phone-confirm-dialog';
 import {MatDialog} from '@angular/material';
 import {TwSuccessComponent} from '../../shared/component/tw-success/tw-success.component';
+import {ROUTE} from '../../shared/const/route.enum';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class CenterComponent extends TWBase implements OnInit {
     avatar: string;
     newMark: boolean = false;
     isLogout: boolean = false;
+    route = ROUTE;
     
     constructor(
         private userSV: UserService,
@@ -51,5 +53,9 @@ export class CenterComponent extends TWBase implements OnInit {
                 this.isLogout = false;
             }, 1000);
         }
+    }
+    
+    navigation(route) {
+        this.routerSV.to1(route);
     }
 }

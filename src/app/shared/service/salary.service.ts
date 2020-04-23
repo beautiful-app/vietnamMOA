@@ -21,7 +21,8 @@ export class SalaryService extends Httpbase {
     getData(year: string, month: string): Observable<any> {
         return new Observable<any>(o => {
             this.get(URL.get_salary_info, year, month).subscribe(r => {
-                RETURN.nextData(o, r);
+                // RETURN.nextData(o, r);
+                RETURN.nextDataAndError(o, r);
             });
         });
     }

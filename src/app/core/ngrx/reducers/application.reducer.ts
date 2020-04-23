@@ -1,7 +1,7 @@
 import {createReducer, on} from '@ngrx/store';
 import {downloadApk, newVersion} from '../actions/application.actions';
 
-const initialState = -1;
+const initialState = -999;
 
 const initialNewVersion = false;
 

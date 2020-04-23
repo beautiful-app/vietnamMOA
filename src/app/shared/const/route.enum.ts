@@ -6,6 +6,8 @@ export enum ROUTE {
     user_details = 'user/details',
     
     login = '/user/login',
-    reset_password = '/user/reset-password'
+    reset_password = '/user/reset-password',
+    about = '/application/about',
+    update_password = '/user/update-password'
     
 }

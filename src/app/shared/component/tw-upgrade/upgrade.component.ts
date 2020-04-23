@@ -35,9 +35,10 @@ export class UpgradeComponent extends TWBase {
     ngOnInit() {
         this.deviceSV.dialogMode(this.dialogRef);
         this.store.pipe(select('downloadApk')).subscribe(r => {
+            console.log('jieshoudao :', r);
             let rate = Number(r);
-            if(this.downloading && rate <= -1) this.close();
-            if(rate > 0) {
+            if(this.downloading && rate < 0) this.close();
+            if(rate >= 0) {
                 this.rate = rate;
                 this.downloading = true;
                 if(this.rate + 5 > this.bufferValue) this.bufferValue = this.rate + Math.ceil(Math.random() * 25);
@@ -53,10 +54,9 @@ export class UpgradeComponent extends TWBase {
     
     update() {
         this.downloading = true;
-        // let url = 'https://dz-pic-test.oss-cn-shanghai.aliyuncs.com/abc1231231.apk';
-        // let url1 = 'https://appdl-drcn.dbankcdn.com/dl/appdl/application/apk/53/53df72eda3f44774b7e26ab5b4d56be1/com.asyey.sport.2002281121.apk';
-        let url = this.data.downloadUrl;
-        let appPath = 'android.apk';
-        this.fileSV.downloadFile(url, appPath);
+        if(this.deviceSV.isIos() || !this.deviceSV.isCordova()) {
+            this.deviceSV.openUrlInNaviteBrowser(this.data.downloadUrl);
+            this.store.dispatch(downloadApk({rate: -new Date()}));
+        } else this.fileSV.downloadFile(this.data.downloadUrl, 'android.apk');
     }
 }

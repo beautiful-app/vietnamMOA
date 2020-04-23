@@ -84,7 +84,12 @@ export class UserService extends Httpbase {
                 value: phoneNum
             };
             this.postJson(URL.change_phone_number, param).subscribe(r => {
-                RETURN.next(o, r);
+                // 手机号修改接口返回的数据不统一，这里做特殊处理
+                let data = JSON.parse(r.data);
+                console.log(data);
+                if(data && RETURN.isSucceed(data)) o.next();
+                else o.next(data.msg);
+                o.complete();
             });
         });
     }

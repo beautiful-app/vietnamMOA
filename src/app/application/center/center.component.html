@@ -10,7 +10,7 @@
         <mat-icon class="arrow-color" svgIcon="arrow-right"></mat-icon>
     </div>
     <ion-list>
-        <ion-item routerLink="/application/about">
+        <ion-item (click)="navigation(route.about)">
             <ion-avatar slot="start">
                 <mat-icon class="icon-about" svgIcon="about"></mat-icon>
             </ion-avatar>
@@ -20,7 +20,7 @@
                 </h2>
             </ion-label>
         </ion-item>
-        <ion-item routerLink="/user/update-password">
+        <ion-item (click)="navigation(route.update_password)">
             <ion-avatar slot="start">
                 <mat-icon class="icon-update-password" svgIcon="update-password"></mat-icon>
             </ion-avatar>
