@@ -1,5 +1,8 @@
 import {userInfoUpddate, userLogOut} from '../../core/ngrx/actions/user.actions';
 
+/**
+ * @Description: 用户对象实体类
+ */
 export class USER {
     private _id: string = '';
     private _token: string = '';
@@ -41,6 +44,7 @@ export class USER {
             store.dispatch(userInfoUpddate());
             store.dispatch(userLogOut({hasLogout: false}));
         }
+        
         return this._instance;
     }
     

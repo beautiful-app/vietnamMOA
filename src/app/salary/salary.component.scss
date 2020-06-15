@@ -47,14 +47,16 @@
 
   .salary-panel {
     margin-top: 5px;
+
   }
 }
 
 .mat-expansion-panel {
   margin: 5px;
+  background-color: #e7e6df;
 }
 
-.mat-expansion-panel-header-description {
+.mat-expansion-panel-header-description  {
   flex-grow: 0;
   margin-right: 9px;
 }

@@ -16,6 +16,9 @@ const newVersionReducer = createReducer(initialNewVersion,
     ),
 );
 
+/**
+ * @Description: 苹果系统编译环境不支持以上匿名函数的写法，所以换成一下形式进行兼容
+ */
 export function _downloadApkReducer(state, action) {
     return downloadApkReducer(state, action);
 }

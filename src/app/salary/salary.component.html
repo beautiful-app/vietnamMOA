@@ -10,23 +10,53 @@
         </div>
     </div>
     <mat-accordion class="salary-panel" [displayMode]="'flat'">
-        <mat-expansion-panel matRipple
-                             *ngFor="let income of salary.incomes"
-                             [hideToggle]="!(income.items.length > 0)"
-                             [disabled]="income.items.length <= 0"
+        <mat-expansion-panel
+                *ngFor="let itemA of salary.incomes"
+                [hideToggle]="!(itemA.items.length > 0)"
+                [disabled]="itemA.items.length <= 0"
         >
             <mat-expansion-panel-header>
-                <mat-panel-title>{{income.name}}</mat-panel-title>
-                <mat-panel-description>{{salary.currencySymbol + income.income}}</mat-panel-description>
+                <mat-panel-title>{{itemA.name}}</mat-panel-title>
+                <mat-panel-description>{{salary.currencySymbol + itemA.income}}</mat-panel-description>
             </mat-expansion-panel-header>
             
-            <div slot="details" class="item-details"
-                 *ngFor="let item of income.items"
-            >
-                <span>{{item.name}}</span>
-                <span class="fill-remaining-space"></span>
-                <span class="text-secondary-color">{{salary.currencySymbol + item.income}}</span>
+            
+            <div *ngFor="let itemB of itemA">
+                
+                <div *ngIf="!itemB.items">
+                    <div slot="details" class="item-details" *ngFor="let item of itemA.items">
+                        <span>{{item.name}}</span>
+                        <span class="fill-remaining-space"></span>
+                        <span class="text-secondary-color">{{salary.currencySymbol + item.income}}</span>
+                    </div>
+                </div>
+    
+                <mat-accordion (click)="stop($event)" *ngIf="itemB.items">
+                    <mat-expansion-panel
+                            *ngFor="let itemC of itemB.items"
+                            [hideToggle]="!(itemC.items.length > 0)"
+                            [disabled]="itemC.items.length <= 0"
+                            (click)="stop($event)"
+                    >
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>{{itemB.name}}</mat-panel-title>
+                            <mat-panel-description>{{salary.currencySymbol + itemC.income}}</mat-panel-description>
+                        </mat-expansion-panel-header>
+            
+                        <div slot="details" class="item-details" *ngFor="let item of itemC.items">
+                            <span>{{item.name}}</span>
+                            <span class="fill-remaining-space"></span>
+                            <span class="text-secondary-color">{{salary.currencySymbol + item.income}}</span>
+                        </div>
+        
+                    </mat-expansion-panel>
+                </mat-accordion>
+                
             </div>
+            
+            
+           
+            
         </mat-expansion-panel>
     </mat-accordion>
 </ion-content>

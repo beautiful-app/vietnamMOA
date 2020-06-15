@@ -1,12 +1,8 @@
 <ion-header mode="md">
-    <!--<ion-header mode="ios">-->
     <ion-toolbar color="secondary">
         <div (click)="back()" style="display: flex;">
             <ion-buttons slot="start" *ngIf="backButton">
-                <!--            <ion-button class="back_button">-->
                 <mat-icon mat-ripple class="back-button" svgIcon="back_arrow"></mat-icon>
-                <!--                <ion-back-button defaultHref="/"></ion-back-button>-->
-                <!--            </ion-button>-->
             </ion-buttons>
             <ion-title>{{title}}</ion-title>
         </div>

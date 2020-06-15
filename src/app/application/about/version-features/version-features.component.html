@@ -1,7 +1,5 @@
 <tw-header title="{{'Lang_51' | translate}}"></tw-header>
-
 <ion-content class="tw-background-color">
-    
     <div *ngIf="featuresList.length > 0">
         <div class="list-box" mat-ripple [routerLink]="['details',item.id]"
              *ngFor="let item of featuresList">
@@ -79,8 +77,6 @@
             </ion-item>
         </ion-list>
     </div>
-
-
 </ion-content>
 
 

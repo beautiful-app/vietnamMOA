@@ -6,7 +6,6 @@ import {PhoneConfirmDialog} from './phone-confirm-dialog';
 import {TWBase} from '../../shared/TWBase.ui';
 import {RETURN} from '../../shared/utils/return-verify.util';
 import {RouterService} from '../../shared/service/router.service';
-import {WHERE} from '../../shared/entity/where.enum';
 import {TwoPasswordValidator, TwoPasswordMatchValidator, VALIDATORS} from '../../shared/utils/validators/validators.collection';
 import {Lang} from '../../shared/const/language.const';
 import {delay} from 'rxjs/operators';

@@ -1,10 +1,11 @@
-// 本应用所有导出的单例
-// user特殊，本应用使用在类内部实例化的方式实现
 import {app} from '../../environments/app.config';
 
+
+// 系统配置常量对象
 export const APP = new app();
 
+// 全局常量对象
 export const GCONST = {
-    Loading: []
+	Loading: []     // 全局loading数组，统一管理控制loading
 };
 

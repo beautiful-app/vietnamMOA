@@ -5,25 +5,26 @@ const initialState = 0;
 const hasLogout = false;
 
 const userReducer = createReducer(initialState,
-    on(userInfoUpddate, (state, user) => {
-        console.log('userReducer:', state);
-        return state + 1;
-    }),
+	on(userInfoUpddate, (state, user) => {
+		return state + 1;
+	}),
 );
 
 const userLogoutReducer = createReducer(hasLogout,
-    on(userLogOut, (state, hasLogout) => {
-        console.log('调用了userLogout', hasLogout);
-        return hasLogout.hasLogout;
-    }),
+	on(userLogOut, (state, hasLogout) => {
+		return hasLogout.hasLogout;
+	}),
 );
 
+/**
+ * @Description: 苹果系统编译环境不支持以上匿名函数的写法，所以换成一下形式进行兼容
+ */
 export function _userReducer(state, action) {
-    return userReducer(state, action);
+	return userReducer(state, action);
 }
 
 export function _userLogoutReducer(state, action) {
-    return userLogoutReducer(state, action);
+	return userLogoutReducer(state, action);
 }
 
 

@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 
 import {VersionDetailRoutingModule} from './version-detail-routing.module';
 import {VersionDetailComponent} from './version-detail.component';
-import {IonicModule} from '@ionic/angular';
 import {SharedModule} from '../../../../shared/shared.module';
 
 
