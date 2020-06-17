@@ -1,16 +1,24 @@
+$mainColor: #414141;
+$seconderyColor: #a4a4a4;
+
 .content {
   --padding-top: 20px;
 
+  .item-details {
+    display: flex;
+  }
+
   mat-accordion {
+
     mat-expansion-panel {
       background-color: #fdfdfdf0;
 
       mat-panel-title {
-        color: #414141;
+        color: $mainColor;
       }
 
       mat-panel-description {
-        color: #a4a4a4;
+        color: $seconderyColor;
       }
     }
   }
@@ -56,9 +64,39 @@
   background-color: #e7e6df;
 }
 
-.mat-expansion-panel-header-description  {
+.income {
   flex-grow: 0;
   margin-right: 9px;
+  color: $seconderyColor;
+}
+
+.income-inner {
+  margin-right: 9px;
+  color: $seconderyColor;
+}
+
+.f-right {
+  margin-left: auto;
+  color: $seconderyColor;
+}
+
+.details-income {
+  flex: 1;
+  text-align: right;
+  margin-right: 58px;
+  color: $seconderyColor;
+}
+
+.details2 {
+  flex: 1;
+  text-align: right;
+  margin-right: 30px;
+
+}
+
+.mat-expansion-panel-header-description {
+  flex-grow: 0;
+  margin-right: 39px;
 }
 
 .fill-remaining-space {
@@ -67,12 +105,27 @@
   flex: 1 1 auto;
 }
 
-.item-details {
-  display: flex;
+
+.inner-expanstion {
+  $padding: 10px;
+
+  mat-expansion-panel {
+    margin: 5px -10px;
+    background-color: rgba(252, 252, 252, 0.06) !important;
+  }
+
+  mat-expansion-panel-header {
+    padding: 0 $padding;
+  }
+
+  ::ng-deep .mat-expansion-panel-body {
+    padding: 0 $padding 10px;
+  }
+
+
 }
 
-
-::ng-deep .specific-class > .mat-expansion-indicator::after {
-  color: red !important;
+::ng-deep .mat-expansion-indicator::after {
+  color: rgba(88, 88, 88, 0.6) !important;
 }
 

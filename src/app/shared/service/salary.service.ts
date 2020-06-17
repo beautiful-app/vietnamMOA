@@ -80,6 +80,10 @@ export class SalaryService extends Httpbase {
                     rrr.name = nameArray[rrr.name];
                 });
             });
+            
+            if (r.itemsElse) r.itemsElse.forEach(rr => {
+                rr.name = nameArray[rr.name];
+            })
         });
     }
     
@@ -98,6 +102,9 @@ export class SalaryService extends Httpbase {
                     nameArray.push(rrr.name);
                 });
             });
+            if (r.itemsElse) r.itemsElse.forEach(rr => {
+                nameArray.push(rr.name);
+            })
         });
         return nameArray;
     }

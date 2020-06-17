@@ -1,6 +1,6 @@
 import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {datePicker, DatePickerOptions} from '../shared/entity/date-picker-options.vo';
-import {PlanA, PlanB, Salary} from '../shared/entity/salary.vo';
+import {PlanA, PlanAA, PlanB, Salary} from '../shared/entity/salary.vo';
 import {DateUtil} from '../shared/utils/date.util';
 import {SalaryService} from '../shared/service/salary.service';
 import {select, Store} from '@ngrx/store';
@@ -33,7 +33,7 @@ export class SalaryComponent extends TWBase implements OnDestroy {
             // 展示缓存数据
             if (r) this.salary = r;
             // 使用基础模板数据
-            else this.salary = PlanA;
+            else this.salary = PlanAA;
             this.salarySV.languageProcessing(this.salary).subscribe(r => {
                 console.log(this.salary);
                 this.subscribers[0] = this.store.pipe(select('user'), delay(2000)).subscribe(_ => {
