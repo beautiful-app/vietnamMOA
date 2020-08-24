@@ -1,17 +1,20 @@
 $mainColor: #414141;
-$seconderyColor: #a4a4a4;
+$seconderyColor: #8e8e8e;
 
 .content {
   --padding-top: 20px;
 
   .item-details {
     display: flex;
+    opacity: 0.4;
+    background-color: #afafaf0d;
+    padding: 4px 15px 3px;
   }
 
   mat-accordion {
 
     mat-expansion-panel {
-      background-color: #fdfdfdf0;
+      //background-color: #fdfdfdf0;
 
       mat-panel-title {
         color: $mainColor;
@@ -56,18 +59,36 @@ $seconderyColor: #a4a4a4;
   .salary-panel {
     margin-top: 5px;
 
+    mat-expansion-panel {
+      background: transparent;
+    }
+
+    .mat-expansion-panel-content {
+      background-color: white;
+    }
+
+    mat-expansion-panel-header {
+      border-bottom: 1px solid #f5f5f5;
+    }
   }
 }
 
+
+.mat-expansion-panel-body {
+  background-color: red !important;
+}
+
+
 .mat-expansion-panel {
   margin: 5px;
-  background-color: #e7e6df;
+  background-color: white;
 }
 
 .income {
   flex-grow: 0;
   margin-right: 9px;
   color: $seconderyColor;
+  margin-top: 3px;
 }
 
 .income-inner {
@@ -77,21 +98,40 @@ $seconderyColor: #a4a4a4;
 
 .f-right {
   margin-left: auto;
-  color: $seconderyColor;
+  //color: $seconderyColor;
+}
+
+// 统计工时类型的偏移量
+$base_amount: 45px;
+
+.amount_margin_right {
+  margin-right: $base_amount;
 }
 
 .details-income {
   flex: 1;
   text-align: right;
-  margin-right: 58px;
-  color: $seconderyColor;
+  margin-right: $base_amount + 2;
+  //color: $seconderyColor;
 }
 
 .details2 {
   flex: 1;
   text-align: right;
-  margin-right: 30px;
+  margin-right: $base_amount;
+}
 
+.amount-type {
+  font-size: 13px;
+  margin-top: 5px;
+  color: #a19f9f !important;
+}
+
+.amount-type-details {
+  font-size: 13px;
+  margin-top: 0px;
+  margin-right: $base_amount - 2 !important;
+  //color: #a19f9f !important;
 }
 
 .mat-expansion-panel-header-description {
@@ -105,27 +145,55 @@ $seconderyColor: #a4a4a4;
   flex: 1 1 auto;
 }
 
-
 .inner-expanstion {
   $padding: 10px;
 
   mat-expansion-panel {
-    margin: 5px -10px;
+    margin: 0px -10px;
     background-color: rgba(252, 252, 252, 0.06) !important;
   }
 
   mat-expansion-panel-header {
-    padding: 0 $padding;
+    padding: 0 24px;
+    opacity: 0.8;
   }
 
   ::ng-deep .mat-expansion-panel-body {
-    padding: 0 $padding 10px;
+    //padding: 0 $padding 10px;
   }
-
-
 }
+
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 10px 0 !important;
+}
+
+//.inner-expanstion {
+//  ::ng-deep .mat-expansion-panel-body {
+//    padding: 0 10px 20px !important;
+//  }
+//}
 
 ::ng-deep .mat-expansion-indicator::after {
   color: rgba(88, 88, 88, 0.6) !important;
 }
 
+
+.inner-header {
+  font-size: 14px;
+}
+
+.item-details-name {
+  padding-left: 3px;
+}
+
+.inner-money {
+  font-size: 14px;
+}
+
+mat-expansion-panel-header {
+  background-color: white !important;
+}
+
+mat-expansion-panel-header:hover {
+  background-color: white !important;
+}

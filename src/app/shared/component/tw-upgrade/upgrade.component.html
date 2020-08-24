@@ -1,8 +1,8 @@
 <div *ngIf="canUpgrade">
     <div *ngIf="!downloading">
         <p class="title" translate>Lang_75_1</p>
-        <p class="" translate>Lang_75_2 <span>{{data.fileSize}}m</span></p>
-        <p class="" translate>Lang_75_3 </p>
+        <p class="" translate>Lang_75_2<span>{{data.fileSize}}m</span></p>
+        <p class="" translate>Lang_75_3</p>
     </div>
     <div class="progress-panel" *ngIf="downloading">
         <span class="download">{{rate}}%</span>

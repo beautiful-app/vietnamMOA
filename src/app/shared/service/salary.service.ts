@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Httpbase} from './httpbase';
-import {Incomes, PlanA, PlanB, Salary} from '../entity/salary.vo';
+import {Incomes, PlanAA, PlanB, Salary} from '../entity/salary.vo';
 import {Observable} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 import {HttpClient} from '@angular/common/http';
@@ -59,7 +59,7 @@ export class SalaryService extends Httpbase {
                 this.translate.get(nameArray).subscribe(r => {
                     this.setName(salary.incomes, r);
                     salary.hasTranslated = true;
-                    o.next();
+                    RETURN.nextAndComplete(o);
                 });
             }
         });
@@ -110,7 +110,7 @@ export class SalaryService extends Httpbase {
     }
     
     /**
-     * @Description: 根据后端返回的数据进行整理操作，使之符合两层结构
+     * @Description: 根据后端返回的数据进行整理操作
      * @param:  {salary} 薪资对象
      * @param: {data} 服务端返回的数据对象
      * @return: void
@@ -144,8 +144,8 @@ export class SalaryService extends Httpbase {
      */
     reinitPlanA(): Observable<Salary> {
         return new Observable(o => {
-            if (PlanA.hasTranslated) o.next();
-            this.languageProcessing(PlanA).subscribe(r => {
+            if (PlanAA.hasTranslated) o.next();
+            this.languageProcessing(PlanAA).subscribe(r => {
                 o.next();
             });
         });

@@ -12,6 +12,11 @@ export class RETURN {
 		return res && res.code == this.succeedCode;
 	}
 	
+	static nextAndComplete(observable: any) {
+		observable.next();
+		observable.complete();
+	}
+	
 	static nextTrueOrFalse(observable: any, res: boolean) {
 		if (res) observable.next(true);
 		else observable.next(false);
@@ -40,6 +45,12 @@ export class RETURN {
 	static nextMsg(observable: any, r: result) {
 		if (this.isSucceed(r)) observable.next();
 		else if (!r.hasError && r.msg) observable.next(r.msg);
+		observable.complete();
+	}
+	
+	static nextCodeAndMsg(observable: any, r: result) {
+		if (this.isSucceed(r)) observable.next();
+		else if (!r.hasError && r.msg) observable.next(r);
 		observable.complete();
 	}
 	

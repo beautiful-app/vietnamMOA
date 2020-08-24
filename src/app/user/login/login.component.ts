@@ -41,7 +41,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 	
 	ngOnInit() {
 		this.storage.get(STORAGE_KEY.login_info).then(r => {
-			if (r) this.form.patchValue(r);
+			// 判断是否超过90天：删除账号密码并重新登录
+			if (r && new Date().getTime() < (r.ms + 1000 * 60 * 60 * 24 * 90)) this.form.patchValue(r);
+			else this.storage.remove(STORAGE_KEY.login_info);
 		});
 	}
 	
@@ -54,9 +56,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 		// 禁用登录按钮
 		this.inLogging = true;
 		// 如果用户记住密码，那么保存信息,否则忘记密码
-		if (this.form.getRawValue().remember) this.storage.set(STORAGE_KEY.login_info, this.form.getRawValue());
+		if (this.form.getRawValue().remember) this.storage.set(STORAGE_KEY.login_info, {...this.form.getRawValue(),ms:new Date().getTime()});
 		else this.storage.remove(STORAGE_KEY.login_info);
-		
 		this.userSV.doLogin(this.form.getRawValue()).pipe(delay(2000)).subscribe(r => {
 			this.inLogging = false;
 			if (RETURN.isTrue(r)) {

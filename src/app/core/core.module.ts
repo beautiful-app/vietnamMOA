@@ -82,15 +82,12 @@ export class CoreModule extends TWBase {
 			// 通过token查询用户信息
 			if (r) this.userSV.getUserInfoByToken().subscribe();
 			else this.routerSV.toLogin();
-			
-			
 		});
 		
 		// 用户信息有更新的业务:更新缓存
 		this.store.pipe(select('user')).subscribe(_ => {
 			// 缓存用户信息
 			this.storageSV.storageUserInfo().subscribe();
-			
 			// 上报客户端信息，有新的更新信息都要上报
 			if (USER.get().token) this.appSV.reportClientInfo();
 			// this.appSV.reportClientInfo();
@@ -105,14 +102,10 @@ export class CoreModule extends TWBase {
 		// 检查版本有没有更新,并做强制升级处理
 		this.appSV.checkNewVersionOnLoad();
 		
-		
 		// 本地设备平台可用后执行的操作
 		this.platform.ready().then(_ => {
-			
 			// 显示软键盘的工具栏，让用户可以进行按钮关闭等操作
 			this.keyboard.hideFormAccessoryBar(false);
-			
-			
 		});
 	}
 }

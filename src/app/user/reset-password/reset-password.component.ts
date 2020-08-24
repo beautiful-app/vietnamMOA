@@ -6,7 +6,11 @@ import {PhoneConfirmDialog} from './phone-confirm-dialog';
 import {TWBase} from '../../shared/TWBase.ui';
 import {RETURN} from '../../shared/utils/return-verify.util';
 import {RouterService} from '../../shared/service/router.service';
-import {TwoPasswordValidator, TwoPasswordMatchValidator, VALIDATORS} from '../../shared/utils/validators/validators.collection';
+import {
+    TwoPasswordValidator,
+    TwoPasswordMatchValidator,
+    VALIDATORS
+} from '../../shared/utils/validators/validators.collection';
 import {Lang} from '../../shared/const/language.const';
 import {delay} from 'rxjs/operators';
 import {DeviceService} from '../../shared/service/device.service';
@@ -55,16 +59,16 @@ export class ResetPasswordComponent extends TWBase {
     getCode() {
         this.inLoad = true;
         this.userSV.confirmPhoneForResetPassword(this.form.getRawValue().account).subscribe(r => {
-            if(!r) this.inLoad = false;
+            if (!r) this.inLoad = false;
             this.openDialog(this.dialog, this.deviceSV, PhoneConfirmDialog, r).subscribe(rr => {
                 // 请求接口获取验证码
-                if(rr) this.userSV.getCodeForRestPassword(r.id).subscribe(rrr => {
-                    if(!rrr) {
+                if (rr) this.userSV.getCodeForRestPassword(r.id).subscribe(rrr => {
+                    if (!rrr) {
                         this.inLoad = false;
                         this.countDown = 60;
                         let interval = setInterval(_ => {
                             --this.countDown;
-                            if(this.countDown == 0) clearInterval(interval);
+                            if (this.countDown == 0) clearInterval(interval);
                         }, 1000);
                     } else this.presentToast(rrr);
                     this.inLoad = false;
@@ -75,17 +79,19 @@ export class ResetPasswordComponent extends TWBase {
         });
     }
     
-    
     commitChanges() {
-        if(!this.updating) {
+        if (!this.updating) {
             this.updating = true;
             this.userSV.resetPassword(this.form.getRawValue()).pipe(delay(2000)).subscribe(r => {
-                if(RETURN.isSucceed(r)) {
+                if (RETURN.isSucceed(r)) {
                     this.form.reset();
                     this.presentToast(Lang.Lang_73);
-                    // this.routerSV.to(WHERE.login);
                     this.routerSV.toLogin();
-                } else if(r.msg) this.resultMsg = r.msg;
+                } else if (r.msg) {
+                    // 验证码不正确
+                    if (r.code == "100106") this.resultMsg = Lang.Lang_85;
+                    else this.resultMsg = r.msg;
+                }
                 this.updating = false;
             });
         }
@@ -93,7 +99,5 @@ export class ResetPasswordComponent extends TWBase {
     
     keypress($event: KeyboardEvent) {
         $event.stopPropagation();
-        
-        
     }
 }

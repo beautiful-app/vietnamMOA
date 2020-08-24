@@ -103,5 +103,4 @@ export abstract class TWBase {
 		if (this._loading) await this._loading.dismiss();
 		// todo 全局控制loading
 	}
-	
 }

@@ -14,8 +14,9 @@ export class LanguageService {
     constructor(
         private translate: TranslateService,
     ) {
-        if (environment.production) this._sysLanguage = this.translate.getBrowserLang().substr(0, 2);
-        else this._sysLanguage = LanguageType.zh;
+        // if (environment.production) this._sysLanguage = this.translate.getBrowserLang().substr(0, 2);
+        this._sysLanguage = this.translate.getBrowserLang().substr(0, 2);
+        // else this._sysLanguage = LanguageType.en;
     }
     
     /**

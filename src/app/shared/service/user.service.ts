@@ -89,7 +89,7 @@ export class UserService extends Httpbase {
 		let changesObj = EntityUtil.fieldReplacement(queryObj, [['oldPassword', 'oldPwd'], ['confirmPassword', 'newPwd']]);
 		return new Observable<result>(o => {
 			this.postJson(URL.change_password, changesObj).subscribe(r => {
-				RETURN.nextMsg(o, r);
+				RETURN.nextCodeAndMsg(o, r);
 			});
 		});
 	}
