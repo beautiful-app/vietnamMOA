@@ -18,10 +18,9 @@ enum exitMark {
     providedIn: 'root'
 })
 export class DeviceService extends TWBase {
-    number: number = 5;
-    _dialogMode: any = false;
-    _exitApp = 0;
-    exitTimeOut: any;
+    _dialogMode: any = false;   // 是否打开了dialog
+    _exitApp = 0;               // 退出app计数
+    exitTimeOut: any;           // 返回退出app时间
     
     constructor(private platform: Platform,
                 private file: File,
@@ -33,7 +32,7 @@ export class DeviceService extends TWBase {
     }
     
     /**
-     * @Description: 物理返回键监听
+     * 物理返回键监听
      */
     androidBackButtonRegister() {
         this.platform.backButton.subscribeWithPriority(29, () => {
@@ -42,7 +41,7 @@ export class DeviceService extends TWBase {
                     // 指定时间内用户仅手动触发一次物理返回
                     if (this._exitApp < exitMark.finish) {
                         if (this.exitTimeOut) clearTimeout(this.exitTimeOut);
-                        this.presentToast(Lang.Lang_01);
+                        if (this._exitApp == exitMark.init) this.presentToast(Lang.Lang_01);
                         this._exitApp += exitMark.step1;
                     } else navigator['app'].exitApp();
                     this.exitTimeOut = setTimeout(_ => {
@@ -57,14 +56,14 @@ export class DeviceService extends TWBase {
     }
     
     /**
-     * @Description: 在别处对本服务实例中的dialog对象进行赋值引用的函数
+     * 在别处对本服务实例中的dialog对象进行赋值引用的函数
      */
     dialogMode(dialogRef: any) {
         this._dialogMode = dialogRef;
     }
     
     /**
-     * @Description: 返回本软件在设备中的存储路径
+     *  返回本软件在设备中的存储路径
      */
     deviceFilePath(): string {
         let path = '';
@@ -77,7 +76,7 @@ export class DeviceService extends TWBase {
     }
     
     /**
-     * @Description: 通过ios内置浏览器打开网址
+     *  通过ios内置浏览器打开网址
      * @param:  {url} 要打开的网址
      * @return:  void
      */
@@ -93,14 +92,14 @@ export class DeviceService extends TWBase {
     }
     
     /**
-     * @name 是否支持cordova
+     *  是否支持cordova
      */
     isCordova(): boolean {
         return this.platform.is('cordova');
     }
     
     /**
-     *@name  是否ios真机环境
+     * 是否ios真机环境
      */
     isIos(): boolean {
         return this.isCordova()

@@ -1,94 +1,94 @@
 
 .about-us-public {
-  font-size: 12px;
-  color: gray;
+    font-size: 12px;
+    color: gray;
 }
 
 .about-us-p-top {
-  @extend .about-us-public;
-  margin-top: 0px;
+    @extend .about-us-public;
+    margin-top: 0px;
 }
 
 .about-us-p-bottom {
-  @extend .about-us-public;
-  margin-bottom: 5px;
+    @extend .about-us-public;
+    margin-bottom: 5px;
 }
 
 .about-us-p {
-  margin-top: 2px;
-  font-size: 16px;
-  color: #7d828d;
+    margin-top: 2px;
+    font-size: 16px;
+    color: #7d828d;
 }
 
 .about-us-h1 {
-  padding-top: 10%;
-  color: #488aff;
-  font-size: 50px;
-  font-weight: bold;
+    padding-top: 10%;
+    color: #488aff;
+    font-size: 50px;
+    font-weight: bold;
 }
 
 ion-list {
-  margin-top: 15%;
+    margin-top: 15%;
 
-  button {
-    margin-bottom: 2px;
-    border-radius: 5px;
-  }
+    button {
+        margin-bottom: 2px;
+        border-radius: 5px;
+    }
 }
 
 .img-div {
-  margin-top: 70px;
-  text-align: center;
+    margin-top: 70px;
+    text-align: center;
 }
 
 .img-content {
-  border-radius: 8px;
+    border-radius: 8px;
 }
 
 .version-new {
-  float: left;
-  width: 36px;
-  background: red;
-  text-align: center;
-  color: #fff;
-  border-radius: 25px;
-  font-size: 14px;
-  margin-top: 3px;
+    float: left;
+    width: 36px;
+    background: red;
+    text-align: center;
+    color: #fff;
+    border-radius: 25px;
+    font-size: 14px;
+    margin-top: 3px;
 }
 
 .custom-dialog-container .mat-dialog-container {
-  padding: 10px;
+    padding: 10px;
 }
 
 .cut-off {
-  border-top-color: #e5e5e5;
+    border-top-color: #e5e5e5;
 }
 
 .new-tip {
-  color: red;
+    color: red;
 
 }
 
 .mat-list-base .mat-list-item {
-  font-size: 15px;
+    font-size: 15px;
 }
 
 
 mat-list {
-  div {
-    background-color: #fcfcfc;
-    outline-style: unset;
+    div {
+        background-color: #fcfcfc;
+        outline-style: unset;
 
-    mat-icon {
+        mat-icon {
 
+        }
     }
-  }
 }
 
 .arrow-color {
-  color: #d8d8d8;
+    color: #d8d8d8;
 }
 
 .setting-list {
-  margin-top: 40px;
+    margin-top: 40px;
 }

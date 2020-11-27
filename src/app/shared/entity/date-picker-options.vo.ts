@@ -1,7 +1,7 @@
 import {Lang} from '../const/language.const';
 
 /**
- * @Description: 日期选择按钮配置实体
+ * 日期选择按钮配置实体
  */
 export class datePicker {
 	static options(page: any): DatePickerOptions {

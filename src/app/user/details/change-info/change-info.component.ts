@@ -17,6 +17,7 @@ import {Lang} from '../../../shared/const/language.const';
 export class ChangeInfoComponent extends TWBase implements OnInit {
 	form: FormGroup;
 	inModify: boolean = false;
+	flag: any;
 	
 	constructor(
 		private userSV: UserService,
@@ -35,7 +36,7 @@ export class ChangeInfoComponent extends TWBase implements OnInit {
 	}
 	
 	/**
-	 * @Description: 更改用户手机号
+	 *  更改用户手机号
 	 */
 	changePhoneNumber() {
 		if (this.form.valid && !this.inModify) {

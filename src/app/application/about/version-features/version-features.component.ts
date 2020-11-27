@@ -36,7 +36,7 @@ export class VersionFeaturesComponent extends TWBase implements OnInit {
 	}
 	
 	/**
-	 * @Description: 获取app的更新信息列表
+	 * 获取app的更新信息列表
 	 * @param:  {page} 获取分页中的第几页数据
 	 */
 	getData(page: number) {
@@ -47,14 +47,13 @@ export class VersionFeaturesComponent extends TWBase implements OnInit {
 				if (this.infiniteScroll) this.infiniteScroll.complete();
 				if (dataList.length < APP.versonFeaturesPZ) {   // 如果获取的数据长度小于每页长度(最后一页)
 					if (this.infiniteScroll) this.infiniteScroll.disabled = true;
-					// event.target.display = 'none';
 					this.noData = true;
 				}
 			}
 		});
 	}
 	
-	loadData($event) {
+	loadData() {
 		this.getData(++this.page);
 	}
 }

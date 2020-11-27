@@ -18,61 +18,51 @@
             (afterCollapse)="closeAllChilPanel()"
             (afterExpand)="afterExpand(pannel)"
         >
-            <mat-expansion-panel-header [expandedHeight]="'48px'" #header>
-                <mat-panel-title>{{itemA.name}}</mat-panel-title>
-                <mat-panel-description class="amount-type" *ngIf="itemA.amountType">{{itemA.amount}}
-                    68{{itemA.amountType}}</mat-panel-description>
+            <mat-expansion-panel-header [expandedHeight]="'48px'">
+                <mat-panel-title>{{itemA.identify}}</mat-panel-title>
+                <mat-panel-description class="amount-type margin-top-3"
+                                       *ngIf="itemA.amountType">{{itemA.amount}}{{itemA.amountType}}</mat-panel-description>
                 <div class="income">{{salary.currencySymbol + itemA.income}}</div>
             </mat-expansion-panel-header>
-            
-            <!-- 内容项，无再次展开 -->
-            <div *ngIf="!itemA.items[0]['items']">
-                <div slot="details" class="item-details" *ngFor="let itemC of itemA.items">
-                    <span>{{itemC.name}}</span>
-                    <div class="details-income amount-type-details" *ngIf="itemA.amountType">
-                        18{{itemC.amountType}}</div>
-                    <div class="f-right margin-right-17">{{salary.currencySymbol + itemC.income}}</div>
+            <div *ngIf="itemA.items.length > 0">
+                <!-- 内容项，无再次展开 -->
+                <div *ngIf="!itemA.items[0]['items']">
+                    <div slot="details" class="item-details" *ngFor="let itemC of itemA.items">
+                        <span>{{itemC.identify}}</span>
+                        <div class="details-income amount3"
+                             *ngIf="itemA.amountType">{{itemC.amount + itemC.amountType}}</div>
+                        <div class="f-right margin-right-17 details3">{{salary.currencySymbol + itemC.income}}</div>
+                    </div>
+                </div>
+                <div class="inner-expanstion" *ngIf="itemA?.items[0]['items']">
+                    <mat-accordion #accordion>
+                        <mat-expansion-panel
+                                *ngFor="let itemB of itemA.items"
+                                [hideToggle]="!(itemB.items.length > 0)"
+                                [disabled]="itemB.items.length <= 0"
+                                [expanded]="close == 1"
+								#mep="matExpansionPanel"
+                                (click)="chilPanel.add(mep)"
+                        >
+                            <mat-expansion-panel-header class="inner-header" [collapsedHeight]="expandedHeight + 'px'"
+                                                        [expandedHeight]="expandedHeight + 'px'"
+                            >
+                                <mat-panel-title>{{itemB.identify}}</mat-panel-title>
+                                <mat-panel-description class="amount-type"
+                                                       *ngIf="itemB.amountType">{{itemB.amount}}{{itemB.amountType}}</mat-panel-description>
+                                <div class="income-inner"
+                                     [style.margin-right]="itemB.items.length > 0 ? '10px' : '17px'">{{salary.currencySymbol + itemB.income}}</div>
+                            </mat-expansion-panel-header>
+                            <div slot="details" class="item-details" *ngFor="let detailsB of itemB.items">
+                                <span class="item-details-name">{{detailsB.identify}}</span>
+                                <div class="details-income amount-type amount-inner-color"
+                                     *ngIf="itemB.amountType">{{detailsB.amount}}{{detailsB.amountType}}</div>
+                                <span class="f-right inner-money margin-right-17">{{salary.currencySymbol + detailsB.income}}</span>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
                 </div>
             </div>
-            
-            <div class="inner-expanstion" *ngIf="itemA.items[0]['items']">
-                <mat-accordion #accordion>
-                    <mat-expansion-panel
-                            *ngFor="let itemB of itemA.items"
-                            [hideToggle]="!(itemB.items.length > 0)"
-                            [disabled]="itemB.items.length <= 0"
-                            [expanded]="close == 1"
-							#mep="matExpansionPanel"
-                            (click)="chilPanel.add(mep)"
-                    >
-                        <mat-expansion-panel-header class="inner-header" [collapsedHeight]="expandedHeight + 'px'"
-                                                    [expandedHeight]="expandedHeight + 'px'"
-                        >
-                            <mat-panel-title>{{itemB.name}}</mat-panel-title>
-                            <mat-panel-description class="amount-type-details" *ngIf="itemB.amountType">{{itemA.amount}}
-                                18{{itemB.amountType}}</mat-panel-description>
-                            <div class="income-inner"
-                                 [style.margin-right]="itemB.items.length > 0 ? '10px' : '17px'">{{salary.currencySymbol + itemA.income}}</div>
-                        </mat-expansion-panel-header>
-                        <div slot="details" class="item-details" *ngFor="let detailsB of itemB.items">
-                            <span class="item-details-name">{{detailsB.name}}</span>
-                            <div class="details-income details2 amount-type-details"
-                                 *ngIf="itemB.amountType">{{detailsB.amount}}
-                                18{{detailsB.amountType}}</div>
-                            <span class="f-right inner-money margin-right-17">{{salary.currencySymbol + detailsB.income}}</span>
-                        </div>
-                    </mat-expansion-panel>
-                </mat-accordion>
-            </div>
-            
-            <!--            <div *ngIf="itemA.itemsElse">-->
-            <!--                <div slot="details" class="item-details" *ngFor="let itemsElse of itemA.itemsElse">-->
-            <!--                    <span>{{itemsElse.name}}</span>-->
-            <!--                    <div class="details-income amount-type-details" *ngIf="itemA.amountType">-->
-            <!--                        21{{itemsElse.amountType}}</div>-->
-            <!--                    <span class="f-right margin-right-17">{{salary.currencySymbol + itemsElse.income}}</span>-->
-            <!--                </div>-->
-            <!--            </div>-->
         </mat-expansion-panel>
     </mat-accordion>
 </ion-content>

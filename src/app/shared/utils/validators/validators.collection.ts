@@ -3,7 +3,7 @@ import {twoValueMatch} from './password-match';
 import {APP} from '../../../core/singleton.export';
 
 /**
- * @Description: 常用表单验证器
+ * 常用表单验证器
  */
 export const VALIDATORS = {
 	case0: ['', Validators.compose([Validators.required])],
@@ -20,7 +20,7 @@ export const VALIDATORS = {
 };
 
 /**
- * @Description: 密码验证器
+ * 密码验证器
  */
 export const TwoPasswordValidator = {
 	password: VALIDATORS.case0,

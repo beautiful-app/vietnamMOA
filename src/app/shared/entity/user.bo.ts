@@ -1,26 +1,26 @@
 import {userInfoUpddate, userLogOut} from '../../core/ngrx/actions/user.actions';
 
 /**
- * @Description: 用户对象实体类
+ * 用户对象实体类
  */
 export class USER {
-    private _id: string = '';
-    private _token: string = '';
-    private _avatar: string = '';
-    private _birthday: string = '';
-    private _cellphone: string = '';
-    private _department: string = '';
-    private _deptId: string = '';
-    private _email: string = '';
-    private _gender: string = '';
-    private _jobTitle: string = '';
-    private _photo: string = '';
-    private _pinyinName: string = '';
-    private _role: string = '';
-    private _state: number = -1;
-    private _username: string = '';
-    private _workAddress: string = '';
-    private _isActive: boolean = false;           // 对象是否已经激活并且可用
+    private _id: string = '';               // 工号
+    private _token: string = '';            // token信息
+    private _avatar: string = '';           // 头像
+    private _birthday: string = '';         // 生日
+    private _cellphone: string = '';        // 电话
+    private _department: string = '';       // 部门名称
+    private _deptId: string = '';           // 部门id
+    private _email: string = '';            // 邮件
+    private _gender: string = '';           // 性别
+    private _jobTitle: string = '';         // 职称
+    private _photo: string = '';            // 头像地址
+    private _pinyinName: string = '';       // 中文名
+    private _role: string = '';             // 角色
+    private _state: number = -1;            // 状态
+    private _username: string = '';         // 用户名
+    private _workAddress: string = '';      // 工作地址
+    private _isActive: boolean = false;     // 对象是否已经激活并且可用
     
     
     // 饿汉模式实例化user对象
@@ -44,7 +44,6 @@ export class USER {
             store.dispatch(userInfoUpddate());
             store.dispatch(userLogOut({hasLogout: false}));
         }
-        
         return this._instance;
     }
     

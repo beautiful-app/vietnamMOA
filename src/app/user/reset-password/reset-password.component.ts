@@ -1,14 +1,13 @@
-import {ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {UserService} from '../../shared/service/user.service';
 import {MatDialog} from '@angular/material';
 import {PhoneConfirmDialog} from './phone-confirm-dialog';
 import {TWBase} from '../../shared/TWBase.ui';
-import {RETURN} from '../../shared/utils/return-verify.util';
 import {RouterService} from '../../shared/service/router.service';
 import {
-    TwoPasswordValidator,
     TwoPasswordMatchValidator,
+    TwoPasswordValidator,
     VALIDATORS
 } from '../../shared/utils/validators/validators.collection';
 import {Lang} from '../../shared/const/language.const';
@@ -16,6 +15,7 @@ import {delay} from 'rxjs/operators';
 import {DeviceService} from '../../shared/service/device.service';
 import {LanguageType} from '../../shared/const/language-type.enum';
 import {LanguageService} from '../../shared/service/language.service';
+import {RETURN} from "../../shared/utils/return.util";
 
 @Component({
     selector: 'app-reset-password',
@@ -23,17 +23,17 @@ import {LanguageService} from '../../shared/service/language.service';
     styleUrls: ['./reset-password.component.scss'],
 })
 export class ResetPasswordComponent extends TWBase {
-    passwordHide: boolean = true;
-    form: FormGroup;
-    inLoad: boolean = false;
-    countDown: number = 0;
-    resultMsg: string = '';
-    headShow: boolean = true;
-    langZH = LanguageType.zh;
-    sysLangType: string;
-    
+    passwordHide: boolean = true;   // 隐藏密码开关
+    form: FormGroup;                // form对象
+    inLoad: boolean = false;        // 加载中开关
+    countDown: number = 0;          // 计数
+    resultMsg: string = '';         // 请求消息
+    headShow: boolean = true;       // 显示头部开关
+    langZH = LanguageType.zh;       // 语言设置
+    sysLangType: string;            // ngrx
+    updating: boolean = false;      // 请求中开关
     @ViewChild('header', {static: false}) div3: ElementRef;
-    updating: boolean = false;
+    
     
     constructor(
         private formBuilder: FormBuilder,
@@ -56,6 +56,9 @@ export class ResetPasswordComponent extends TWBase {
         this.form = this.formBuilder.group(validatorGroup, TwoPasswordMatchValidator);
     }
     
+    /**
+     * 通过短信获取验证码
+     */
     getCode() {
         this.inLoad = true;
         this.userSV.confirmPhoneForResetPassword(this.form.getRawValue().account).subscribe(r => {
@@ -75,10 +78,12 @@ export class ResetPasswordComponent extends TWBase {
                 });
                 else this.inLoad = false;
             });
-            // this.inLoad = false;
         });
     }
     
+    /**
+     * 提交更新
+     */
     commitChanges() {
         if (!this.updating) {
             this.updating = true;
@@ -95,9 +100,5 @@ export class ResetPasswordComponent extends TWBase {
                 this.updating = false;
             });
         }
-    }
-    
-    keypress($event: KeyboardEvent) {
-        $event.stopPropagation();
     }
 }

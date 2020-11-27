@@ -52,4 +52,3 @@ import {Keyboard} from '@ionic-native/keyboard/ngx';
 })
 export class AppModule {
 }
-

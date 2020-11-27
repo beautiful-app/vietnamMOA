@@ -1,7 +1,9 @@
 import {environment} from './environment';
 
+/**
+ * 全局配置项
+ */
 export class app {
-    
     private _baseURL = environment.baseURL;
     private _succeedCode = 0;                               // 后端成功标志代码
     private _invalidationCode = 7;                          // 访问标识过期代码
@@ -12,15 +14,10 @@ export class app {
     private _authCodeLength = 4;                             // 验证码最小长度
     private _maxPhoneNum = 11;                              // 手机号最大/小多少位，
     private _minPhoneNum = 11;
-    private _appVersion = '1.3.0';                          // 当无法使用cordova插件的时候，自定义一个版本号显示和测试
+    private _appVersion = '1.0.0';                          // 当无法使用cordova插件的时候，自定义一个版本号显示和测试
     private _backButtonTime = 1500;                        	// 定义两次点击在多少秒之内判定用户退出  单位：毫秒
     private _downloadIos = 2;                               // 下载时候后端用于判断是安卓还是苹果的数据标识
     private _downloadAndroid = 1;
-    
-    
-    constructor() {
-    }
-    
     
     get downloadIos(): number {
         return this._downloadIos;

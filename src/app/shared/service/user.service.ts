@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {URL} from '../const/url.const';
-import {RETURN} from '../utils/return-verify.util';
+import {NEXT} from '../utils/next.util';
 import {USER} from '../entity/user.bo';
 import {StorageService} from './storage.service';
 import {Observable} from 'rxjs';
@@ -12,12 +12,13 @@ import {result} from '../entity/result.bo';
 import {EntityUtil} from '../utils/entity.util';
 import {RouterService} from './router.service';
 import {ROUTE} from '../const/route.enum';
+import {RETURN} from "../utils/return.util";
 
 @Injectable({
 	providedIn: 'root'
 })
 /**
- * @Description: 用户操作服务类
+ *  用户操作服务类
  */
 export class UserService extends Httpbase {
 	
@@ -30,7 +31,7 @@ export class UserService extends Httpbase {
 	}
 	
 	/**
-	 * @Description: 用户登录操作
+	 *  用户登录操作
 	 * @param:  {loginInfo} 用户名、密码等信息对象
 	 * @return:  Observable<CheckBo>
 	 */
@@ -53,7 +54,7 @@ export class UserService extends Httpbase {
 	}
 	
 	/**
-	 * @Description: 通过token获取用户信息
+	 *  通过token获取用户信息
 	 * @return:  Observable<CheckBo>
 	 */
 	getUserInfoByToken(): Observable<CheckBo> {
@@ -69,7 +70,7 @@ export class UserService extends Httpbase {
 	}
 	
 	/**
-	 * @Description: 从缓存中获取用户信息
+	 *  从缓存中获取用户信息
 	 */
 	getUserFromStorage(): Observable<CheckBo> {
 		return new Observable<any>(o => {
@@ -83,19 +84,19 @@ export class UserService extends Httpbase {
 	}
 	
 	/**
-	 * @Description: 用户修改密码
+	 *  用户修改密码
 	 */
 	changePassword(queryObj: any = {}): Observable<result> {
 		let changesObj = EntityUtil.fieldReplacement(queryObj, [['oldPassword', 'oldPwd'], ['confirmPassword', 'newPwd']]);
 		return new Observable<result>(o => {
 			this.postJson(URL.change_password, changesObj).subscribe(r => {
-				RETURN.nextCodeAndMsg(o, r);
+				NEXT.codeOrMsg(o, r);
 			});
 		});
 	}
 	
 	/**
-	 * @Description: 用户修改手机号码
+	 *  用户修改手机号码
 	 */
 	setPhoneNumber(phoneNum: string): Observable<boolean | result> {
 		return new Observable<boolean | result>(o => {
@@ -114,33 +115,33 @@ export class UserService extends Httpbase {
 	}
 	
 	/**
-	 * @Description: 找回密码时候确认手机号是否可用
+	 *  找回密码时候确认手机号是否可用
 	 * @param:  {account} 手机号
 	 * @return:  Observable<result | boolean>
 	 */
 	confirmPhoneForResetPassword(account: string): Observable<result | boolean | any> {
 		return new Observable<result | boolean>(o => {
 			this.get(URL.get_confirm_phone_for_reset_password + account).subscribe(r => {
-				RETURN.nextData(o, r);
+				NEXT.data(o, r);
 			});
 		});
 	}
 	
 	/**
-	 * @Description: 获取手机验证码
+	 *  获取手机验证码
 	 * @param: {accout} 手机号
 	 * @return:  Observable<boolean | result>
 	 */
 	getCodeForRestPassword(account: string): Observable<boolean | result | any> {
 		return new Observable<boolean | result>(o => {
 			this.get(URL.get_code_for_reset_password + account).subscribe(r => {
-				RETURN.nextMsg(o, r);
+				NEXT.message(o, r);
 			});
 		});
 	}
 	
 	/**
-	 * @Description: 用户重置密码
+	 *  用户重置密码
 	 * @param:  {data} 账号、新旧密码等信息对象
 	 * @return:  Observable<result>
 	 */
@@ -154,7 +155,7 @@ export class UserService extends Httpbase {
 	}
 	
 	/**
-	 * @Description: 用户退出
+	 *  用户退出
 	 */
 	loginOut() {
 		USER.reset(this.store);
@@ -162,3 +163,6 @@ export class UserService extends Httpbase {
 		this.routerSV.to(ROUTE.login);
 	}
 }
+
+// 学习和研究ionic5新版本 2
+// 搭建基本 1

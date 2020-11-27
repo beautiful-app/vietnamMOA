@@ -6,7 +6,7 @@ import {Component, Input, OnInit} from '@angular/core';
     styleUrls: ['./tw-avatar.component.scss'],
 })
 /**
- * @Description: 用户头像组件
+ * 用户头像组件
  */
 export class TwAvatarComponent implements OnInit {
     
@@ -18,7 +18,6 @@ export class TwAvatarComponent implements OnInit {
     }
     
     ngOnInit() {
-        console.log('slot', this.slot);
     }
     
 }

@@ -5,7 +5,7 @@ import {APP} from '../../core/singleton.export';
 import {TWBase} from '../TWBase.ui';
 
 /**
- * @Description: http网络请求的基础类
+ * http网络请求的基础类
  */
 export class Httpbase extends TWBase {
 	
@@ -14,7 +14,7 @@ export class Httpbase extends TWBase {
 	}
 	
 	/**
-	 * @Description: post请求
+	 * post请求
 	 * @param: {url} 请求地址
 	 * @param: {queryObj} 请求body
 	 * @return: Observable<result>
@@ -25,7 +25,7 @@ export class Httpbase extends TWBase {
 	}
 	
 	/**
-	 * @Description: post请求
+	 * post请求
 	 * @param: {url} 请求地址
 	 * @param: {queryObj} 请求body
 	 * @return: Observable<result>
@@ -36,7 +36,7 @@ export class Httpbase extends TWBase {
 	}
 	
 	/**
-	 * @Description: get请求
+	 * get请求
 	 * @param: {url} 请求地址
 	 * @param: {...params} 请求参数
 	 * @return: Observable<result>
@@ -47,7 +47,7 @@ export class Httpbase extends TWBase {
 	}
 	
 	/**
-	 * @Description: 把网址常量中的下划线替换成参数
+	 * 把网址常量中的下划线替换成参数
 	 * @param: {url} 要替换的参数
 	 * @param: {...params} 参数裂变
 	 * @return: string

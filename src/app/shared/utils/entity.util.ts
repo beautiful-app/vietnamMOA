@@ -1,9 +1,9 @@
 /**
- * @Description: 实体类操作工具类
+ *  实体类操作工具类
  */
 export class EntityUtil {
 	/**
-	 * @Description: 把对象中名称在数组中匹配的值进行替换,常用于与服务端做交互时临时改变对象的参数名称
+	 *  把对象中名称在数组中匹配的值进行替换,常用于与服务端做交互时临时改变对象的参数名称
 	 * @param:  {operationObj} 需要进行替换的对象
 	 * @param: {matchArray} [aa,bb] 把{operationObj}中的aa名称的参数替换为bb
 	 * @return: Object

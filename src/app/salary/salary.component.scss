@@ -1,199 +1,200 @@
 $mainColor: #414141;
 $seconderyColor: #8e8e8e;
+$moneyWidth: 90px;
+$amountFontSize: 12px;
 
 .content {
-  --padding-top: 20px;
+    --padding-top: 20px;
 
-  .item-details {
-    display: flex;
-    opacity: 0.4;
-    background-color: #afafaf0d;
-    padding: 4px 15px 3px;
-  }
-
-  mat-accordion {
-
-    mat-expansion-panel {
-      //background-color: #fdfdfdf0;
-
-      mat-panel-title {
-        color: $mainColor;
-      }
-
-      mat-panel-description {
-        color: $seconderyColor;
-      }
-    }
-  }
-
-  .tw-theme .mat-expansion-panel-header[aria-disabled=true] {
-    color: red;
-  }
-
-  .date-picker {
-    display: flex;
-    align-items: center;
-    padding: 3px 5px;
-
-    .date-picker-button {
-      display: flex;
-      align-items: center;
-
-      .mat-icon {
-        height: 20px;
-      }
-
-      .date-number {
-        line-height: 100%;
-        margin-left: 3px;
-      }
+    .item-details {
+        display: flex;
+        opacity: 0.4;
+        background-color: #afafaf0d;
+        padding: 4px 15px 3px;
     }
 
-    .all-income {
-      flex: 1;
-      text-align: right;
-      padding-right: 5px;
-    }
-  }
+    mat-accordion {
 
-  .salary-panel {
-    margin-top: 5px;
+        mat-expansion-panel {
 
-    mat-expansion-panel {
-      background: transparent;
-    }
+            mat-panel-title {
+                color: $mainColor;
+                width: 120px;
+            }
 
-    .mat-expansion-panel-content {
-      background-color: white;
+            mat-panel-description {
+                color: $seconderyColor;
+            }
+        }
     }
 
-    mat-expansion-panel-header {
-      border-bottom: 1px solid #f5f5f5;
+    .tw-theme .mat-expansion-panel-header[aria-disabled=true] {
+        color: red;
     }
-  }
+
+    .date-picker {
+        display: flex;
+        align-items: center;
+        padding: 3px 5px;
+
+        .date-picker-button {
+            display: flex;
+            align-items: center;
+
+            .mat-icon {
+                height: 20px;
+            }
+
+            .date-number {
+                line-height: 100%;
+                margin-left: 3px;
+            }
+        }
+
+        .all-income {
+            flex: 1;
+            text-align: right;
+            padding-right: 5px;
+        }
+    }
+
+    .salary-panel {
+        margin-top: 5px;
+
+        mat-expansion-panel {
+            background: transparent;
+        }
+
+        .mat-expansion-panel-content {
+            background-color: white;
+        }
+
+        mat-expansion-panel-header {
+            border-bottom: 1px solid #f5f5f5;
+        }
+    }
 }
-
 
 .mat-expansion-panel-body {
-  background-color: red !important;
+    background-color: red !important;
 }
 
-
 .mat-expansion-panel {
-  margin: 5px;
-  background-color: white;
+    margin: 5px;
+    background-color: white;
 }
 
 .income {
-  flex-grow: 0;
-  margin-right: 9px;
-  color: $seconderyColor;
-  margin-top: 3px;
+    flex-grow: 0;
+    margin-right: 9px;
+    color: $seconderyColor;
+    //margin-top: 3px;
+    width: $moneyWidth;
+    text-align: right;
 }
 
 .income-inner {
-  margin-right: 9px;
-  color: $seconderyColor;
+    margin-right: 9px;
+    color: $seconderyColor;
+    width: $moneyWidth;
+    text-align: right;
 }
 
 .f-right {
-  margin-left: auto;
-  //color: $seconderyColor;
+    margin-left: auto;
 }
 
 // 统计工时类型的偏移量
 $base_amount: 45px;
 
 .amount_margin_right {
-  margin-right: $base_amount;
+    margin-right: $base_amount;
 }
 
 .details-income {
-  flex: 1;
-  text-align: right;
-  margin-right: $base_amount + 2;
-  //color: $seconderyColor;
+    flex: 1;
+    text-align: right;
 }
 
 .details2 {
-  flex: 1;
-  text-align: right;
-  margin-right: $base_amount;
+    flex: 1;
+    text-align: right;
 }
 
 .amount-type {
-  font-size: 13px;
-  margin-top: 5px;
-  color: #a19f9f !important;
-}
-
-.amount-type-details {
-  font-size: 13px;
-  margin-top: 0px;
-  margin-right: $base_amount - 2 !important;
-  //color: #a19f9f !important;
+    font-size: $amountFontSize;
+    color: #aeacac !important;
 }
 
 .mat-expansion-panel-header-description {
-  flex-grow: 0;
-  margin-right: 39px;
+    flex-grow: 0;
+    margin-right: 0px;
 }
 
+.details3 {
+    width: $moneyWidth;
+    text-align: right;
+}
+
+.amount3 {
+    font-size: $amountFontSize;
+}
+
+
 .fill-remaining-space {
-  // 使用 flexbox 填充剩余空间
-  // @angular/material 中的很多控件使用了 flex 布局
-  flex: 1 1 auto;
+    // 使用 flexbox 填充剩余空间
+    // @angular/material 中的很多控件使用了 flex 布局
+    flex: 1 1 auto;
 }
 
 .inner-expanstion {
-  $padding: 10px;
+    $padding: 10px;
 
-  mat-expansion-panel {
-    margin: 0px -10px;
-    background-color: rgba(252, 252, 252, 0.06) !important;
-  }
+    mat-expansion-panel {
+        margin: 0px -10px;
+        background-color: rgba(252, 252, 252, 0.06) !important;
+    }
 
-  mat-expansion-panel-header {
-    padding: 0 24px;
-    opacity: 0.8;
-  }
+    mat-expansion-panel-header {
+        padding: 0 24px;
+        opacity: 0.8;
+    }
+}
 
-  ::ng-deep .mat-expansion-panel-body {
-    //padding: 0 $padding 10px;
-  }
+.margin-top-3 {
+    margin-top: 3px;
 }
 
 ::ng-deep .mat-expansion-panel-body {
-  padding: 0 10px 0 !important;
+    padding: 0 10px 0 !important;
 }
-
-//.inner-expanstion {
-//  ::ng-deep .mat-expansion-panel-body {
-//    padding: 0 10px 20px !important;
-//  }
-//}
 
 ::ng-deep .mat-expansion-indicator::after {
-  color: rgba(88, 88, 88, 0.6) !important;
+    color: rgba(88, 88, 88, 0.6) !important;
 }
 
-
 .inner-header {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 .item-details-name {
-  padding-left: 3px;
+    padding-left: 3px;
 }
 
 .inner-money {
-  font-size: 14px;
+    font-size: 14px;
+    width: $moneyWidth;
+    text-align: right;
 }
 
 mat-expansion-panel-header {
-  background-color: white !important;
+    background-color: white !important;
 }
 
 mat-expansion-panel-header:hover {
-  background-color: white !important;
+    background-color: white !important;
+}
+
+.amount-inner-color {
+    color: rgba(114, 113, 113, 0.87) !important;
 }

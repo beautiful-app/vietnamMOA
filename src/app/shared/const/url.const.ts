@@ -1,5 +1,5 @@
 /**
- * @Description: 服务端api接口地址常量
+ *  服务端api接口地址常量
  */
 export const URL = {
 	login_check: 'auth/login',

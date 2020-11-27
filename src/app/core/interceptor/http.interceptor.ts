@@ -9,6 +9,7 @@ import {Network} from '@ionic-native/network/ngx';
 import {TWBase} from '../../shared/TWBase.ui';
 import {MatDialog} from '@angular/material';
 import {PromptService} from '../../shared/service/prompt.service';
+import {Lang} from "../../shared/const/language.const";
 
 @Injectable({providedIn: 'root'})
 export class HttpInterceptor extends TWBase {
@@ -27,7 +28,6 @@ export class HttpInterceptor extends TWBase {
      */
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // 加入token信息
-        // console.log("当前请求的token", USER.get().token);
         req = req.clone({headers: req.headers.set('Authorization', USER.get().token)});
         //  自定义的错误相应对象
         let errorRespone = new HttpResponse({status: 200, body: {hasError: true}});
@@ -37,7 +37,7 @@ export class HttpInterceptor extends TWBase {
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
                     if (event.body.code && event.body.code == 7) {
-                        this.presentToast('访问已过期');
+                        this.presentToast(Lang.Lang_811);
                         // 访问过期了就导航到登录页
                         setTimeout(_ => {
                             this.userSV.loginOut();

@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    baseURL: 'https://tcmp.twsz.com/'
+    baseURL: 'https://cmp.twsz.com/'
 };
 

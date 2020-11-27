@@ -1,4 +1,5 @@
 {
+  "Lang_01": "Ấn lần nữa để thoát",
 
   "Lang_11":"Lương",
   "Lang_12":"Tôi",
@@ -130,7 +131,8 @@
   "Lang_710": "Thay đổi số di đông",
   "Lang_711": "Không có dữ liệu cho tháng này",
   "Lang_712": "Sai mật khẩu",
-
+  "Lang_713": "nạp vào",
+  "Lang_714": "Cập nhật chính",
 
   "Lang_81":"Nhập mật khẩu đi",
   "Lang_82":"Hãy nhập số công việc",

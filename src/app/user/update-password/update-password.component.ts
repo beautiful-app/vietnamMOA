@@ -8,7 +8,6 @@ import {
 } from '../../shared/utils/validators/validators.collection';
 import {TWBase} from '../../shared/TWBase.ui';
 import {Lang} from '../../shared/const/language.const';
-import {RouterService} from '../../shared/service/router.service';
 import {delay} from 'rxjs/operators';
 
 @Component({
@@ -18,15 +17,14 @@ import {delay} from 'rxjs/operators';
 })
 export class UpdatePasswordComponent extends TWBase implements OnInit {
     
-    oldPasswordHide: boolean = true;
-    passwordHide: boolean = true;
-    form: FormGroup;
-    updating: boolean = false;      // true为在修改密码中
+    oldPasswordHide: boolean = true;    // 旧密码隐藏开关
+    passwordHide: boolean = true;       // 新密码隐藏开关
+    form: FormGroup;                    // form对象
+    updating: boolean = false;          // true为在修改密码中
     
     constructor(
         private formBuilder: FormBuilder,
         private userSV: UserService,
-        private routerSV: RouterService
     ) {
         super();
     }
@@ -37,6 +35,9 @@ export class UpdatePasswordComponent extends TWBase implements OnInit {
         this.form = this.formBuilder.group(validator, TwoPasswordMatchValidator);
     }
     
+    /**
+     * 请求更新密码
+     */
     commitChanges() {
         if (!this.updating) {
             this.updating = true;

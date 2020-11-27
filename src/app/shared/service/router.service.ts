@@ -10,14 +10,14 @@ import {ROUTE} from '../const/route.enum';
 
 @Injectable({providedIn: 'root'})
 /**
- * @Description: 路由与导航服务类
+ *  路由与导航服务类
  */
 export class RouterService extends TWBase {
     
-    private _previousUrl: string;       // 相对于当前页的前一个页面
-    private _currentUrl: string;        // 当前页面
-    private _routeHistory: string[] = [];   // 路由路径数组
-    private _backTimeOut: boolean = true;      // 用户物理返回的延时开关，修复点击按钮同时快速物理返回会出现空白页面的bug
+    private _previousUrl: string;            // 相对于当前页的前一个页面
+    private _currentUrl: string;             // 当前页面
+    private _routeHistory: string[] = [];    // 路由路径数组
+    private _backTimeOut: boolean = true;    // 用户物理返回的延时开关，修复点击按钮同时快速物理返回会出现空白页面的bug
     constructor(
         private router: Router,
         private location: Location,
@@ -28,7 +28,7 @@ export class RouterService extends TWBase {
     }
     
     /**
-     * @Description: 路由跳转方法
+     *  路由跳转方法
      * @param: {where} 导航到哪里
      * @param: {data} 携带的数据
      * @return: void
@@ -38,14 +38,14 @@ export class RouterService extends TWBase {
     }
     
     /**
-     * @Description: 跳转到登录页面
+     *  跳转到登录页面
      */
     toLogin() {
         this.to(ROUTE.login);
     }
     
     /**
-     * @Description: 路由检查方法，记录用户的每一步路由，并把相应信息记录，方便做前后跳转等导航操作
+     *  路由检查方法，记录用户的每一步路由，并把相应信息记录，方便做前后跳转等导航操作
      */
     routeDetection() {
         this._routeHistory = [];
@@ -65,7 +65,7 @@ export class RouterService extends TWBase {
     }
     
     /**
-     * @Description: 根据路由事件对象 event维护自己配置的历史路由
+     *  根据路由事件对象 event维护自己配置的历史路由
      */
     private _setURLs(event: NavigationEnd): void {
         // 如果堆栈的历史大于零在做处理
@@ -85,24 +85,24 @@ export class RouterService extends TWBase {
     }
     
     /**
-     * @Description: 是否可返回，可返回就做返回处理
+     * 是否可返回，可返回就做返回处理
      * @return boolean
      */
     back(): boolean {
         if (!StringUtil.isIncludeArr([[this._currentUrl, ROUTE.tabs_root], [this._currentUrl, ROUTE.login]])) {
-            // if (this._backTimeOut) {
-            // this._backTimeOut = false;
-            // setTimeout(_ => n{
-            if (this._previousUrl == this.router.url) return true;
-            if (this._previousUrl) {
-                // 获取当前的url，判断如果当前url和previousUrl一样那就不做任何事情
-                this.navCtrl.navigateBack(this._previousUrl);
-            } else {
-                this.to(ROUTE.tabs_home);
+            if (this._backTimeOut) {
+                this._backTimeOut = false;
+                if (this._previousUrl == this.router.url) return true;
+                if (this._previousUrl) {
+                    // 获取当前的url，判断如果当前url和previousUrl一样那就不做任何事情
+                    this.navCtrl.navigateBack(this._previousUrl);
+                } else {
+                    this.to(ROUTE.tabs_home);
+                }
+                setTimeout(_ => {
+                    this._backTimeOut = true;
+                }, 400);
             }
-            // this._backTimeOut = true;
-            // }, 350)
-            // }
             return true;
         } else return false;
     }

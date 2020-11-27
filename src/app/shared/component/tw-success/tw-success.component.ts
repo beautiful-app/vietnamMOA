@@ -13,12 +13,12 @@ export enum tipsMode {
 	styleUrls: ['./tw-success.component.scss'],
 })
 /**
- * @Description: 成功打钩提示组件
+ * 成功打钩提示组件
  */
 export class TwSuccessComponent implements OnInit {
-	@Input() mode: tipsMode;
-	tipsMode = tipsMode;
-	closeTime: number;
+	@Input() mode: tipsMode; // 显示模式
+	tipsMode = tipsMode;  	// 显示模式
+	closeTime: number;		// 显示时长
 	
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public data: any,

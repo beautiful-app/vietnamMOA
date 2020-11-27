@@ -2,39 +2,39 @@
 <ion-content class="tw-background-color">
     <ion-list>
         <ion-item>
-            <tw-avatar [avatar]="avatar" slot="end"></tw-avatar>
+            <tw-avatar [avatar]="user.avatar" slot="end"></tw-avatar>
             <ion-label translate>Lang_41</ion-label>
         </ion-item>
         <ion-item class="info-item">
             <span translate>Lang_42</span>
             <span class="flex-right"></span>
-            <span>{{username}}</span>
+            <span>{{user.username}}</span>
         </ion-item>
         <ion-item class="info-item">
             <span translate>Lang_43</span>
             <span class="flex-right"></span>
-            <span>{{gender}}</span>
+            <span>{{user.gender}}</span>
         </ion-item>
         
-        <ion-item class="info-item" [routerLink]="['change-info',phoneNumber]">
+        <ion-item class="info-item" [routerLink]="['change-info',user.cellphone]">
             <span translate>Lang_44</span>
             <span class="flex-right"></span>
-            <span>{{phoneNumber}}</span>
+            <span>{{user.cellphone}}</span>
         </ion-item>
         <ion-item class="info-item">
             <span translate>Lang_45</span>
             <span class="flex-right"></span>
-            <span>{{email}}</span>
+            <span>{{user.email}}</span>
         </ion-item>
         <ion-item class="info-item">
             <span translate>Lang_46</span>
             <span class="flex-right"></span>
-            <span>{{jobTitle}}</span>
+            <span>{{user.jobTitle}}</span>
         </ion-item>
         <ion-item class="info-item">
             <span translate>Lang_47</span>
             <span class="flex-right"></span>
-            <span>{{department}}</span>
+            <span>{{user.department}}</span>
         </ion-item>
     </ion-list>
 </ion-content>

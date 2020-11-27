@@ -3,7 +3,7 @@ import {APP} from '../../../core/singleton.export';
 import {Lang} from '../../const/language.const';
 
 /**
- * @Description: 验证器，用于验证连个表单输入值是否相等，常用与密码与确认密码
+ *  验证器，用于验证连个表单输入值是否相等，常用与密码与确认密码
  */
 export function twoValueMatch(controlName: string, matchingControlName: string, msg?: string) {
 	return (formGroup: FormGroup) => {
@@ -24,7 +24,7 @@ export function twoValueMatch(controlName: string, matchingControlName: string, 
 }
 
 /**
- * @Description: 密码复杂度验证器
+ * 密码复杂度验证器
  */
 export function complexPassword(controlName: string, matchingControlName: string, msg: string) {
 	return (formGroup: FormGroup) => {

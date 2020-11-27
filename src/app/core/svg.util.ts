@@ -2,7 +2,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {MatIconRegistry} from '@angular/material';
 
 /**
- * @Description: 注册svg图片，详细了解请移步到material angular官方
+ * 注册svg图片，详细了解请移步到material angular官方
  */
 export const loadSvgResources = (ir: MatIconRegistry, ds: DomSanitizer) => {
 	const svgDir = '../../../assets/svg';

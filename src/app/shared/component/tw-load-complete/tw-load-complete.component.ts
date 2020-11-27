@@ -6,7 +6,7 @@ import {Component, Input, OnInit} from '@angular/core';
 	styleUrls: ['./tw-load-complete.component.scss'],
 })
 /**
- * @Description: 列表加载完成底部显示标识 
+ *  列表加载完成底部显示标识
  */
 export class TwLoadCompleteComponent implements OnInit {
 	@Input() isShow: any;

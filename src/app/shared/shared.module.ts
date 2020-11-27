@@ -11,7 +11,7 @@ import {
 import {TwComponentModule} from './component/tw-component.module';
 import {SafeHTMLPipe} from './pipes/save-html';
 import {HttpClientModule} from '@angular/common/http';
-import { InputKeyupStopDirective } from './directive/input-keyup-stop.directive';
+import {InputKeyupStopDirective} from './directive/input-keyup-stop.directive';
 
 
 @NgModule({
@@ -41,6 +41,7 @@ import { InputKeyupStopDirective } from './directive/input-keyup-stop.directive'
     ],
     exports: [
         IonicModule,
+        CommonModule,
         TranslateModule,
         ReactiveFormsModule,
         MatIconModule,

@@ -8,7 +8,7 @@ import {ApplicationService} from '../../../../shared/service/application.service
     styleUrls: ['./version-detail.component.scss'],
 })
 export class VersionDetailComponent implements OnInit {
-    contnet: string;
+    contnet: string;    // 内容
     
     constructor(
         private route: ActivatedRoute,
@@ -18,9 +18,9 @@ export class VersionDetailComponent implements OnInit {
     
     ngOnInit() {
         setTimeout(_ => {
-            let a = this.route.snapshot.paramMap.get('id');
-            this.appSV.getVersionFeaturesDetail(Number(a)).subscribe(r => {
-                if(r) this.contnet = r.data;
+            let id = this.route.snapshot.paramMap.get('id');
+            this.appSV.getVersionFeaturesDetail(Number(id)).subscribe(r => {
+                if (r) this.contnet = r.data;
                 else this.contnet = '';
             });
         }, 500);

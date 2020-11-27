@@ -6,14 +6,13 @@ import {FileOpener} from '@ionic-native/file-opener/ngx';
 import {TWBase} from '../TWBase.ui';
 import {Store} from '@ngrx/store';
 import {downloadApk} from '../../core/ngrx/actions/application.actions';
-import {Observable} from 'rxjs';
 
 
 @Injectable({
 	providedIn: 'root'
 })
 /**
- * @Description: 文件操作类相关的服务类
+ * 文件操作类相关的服务类
  */
 export class FileService extends TWBase {
 	
@@ -27,7 +26,7 @@ export class FileService extends TWBase {
 	}
 	
 	/**
-	 * @Description: 文件下载
+	 * 文件下载
 	 * @param:  {url} 下载地址
 	 * @param: {relativePath} 保存的地址
 	 * @return:  void
@@ -35,7 +34,6 @@ export class FileService extends TWBase {
 	downloadFile(url: string, relativePath: string) {
 		const fileTransfer = this.ft.create();
 		fileTransfer.download(encodeURI(url), this.deviceSV.deviceFilePath() + relativePath).then((entry) => {
-				// this.presentToast('download has completed:' + JSON.stringify(entry), 1000000);
 			}, (error) => {
 				this.store.dispatch(downloadApk({rate: -1}));
 			}
@@ -43,7 +41,8 @@ export class FileService extends TWBase {
 		
 		let timer = null;
 		fileTransfer.onProgress((event: ProgressEvent) => {
-			let progress = Math.floor(event.loaded / event.total * 100);    //下载进度
+			//下载进度
+			let progress = Math.floor(event.loaded / event.total * 100);
 			if (progress >= 100) {
 				setTimeout(_ => {
 					this.openFile(null, null);
@@ -60,7 +59,7 @@ export class FileService extends TWBase {
 	}
 	
 	/**
-	 * @Description: 打开安卓安装文件
+	 * 打开安卓安装文件
 	 */
 	openFile(targetPath: string, fileMimeType: string) {
 		let url = this.deviceSV.deviceFilePath() + 'android.apk';

@@ -1,17 +1,17 @@
 import {Injectable} from '@angular/core';
 import {Httpbase} from './httpbase';
-import {Incomes, PlanAA, PlanB, Salary} from '../entity/salary.vo';
+import {Incomes, ShowModeA, ShowModeB, Salary} from '../entity/salary.vo';
 import {Observable} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 import {HttpClient} from '@angular/common/http';
 import {URL} from '../const/url.const';
-import {RETURN} from '../utils/return-verify.util';
+import {NEXT} from '../utils/next.util';
 
 @Injectable({
     providedIn: 'root'
 })
 /**
- * @Description: 薪资处理相关服务类
+ *  薪资处理相关服务类
  */
 export class SalaryService extends Httpbase {
     constructor(
@@ -22,7 +22,7 @@ export class SalaryService extends Httpbase {
     }
     
     /**
-     * @Description: 请求服务端获取薪资数据
+     * 请求服务端获取薪资数据
      * @param: {year} 年份
      * @param: {month} 月份
      * @return: Observable<any>
@@ -30,13 +30,13 @@ export class SalaryService extends Httpbase {
     getData(year: string, month: string): Observable<any> {
         return new Observable<any>(o => {
             this.get(URL.get_salary_info, year, month).subscribe(r => {
-                RETURN.nextDataAndError(o, r);
+                NEXT.dataOrError(o, r);
             });
         });
     }
     
     /**
-     * @Description: 从缓存中获取薪资数据
+     *  从缓存中获取薪资数据
      */
     getDataFromStorage(): Observable<Salary> {
         return new Observable<Salary>(o => {
@@ -47,7 +47,7 @@ export class SalaryService extends Httpbase {
     }
     
     /**
-     * @Description: 薪资展示面板中的语言根据系统当前语言进行设置
+     *  薪资展示面板中的显示文字根据系统当前语言进行赋值
      * @param:  {salary} 薪资实体对象
      * @return:  Observable<Salary>
      */
@@ -59,96 +59,106 @@ export class SalaryService extends Httpbase {
                 this.translate.get(nameArray).subscribe(r => {
                     this.setName(salary.incomes, r);
                     salary.hasTranslated = true;
-                    RETURN.nextAndComplete(o);
+                    NEXT.finish(o);
                 });
-            }
+            } else NEXT.finish(o);
         });
     }
     
     /**
-     * @Description: 对薪资实体对象进行语言常量的赋值替换
+     *  对薪资实体对象进行语言常量的赋值替换
      * @param: {incomes} 薪资收入对象
      * @param: {nameArray} 翻译后的所有信息数组
      * @return: void
      */
     setName(incomes: Incomes[], nameArray: string[]): void {
         incomes.forEach(r => {
-            r.name = nameArray[r.name];
+            r.identify = nameArray[r.id];
             if (r.items) r.items.forEach(rr => {
-                rr.name = nameArray[rr.name];
+                rr.identify = nameArray[rr.id];
                 if (rr.items) rr.items.forEach(rrr => {
-                    rrr.name = nameArray[rrr.name];
+                    rrr.identify = nameArray[rrr.id];
                 });
             });
             
             if (r.itemsElse) r.itemsElse.forEach(rr => {
-                rr.name = nameArray[rr.name];
+                rr.identify = nameArray[rr.id];
             })
         });
     }
     
     /**
-     * @Description: 把薪资对象所有需要翻译的名称放到一个数组中
+     * 把薪资对象所有需要翻译的名称放到一个数组中
      * @param:  {incomes} 薪资收入对象
      * @return:  string[]
      */
     getNameIdArray(incomes: Incomes[]): string[] {
         let nameArray = [];
         incomes.forEach(r => {
-            nameArray.push(r.name);
+            nameArray.push(r.id);
             if (r.items) r.items.forEach(rr => {
-                nameArray.push(rr.name);
+                nameArray.push(rr.id);
                 if (rr.items) rr.items.forEach(rrr => {
-                    nameArray.push(rrr.name);
+                    nameArray.push(rrr.id);
                 });
             });
             if (r.itemsElse) r.itemsElse.forEach(rr => {
-                nameArray.push(rr.name);
+                nameArray.push(rr.id);
             })
         });
         return nameArray;
     }
     
     /**
-     * @Description: 根据后端返回的数据进行整理操作
+     *  根据后端返回的数据进行赋值到薪资对象中
      * @param:  {salary} 薪资对象
      * @param: {data} 服务端返回的数据对象
      * @return: void
      */
     salaryDataProcessing(salary: Salary, data: any) {
-        salary.totalIncoming = data.salary;
-        salary.incomes.forEach(r => {
-            r.income = data.data[r.matchField];
-            r.items.forEach(rr => {
-                rr.income = data.data[rr.matchField];
+        salary.totalIncoming = data.node[0].salary;
+        const dataArr = data.node[0].childs;
+        
+        salary.incomes.forEach((r, i) => {
+            const rData = dataArr[i];
+            const rArr = rData.childs;
+            r.income = rData.salary;
+            r.amount = rData.workHour;
+            r.items.forEach((rr, j) => {
+                const rrArr = rArr[j].childs;
+                rr.income = rArr[j].salary;
+                rr.amount = rArr[j].workHour;
+                if (rr.items) rr.items.forEach((rrr, k) => {
+                    rrr.income = rrArr[k].salary;
+                    rrr.amount = rrArr[k].workHour;
+                });
             });
         });
     }
     
     /**
-     * @Description: 如果本月无薪资信息,那么让薪资面板显示切回无数据的显示方式
+     *  翻译ShowModeB
      * @return: Observable<Salary>
      */
-    reinitSalaryData(): Observable<Salary> {
+    initShowModeB(): Observable<Salary> {
         return new Observable(o => {
-            if (PlanB.hasTranslated) o.next();
-            this.languageProcessing(PlanB).subscribe(r => {
-                o.next();
+            if (ShowModeB.hasTranslated) o.next();
+            this.languageProcessing(ShowModeB).subscribe(r => {
+                NEXT.finish(o);
             });
         });
     }
     
     /**
-     * @Description: 如果本月无薪资信息,那么让薪资面板显示切回无数据的显示方式
+     *  如果本月无薪资信息,那么让薪资面板显示切回无数据的显示方式
      * @return: Observable<Salary>
      */
     reinitPlanA(): Observable<Salary> {
         return new Observable(o => {
-            if (PlanAA.hasTranslated) o.next();
-            this.languageProcessing(PlanAA).subscribe(r => {
+            if (ShowModeA.hasTranslated) o.next();
+            this.languageProcessing(ShowModeA).subscribe(r => {
                 o.next();
             });
         });
     }
-    
 }

@@ -4,7 +4,7 @@ import {Directive, ElementRef, EventEmitter, Output, Renderer2} from '@angular/c
 	selector: '[TWInputKeyupStop]'
 })
 /**
- * @Description: 监听回车事件
+ *  监听回车事件
  */
 export class InputKeyupStopDirective {
 	

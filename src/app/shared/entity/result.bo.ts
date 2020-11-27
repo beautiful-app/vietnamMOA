@@ -1,5 +1,5 @@
 /**
- * @Description: 请求结果实体
+ *  请求结果实体
  */
 export class result {
 	public id?: string;

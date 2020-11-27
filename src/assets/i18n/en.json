@@ -1,7 +1,8 @@
 {
+  "Lang_01": "Press again to exit",
+
   "Lang_11":"Salary",
   "Lang_12":"Me",
-
 
   "Lang_21": "Probation",
   "Lang_22": "Regular",
@@ -126,7 +127,8 @@
   "Lang_710": "Modify Tel",
   "Lang_711": "No data for this month",
   "Lang_712": "Wrong password",
-
+  "Lang_713": "Loaded",
+  "Lang_714": "Major update",
 
 
   "Lang_81":"Please enter your password",

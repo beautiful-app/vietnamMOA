@@ -5,10 +5,9 @@ import {tipsMode, TwSuccessComponent} from './component/tw-success/tw-success.co
 import {Lang} from './const/language.const';
 import {DeviceService} from './service/device.service';
 import {GCONST} from '../core/singleton.export';
-import {ObjectUtil} from './utils/object.util';
 
 /**
- * @Description: 提示、加载中等页面常用交互集合
+ *  提示、加载中等页面常用交互集合
  */
 export abstract class TWBase {
 	protected _loadCtrl: LoadingController;
@@ -21,7 +20,7 @@ export abstract class TWBase {
 	}
 	
 	/**
-	 * @Description: 弹出toast提示
+	 *  弹出toast提示
 	 * @param: {message} 提示的文字信息
 	 * @param: {position} 显示位置
 	 * @param: {duration} 显示时间
@@ -48,7 +47,7 @@ export abstract class TWBase {
 	}
 	
 	/**
-	 * @Description: 成功打钩提示
+	 *  成功打钩提示
 	 * @param:  {dialog} MatDialog对象
 	 * @param: {mode} 显示配置
 	 * @return:  Observable<any>
@@ -58,7 +57,7 @@ export abstract class TWBase {
 	}
 	
 	/**
-	 * @Description: 打开dialog页面
+	 *  打开dialog页面
 	 * @param: {dialog} Matdialog对象
 	 * @param: {deviceSV} DeviceService 服务
 	 * @param: {component} 需要显示的组件
@@ -81,7 +80,7 @@ export abstract class TWBase {
 	}
 	
 	/**
-	 * @Description: loading提示信息
+	 *  loading提示信息
 	 * @param:  {message} 提示信息
 	 * @return:  void
 	 */
@@ -97,7 +96,7 @@ export abstract class TWBase {
 	}
 	
 	/**
-	 * @Description: 关闭提示信息
+	 *  关闭提示信息
 	 */
 	protected async loadingDismiss() {
 		if (this._loading) await this._loading.dismiss();

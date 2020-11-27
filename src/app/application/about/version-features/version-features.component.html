@@ -4,14 +4,14 @@
         <div class="list-box" mat-ripple [routerLink]="['details',item.id]"
              *ngFor="let item of featuresList">
             <div class="list">
-                <p class="name">vietnamMOA{{item.version}}主要更新</p>
+                <p class="name">vietnamMOA{{item.version}}<span translate>Lang_714</span></p>
                 <p class="time text-secondary-color">{{item.releaseTime}}</p>
             </div>
             <span class="flex-right"></span>
             <mat-icon class="arrow-color" svgIcon="arrow-right"></mat-icon>
         </div>
         
-        <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData()">
             <ion-infinite-scroll-content
                     loadingSpinner="bubbles"
                     loadingText="">
